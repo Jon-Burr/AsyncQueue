@@ -1,0 +1,46 @@
+#include <cassert>
+
+namespace AsyncQueue {
+    template <typename T> void AsyncQueue<T>::push(const T &value) {
+        auto lock = this->lock();
+        m_queue.push(value);
+        lock.unlock();
+        m_cv.notify_one();
+    }
+
+    template <typename T>
+    void AsyncQueue<T>::push(const T &value, const std::unique_lock<std::mutex> &lock) {
+        assert(lock.owns_lock() && lock.mutex() == &m_mutex);
+        m_queue.push(value);
+        m_cv.notify_one();
+    }
+
+    template <typename T> void AsyncQueue<T>::push(T &&value) {
+        auto lock = this->lock();
+        m_queue.push(std::move(value));
+        lock.unlock();
+        m_cv.notify_one();
+    }
+
+    template <typename T>
+    void AsyncQueue<T>::push(T &&value, const std::unique_lock<std::mutex> &lock) {
+        assert(lock.owns_lock() && lock.mutex() == &m_mutex);
+        m_queue.push(std::move(value));
+        m_cv.notify_one();
+    }
+
+    template <typename T> std::optional<T> AsyncQueue<T>::extract() {
+        return extract(this->lock());
+    }
+
+    template <typename T>
+    std::optional<T> AsyncQueue<T>::extract(const std::unique_lock<std::mutex> &lock) {
+        assert(lock.owns_lock() && lock.mutex() == &m_mutex);
+        if (m_queue.size()) {
+            std::optional<T> value(std::move(m_queue.front()));
+            m_queue.pop();
+            return value;
+        }
+        return {};
+    }
+} // namespace AsyncQueue

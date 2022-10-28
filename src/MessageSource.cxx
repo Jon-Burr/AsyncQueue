@@ -21,7 +21,7 @@ namespace AsyncQueue {
             : m_name(name), m_queue(queue), m_outputLvl(level) {}
 
     MessageBuilder MessageSource::operator<<(MessageLevel level) {
-        if (m_outputLvl <= level)
+        if (testLevel(level))
             return MessageBuilder(m_queue, m_name, level);
         else
             return MessageBuilder(m_queue);

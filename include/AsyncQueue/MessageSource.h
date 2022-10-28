@@ -19,7 +19,7 @@ namespace AsyncQueue {
         void flush();
 
         /// @brief Get the current output level
-        MessageLevel outputLevel() const { return m_lvl; }
+        MessageLevel level() const { return m_lvl; }
 
         /// Pass a generic type to the underlying string stream
         template <typename T> MessageBuilder &operator<<(T &&value) {
@@ -65,6 +65,12 @@ namespace AsyncQueue {
 
         /// @brief Set the level of the next message to create
         MessageBuilder operator<<(MessageLevel level);
+
+        /// @brief Get the current output level
+        MessageLevel outputLevel() const { return m_outputLvl; }
+
+        /// @brief Should we output this message?
+        bool testLevel(MessageLevel level) const { return m_outputLvl <= level; }
 
     private:
         std::string m_name;

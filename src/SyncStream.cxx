@@ -24,9 +24,14 @@ namespace AsyncQueue {
             return itr->second.lock();
     }
 
-    void SyncStream::flush() {
+    void SyncStream::ensureLock() {
+        std::lock_guard<std::mutex> lock_(m_lockMutex);
         if (!m_lock.owns_lock())
             m_lock.lock();
+    }
+
+    void SyncStream::flush() {
+        ensureLock();
         m_os.flush();
         m_lock.unlock();
     }

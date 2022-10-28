@@ -23,19 +23,19 @@ namespace AsyncQueue {
         SyncStream(std::ostream &os);
         SyncStream(const SyncStream &os);
 
+        void ensureLock();
+
         void flush();
 
         template <typename T> SyncStream &operator<<(T &&value) {
-            if (!m_lock.owns_lock())
-                m_lock.lock();
+            ensureLock();
             m_os << std::forward<T>(value);
             return *this;
         }
 
         using stream_mod_t = std::ostream &(*)(std::ostream &);
         SyncStream &operator<<(stream_mod_t mod) {
-            if (!m_lock.owns_lock())
-                m_lock.lock();
+            ensureLock();
             m_os << mod;
             if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>)
                 m_lock.unlock();
@@ -46,6 +46,7 @@ namespace AsyncQueue {
         std::ostream &m_os;
         std::shared_ptr<std::mutex> m_mutex;
         std::unique_lock<std::mutex> m_lock;
+        std::mutex m_lockMutex;
     };
 
 } // namespace AsyncQueue

@@ -1,21 +1,29 @@
 #include "AsyncQueue/MessageSource.h"
 
 namespace AsyncQueue {
-    MessageSource::MessageSource(const std::string &name, MessageQueue &queue, MessageLevel level)
-            : m_name(name), m_queue(queue), m_outputLvl(level), m_currentLvl(level) {}
 
-    void MessageSource::flush() {
-        if (m_currentLvl < m_outputLvl)
+    MessageBuilder::MessageBuilder(MessageQueue &queue)
+            : m_void(true), m_queue(queue), m_lvl(MessageLevel::ABORT) {}
+
+    MessageBuilder::MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl)
+            : m_void(false), m_name(name), m_queue(queue), m_lvl(lvl) {}
+
+    void MessageBuilder::flush() {
+        if (m_void)
             return;
-        m_queue.push(Message{
-                m_name, std::chrono::high_resolution_clock::now(), m_currentLvl, m_msg.str()});
+        m_queue.push(
+                Message{m_name, std::chrono::high_resolution_clock::now(), m_lvl, m_msg.str()});
         // Clear the message buffer
         m_msg.str("");
-        m_currentLvl = m_outputLvl;
     }
 
-    MessageSource &MessageSource::operator<<(MessageLevel level) {
-        m_currentLvl = level;
-        return *this;
+    MessageSource::MessageSource(const std::string &name, MessageQueue &queue, MessageLevel level)
+            : m_name(name), m_queue(queue), m_outputLvl(level) {}
+
+    MessageBuilder MessageSource::operator<<(MessageLevel level) {
+        if (m_outputLvl <= level)
+            return MessageBuilder(m_queue, m_name, level);
+        else
+            return MessageBuilder(m_queue);
     }
 } // namespace AsyncQueue

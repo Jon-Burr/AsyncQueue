@@ -5,6 +5,52 @@
 #include "AsyncQueue/MessageSource.h"
 
 namespace AsyncQueue {
+    class MessageBuilder {
+    public:
+        /// Create a void builder
+        MessageBuilder(MessageQueue &queue);
+        /// Create a builder with the specified message level
+        MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl);
+        /**
+         * @brief Send the current message to the queue
+         *
+         * Note that this is equivalent to msg << std::endl;
+         */
+        void flush();
+
+        /// @brief Get the current output level
+        MessageLevel outputLevel() const { return m_lvl; }
+
+        /// Pass a generic type to the underlying string stream
+        template <typename T> MessageBuilder &operator<<(T &&value) {
+            if (m_void)
+                return *this;
+            m_msg << std::forward<T>(value);
+            return *this;
+        }
+
+        /// Handle endl by sending the message to the queue
+        using stream_mod_t = std::ostream &(*)(std::ostream &);
+        MessageBuilder &operator<<(stream_mod_t mod) {
+            if (m_void)
+                return *this;
+            if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>)
+                flush();
+            else
+                // OK - this was actually a generic stream modifier, not endl
+                m_msg << mod;
+            return *this;
+        }
+
+    private:
+        bool m_void;
+        const std::string m_name;
+        MessageQueue &m_queue;
+        // The level  message
+        const MessageLevel m_lvl;
+        std::ostringstream m_msg;
+
+    }; //> end class MessageBuilder
     class MessageSource {
     public:
         /**
@@ -17,57 +63,14 @@ namespace AsyncQueue {
                 const std::string &name, MessageQueue &queue,
                 MessageLevel level = MessageLevel::INFO);
 
-        /**
-         * @brief Send the current message to the queue
-         *
-         * Note that this is equivalent to msg << std::endl;
-         */
-        void flush();
-
-        /// @brief Get the current output level
-        MessageLevel outputLevel() const { return m_outputLvl; }
-        /**
-         * @brief Set the output level
-         *
-         * Note that it's too late to set this after values have already been provided to this as
-         * they will be discarded as early as possible.
-         *
-         * Ideally the start of every message should begin with setting its level.
-         */
-        void setOutputLevel(MessageLevel level) { m_outputLvl = level; }
-
         /// @brief Set the level of the next message to create
-        MessageSource &operator<<(MessageLevel level);
-
-        /// Pass a generic type to the underlying string stream
-        template <typename T> MessageSource &operator<<(T &&value) {
-            if (m_currentLvl < m_outputLvl)
-                return *this;
-            m_msg << std::forward<T>(value);
-            return *this;
-        }
-
-        /// Handle endl by sending the message to the queue
-        using stream_mod_t = std::ostream &(*)(std::ostream &);
-        MessageSource &operator<<(stream_mod_t mod) {
-            if (m_currentLvl < m_outputLvl)
-                return *this;
-            if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>)
-                flush();
-            else
-                // OK - this was actually a generic stream modifier, not endl
-                m_msg << mod;
-            return *this;
-        }
+        MessageBuilder operator<<(MessageLevel level);
 
     private:
         std::string m_name;
         MessageQueue &m_queue;
         // Don't output messages below this level
         MessageLevel m_outputLvl;
-        // The level of the current message
-        MessageLevel m_currentLvl;
-        std::ostringstream m_msg;
     };
 } // namespace AsyncQueue
 

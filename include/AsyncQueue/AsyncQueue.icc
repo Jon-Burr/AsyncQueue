@@ -43,4 +43,74 @@ namespace AsyncQueue {
         }
         return {};
     }
+    template <typename T>
+    template <typename F, typename... Args>
+    std::future<TaskStatus> AsyncQueue<T>::loopProducer(
+            ThreadManager &mgr, F &&producer, Args &&...args) {
+        static_assert(
+                std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
+                "The passed function is incorrect");
+        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
+                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        return loopProducer(mgr, f);
+    }
+    template <typename T>
+    template <typename F, typename... Args>
+    std::future<TaskStatus> AsyncQueue<T>::loopProducer(
+            ThreadManager &mgr, std::condition_variable &cv, F &&producer, Args &&...args) {
+        static_assert(
+                std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
+                "The passed function is incorrect");
+        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
+                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        return loopProducer(mgr, cv, f);
+    }
+    template <typename T>
+    template <typename F, typename... Args>
+    std::future<TaskStatus> AsyncQueue<T>::loopConsumer(
+            ThreadManager &mgr, F &&consumer, Args &&...args) {
+        std::function<TaskStatus(const T &)> f = std::bind(
+                std::forward<F>(consumer), std::placeholders::_1, std::forward<Args>(args)...);
+        return loopConsumer(mgr, f);
+    }
+
+    template <typename T>
+    std::future<TaskStatus> AsyncQueue<T>::loopProducer(
+            ThreadManager &mgr, std::function<TaskStatus(AsyncQueue<T> &)> producer) {
+        return mgr.loopTask(producer, std::ref(*this));
+    }
+
+    template <typename T>
+    std::future<TaskStatus> AsyncQueue<T>::loopProducer(
+            ThreadManager &mgr, std::condition_variable &cv,
+            std::function<TaskStatus(AsyncQueue<T> &)> producer) {
+        return mgr.loopTask(cv, producer, std::ref(*this));
+    }
+
+    template <typename T>
+    std::future<TaskStatus> AsyncQueue<T>::loopConsumer(
+            ThreadManager &mgr, std::function<TaskStatus(const T &)> consumer) {
+        return mgr.loopTask(cv(), &AsyncQueue::doLoopConsumer, this, consumer);
+    }
+
+    template <typename T>
+    TaskStatus AsyncQueue<T>::doLoopConsumer(std::function<TaskStatus(const T &)> consumer) {
+        auto lock_ = this->lock();
+        while (std::optional<T> value = extract(lock_)) {
+            // Unlock while the consumer deals with the value
+            lock_.unlock();
+            switch (consumer(*value)) {
+            case TaskStatus::CONTINUE:
+                break;
+            case TaskStatus::HALT:
+                return TaskStatus::HALT;
+            case TaskStatus::ABORT:
+                return TaskStatus::ABORT;
+            }
+            // Reacquire the lock before trying to extract another value
+            lock_.lock();
+        }
+        cv().wait(lock_);
+        return TaskStatus::CONTINUE;
+    }
 } // namespace AsyncQueue

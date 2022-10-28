@@ -1,99 +1,38 @@
 namespace AsyncQueue {
 
-    namespace detail {
-        template <typename F, typename... Args>
-        std::future<std::invoke_result_t<F, Args...>> async2(F &&f, Args &&... args) {
-            // To get around a gcc bug that was only fixed in version 10 we have to coerce f
-            // into a std::function
-            using StdFType = std::function<std::invoke_result_t<F &&, Args &&...>(Args...)>;
-            return std::async<StdFType, Args...>(StdFType(f), std::forward<Args>(args)...);
-        }
-    } // namespace detail
-
     template <typename F, typename... Args>
-    std::future<void> ThreadManager::loop(F &&f, Args &&... args) {
-        return detail::async2(
-                &ThreadManager::doLoop<Args...>, this, std::function<void(Args...)>(f),
-                std::forward<Args>(args)...);
-    }
-
-    template <typename... Args>
-    void ThreadManager::doLoop(std::function<void(Args...)> f, Args &&... args) {
-        while (true) {
-            f(std::forward<Args>(args)...);
-            if (isAborted())
-                return;
-        }
-    }
-
-#if 0
-    template <typename F, typename... Args>
-    std::future<void> ThreadManager::loop(F f, Args &&... args) {
-        auto doLoop_ = static_cast<void (ThreadManager::*)(F, Args && ...)>(
-                &ThreadManager::doLoop<F, Args...>);
-        return std::async(doLoop_, this, f, std::forward<Args>(args)...);
+    std::future<void> ThreadManager::loop(F &&f, Args &&...args) {
+        std::function<void()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        // Resolve the overloaded function for async
+        void (ThreadManager::*doLoop)(std::function<void()>) = &ThreadManager::doLoop;
+        return std::async(doLoop, this, f_);
     }
 
     template <typename F, typename... Args>
-    std::future<void> ThreadManager::loop(std::condition_variable &cv, F f, Args &&... args) {
-        auto doLoop_ =
-                static_cast<void (ThreadManager::*)(std::condition_variable &, F, Args && ...)>(
-                        &ThreadManager::doLoopCV<F, Args...>);
-        return std::async(doLoop_, this, cv, f, std::forward<Args>(args)...);
+    std::future<void> ThreadManager::loop(std::condition_variable &cv, F f, Args &&...args) {
+        std::function<void()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        // Resolve the overloaded function for async
+        void (ThreadManager::*doLoop)(std::condition_variable &, std::function<void()>) =
+                &ThreadManager::doLoop;
+        return std::async(doLoop, this, std::ref(cv), f_);
     }
-
-    template <typename... Args>
+    template <typename F, typename... Args>
+    std::future<TaskStatus> ThreadManager::loopTask(F &&f, Args &&...args) {
+        std::function<TaskStatus()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        // Resolve the overloaded function for async
+        TaskStatus (ThreadManager::*doLoopTask)(std::function<TaskStatus()>) =
+                &ThreadManager::doLoopTask;
+        return std::async(doLoopTask, this, f_);
+    }
+    template <typename F, typename... Args>
     std::future<TaskStatus> ThreadManager::loopTask(
-            std::function<TaskStatus(Args &&...)> f, Args &&... args) {
-        return std::async(this->template doLoopTask, f, std::forward(args)...);
+            std::condition_variable &cv, F &&f, Args &&...args) {
+        std::function<TaskStatus()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        // Resolve the overloaded function for async
+        TaskStatus (ThreadManager::*doLoopTask)(
+                std::condition_variable &, std::function<TaskStatus()>) =
+                &ThreadManager::doLoopTask;
+        return std::async(doLoopTask, this, std::ref(cv), f_);
     }
-
-    template <typename... Args>
-    std::future<TaskStatus> ThreadManager::loopTask(
-            std::condition_variable &cv, std::function<TaskStatus(Args &&...)> f, Args &&... args) {
-        return std::async(this->template doLoopTaskCV(cv, f, std::forward<Args>(args)...));
-    }
-
-    template <typename F, typename... Args> void ThreadManager::doLoop(F f, Args &&... args) {
-        while (true) {
-            F(std::forward<Args>(args)...);
-            if (isAborted())
-                return;
-        }
-    }
-    template <typename F, typename... Args>
-    void ThreadManager::doLoopCV(std::condition_variable &cv, F f, Args &&... args) {
-        std::condition_variable *cvptr = &cv;
-        reference(cvptr);
-        doLoop(f, std::forward<Args>(args)...);
-        dereference(cvptr);
-    }
-
-    template <typename... Args>
-    TaskStatus ThreadManager::doLoopTask(std::function<TaskStatus(Args &&...)> f, Args &&... args) {
-        while (true) {
-            switch (F(std::forward<Args>(args)...)) {
-            case TaskStatus::CONTINUE:
-                if (isAborted())
-                    return TaskStatus::CONTINUE;
-                break;
-            case TaskStatus::HALT:
-                return TaskStatus::HALT;
-            case TaskStatus::ABORT:
-                abort();
-                return TaskStatus::ABORT;
-            }
-        }
-    }
-    template <typename... Args>
-    TaskStatus ThreadManager::doLoopTaskCV(
-            std::condition_variable &cv, std::function<TaskStatus(Args &&...)> f, Args &&... args) {
-        std::condition_variable *cvptr = &cv;
-        reference(cvptr);
-        TaskStatus status = doLoopTask(f, std::forward<Args>(args)...);
-        dereference(cvptr);
-        return status;
-    }
-#endif
 
 } // namespace AsyncQueue

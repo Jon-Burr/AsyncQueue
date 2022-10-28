@@ -1,0 +1,77 @@
+#ifndef ASYNCQUEUE_MESSAGEFORMATTER_H
+#define ASYNCQUEUE_MESSAGEFORMATTER_H
+
+#include "AsyncQueue/Message.h"
+
+#include <chrono>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include <iostream>
+
+namespace AsyncQueue {
+    class MessageFormatter {
+    public:
+        enum class FieldType { Name, Level, Time, Message, Literal };
+        struct Field {
+            FieldType type;
+            std::size_t minLength{0};
+            std::string extra;
+        };
+
+        static const inline Field defaultNameField{FieldType::Name, 10, ""};
+        static const inline Field defaultLevelField{FieldType::Level, 7, ""};
+        static const inline Field defaultTimeField{FieldType::Time, 35, "%F %T+%+uus %Z"};
+        static const inline Field defaultMessageField{FieldType::Message, 0, ""};
+
+        MessageFormatter();
+        MessageFormatter(const std::vector<Field> &fields, const std::string &sep = " ");
+        std::string operator()(const Message &message) { return format(message); }
+        std::string format(const Message &message) const;
+        static std::string formatField(const Message &message, const Field &field);
+        template <typename Clock>
+        static std::string formatTime(
+                const std::chrono::time_point<Clock> &timepoint, std::string format);
+        operator std::function<std::string(const Message &message)>() {
+            return std::function<std::string(const Message &msg)>(*this);
+        }
+
+    private:
+        std::vector<Field> m_fields;
+        std::string m_sep;
+    };
+
+    template <typename Clock>
+    std::string MessageFormatter::formatTime(
+            const std::chrono::time_point<Clock> &timepoint, std::string format) {
+        auto seconds = std::chrono::floor<std::chrono::seconds>(timepoint);
+        if (format.find("%+") != std::string::npos) {
+            std::size_t pos = format.find("%+");
+            auto diff = timepoint - seconds;
+            while (pos != std::string::npos) {
+                if (pos + 2 >= format.size())
+                    break;
+                char code = format.at(pos + 2);
+                std::size_t count;
+                if (code == 'n')
+                    count = std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count();
+                else if (code == 'u')
+                    count = std::chrono::duration_cast<std::chrono::microseconds>(diff).count();
+                else if (code == 'm')
+                    count = std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
+                else
+                    break;
+                format = format.replace(pos, 3, std::to_string(count));
+                pos = format.find("%+", pos);
+            }
+        }
+        std::ostringstream oss;
+        std::time_t tmt = Clock::to_time_t(seconds);
+        oss << std::put_time(std::localtime(&tmt), format.c_str());
+        return oss.str();
+    }
+} // namespace AsyncQueue
+
+#endif //> !ASYNCQUEUE_MESSAGEFORMATTER_H

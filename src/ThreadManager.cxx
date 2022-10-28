@@ -1,8 +1,14 @@
 #include "AsyncQueue/ThreadManager.h"
+#include "AsyncQueue/MessageSource.h"
 
 #include <cassert>
+#include <stdexcept>
 
 namespace AsyncQueue {
+
+    ThreadManager::ThreadManager(MessageSource &&msg)
+            : m_msg(std::make_unique<MessageSource>(std::move(msg))) {}
+
     void ThreadManager::abort() {
         std::lock_guard<std::mutex> lock(m_cvMutex);
         if (m_aborted)
@@ -16,6 +22,62 @@ namespace AsyncQueue {
         }
     }
 
+    void ThreadManager::doLoop(std::function<void()> f) {
+        while (!isAborted()) {
+            try {
+                f();
+            } catch (const std::exception &e) {
+                if (m_msg)
+                    (*m_msg) << MessageLevel::ABORT << "Raised exception: " << e.what()
+                             << std::endl;
+                abort();
+                return;
+            }
+        }
+    }
+
+    void ThreadManager::doLoop(std::condition_variable &cv, std::function<void()> f) {
+        std::condition_variable *cvptr = &cv;
+        reference(cvptr);
+        doLoop(f);
+        dereference(cvptr);
+    }
+
+    TaskStatus ThreadManager::doLoopTask(std::function<TaskStatus()> f) {
+        while (!isAborted()) {
+
+            TaskStatus status;
+            try {
+                status = f();
+            } catch (const std::exception &e) {
+                if (m_msg)
+                    (*m_msg) << MessageLevel::ABORT << "Raised exception: " << e.what()
+                             << std::endl;
+                abort();
+                return TaskStatus::ABORT;
+            }
+            switch (status) {
+            case TaskStatus::CONTINUE:
+                break;
+            case TaskStatus::HALT:
+                return TaskStatus::HALT;
+            case TaskStatus::ABORT:
+                abort();
+                return TaskStatus::ABORT;
+            }
+        }
+        return TaskStatus::CONTINUE;
+    }
+
+    TaskStatus ThreadManager::doLoopTask(
+            std::condition_variable &cv, std::function<TaskStatus()> f) {
+        std::condition_variable *cvptr = &cv;
+        reference(cvptr);
+        TaskStatus status = doLoopTask(f);
+        dereference(cvptr);
+        return status;
+    }
+
     void ThreadManager::reference(std::condition_variable *cv) {
         std::lock_guard<std::mutex> lock(m_cvMutex);
         ++m_cvCounter[cv];
@@ -26,5 +88,9 @@ namespace AsyncQueue {
         std::size_t &counter = m_cvCounter[cv];
         assert(counter != 0);
         --counter;
+    }
+
+    void ThreadManager::setMsg(MessageSource &&msg) {
+        m_msg = std::make_unique<MessageSource>(std::move(msg));
     }
 } // namespace AsyncQueue

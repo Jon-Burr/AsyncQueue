@@ -21,32 +21,24 @@ namespace AsyncQueue {
 
         static std::shared_ptr<std::mutex> getMutex(const std::ostream &os);
         SyncStream(std::ostream &os);
-        SyncStream(const SyncStream &os);
-
-        void ensureLock();
 
         void flush();
 
         template <typename T> SyncStream &operator<<(T &&value) {
-            ensureLock();
             m_os << std::forward<T>(value);
             return *this;
         }
 
         using stream_mod_t = std::ostream &(*)(std::ostream &);
         SyncStream &operator<<(stream_mod_t mod) {
-            ensureLock();
             m_os << mod;
-            if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>)
-                m_lock.unlock();
             return *this;
         }
 
     private:
         std::ostream &m_os;
         std::shared_ptr<std::mutex> m_mutex;
-        std::unique_lock<std::mutex> m_lock;
-        std::mutex m_lockMutex;
+        std::lock_guard<std::mutex> m_lock;
     };
 
 } // namespace AsyncQueue

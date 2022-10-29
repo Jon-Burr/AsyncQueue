@@ -8,9 +8,6 @@ namespace AsyncQueue {
     SyncStream SyncStream::cout() { return SyncStream(std::cout); }
     SyncStream SyncStream::cerr() { return SyncStream(std::cerr); }
 
-    SyncStream::SyncStream(const SyncStream &other)
-            : m_os(other.m_os), m_mutex(other.m_mutex), m_lock(*m_mutex, std::defer_lock) {}
-
     std::shared_ptr<std::mutex> SyncStream::getMutex(const std::ostream &os) {
         static std::mutex mapMutex;
         std::lock_guard<std::mutex> lock(mapMutex);
@@ -24,18 +21,7 @@ namespace AsyncQueue {
             return itr->second.lock();
     }
 
-    void SyncStream::ensureLock() {
-        std::lock_guard<std::mutex> lock_(m_lockMutex);
-        if (!m_lock.owns_lock())
-            m_lock.lock();
-    }
+    void SyncStream::flush() { m_os.flush(); }
 
-    void SyncStream::flush() {
-        ensureLock();
-        m_os.flush();
-        m_lock.unlock();
-    }
-
-    SyncStream::SyncStream(std::ostream &os)
-            : m_os(os), m_mutex(getMutex(os)), m_lock(*m_mutex, std::defer_lock) {}
+    SyncStream::SyncStream(std::ostream &os) : m_os(os), m_mutex(getMutex(os)), m_lock(*m_mutex) {}
 } // namespace AsyncQueue

@@ -5,12 +5,19 @@
 #include "AsyncQueue/MessageSource.h"
 
 namespace AsyncQueue {
+
+    /**
+     * @brief Creates messages and sends them to the queue
+     *
+     * The queue is locked for as long as the builder exists.
+     */
     class MessageBuilder {
     public:
         /// Create a void builder
         MessageBuilder(MessageQueue &queue);
         /// Create a builder with the specified message level
         MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl);
+        ~MessageBuilder() { flush(); }
         /**
          * @brief Send the current message to the queue
          *
@@ -25,6 +32,7 @@ namespace AsyncQueue {
         template <typename T> MessageBuilder &operator<<(T &&value) {
             if (m_void)
                 return *this;
+            m_empty = false;
             m_msg << std::forward<T>(value);
             return *this;
         }
@@ -44,11 +52,13 @@ namespace AsyncQueue {
 
     private:
         bool m_void;
+        bool m_empty{true};
         const std::string m_name;
         MessageQueue &m_queue;
-        // The level  message
+        // The message level
         const MessageLevel m_lvl;
         std::ostringstream m_msg;
+        std::unique_lock<std::mutex> m_lock;
 
     }; //> end class MessageBuilder
     class MessageSource {

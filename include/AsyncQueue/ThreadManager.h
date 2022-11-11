@@ -2,6 +2,7 @@
 #define ASYNCQUEUE_THREADMANAGER_H
 
 #include <atomic>
+#include <chrono>
 #include <condition_variable>
 #include <functional>
 #include <future>
@@ -32,19 +33,29 @@ namespace AsyncQueue {
         void abort();
         /// @brief Whether the abort signal has been sent
         bool isAborted() const { return m_aborted; }
-        template <typename F, typename... Args> std::future<void> loop(F &&f, Args &&...args);
 
+        template <typename F, typename... Args> std::future<void> loop(F &&f, Args &&...args);
         template <typename F, typename... Args>
         std::future<void> loop(std::condition_variable &cv, F f, Args &&...args);
+        template <typename Rep, typename Ratio, typename F, typename... Args>
+        std::future<void> loop(std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args);
         template <typename F, typename... Args>
         std::future<TaskStatus> loopTask(F &&f, Args &&...args);
         template <typename F, typename... Args>
         std::future<TaskStatus> loopTask(std::condition_variable &cv, F &&f, Args &&...args);
+        template <typename Rep, typename Ratio, typename F, typename... Args>
+        std::future<TaskStatus> loopTask(
+                std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args);
 
-        void doLoop(std::function<void()> f);
-        void doLoop(std::condition_variable &cv, std::function<void()> f);
-        TaskStatus doLoopTask(std::function<TaskStatus()> f);
-        TaskStatus doLoopTask(std::condition_variable &cv, std::function<TaskStatus()> f);
+        void doLoop(std::chrono::nanoseconds heartbeat, std::function<void()> f);
+        void doLoop(
+                std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
+                std::function<void()> f);
+
+        TaskStatus doLoopTask(std::chrono::nanoseconds heartbeat, std::function<TaskStatus()> f);
+        TaskStatus doLoopTask(
+                std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
+                std::function<TaskStatus()> f);
 
         /**
          * @brief Reset the status so it is no longer aborted

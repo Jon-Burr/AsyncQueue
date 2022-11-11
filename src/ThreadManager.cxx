@@ -22,7 +22,7 @@ namespace AsyncQueue {
         }
     }
 
-    void ThreadManager::doLoop(std::function<void()> f) {
+    void ThreadManager::doLoop(std::chrono::nanoseconds heartbeat, std::function<void()> f) {
         while (!isAborted()) {
             try {
                 f();
@@ -33,19 +33,28 @@ namespace AsyncQueue {
                 abort();
                 return;
             }
+            std::this_thread::sleep_for(heartbeat);
         }
     }
 
-    void ThreadManager::doLoop(std::condition_variable &cv, std::function<void()> f) {
+    void ThreadManager::doLoop(
+            std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
+            std::function<void()> f) {
         std::condition_variable *cvptr = &cv;
         reference(cvptr);
-        doLoop(f);
+        doLoop(heartbeat, f);
         dereference(cvptr);
     }
 
-    TaskStatus ThreadManager::doLoopTask(std::function<TaskStatus()> f) {
+    TaskStatus ThreadManager::doLoopTask(
+            std::chrono::nanoseconds heartbeat, std::function<TaskStatus()> f) {
+        static std::atomic<std::size_t> taskCounter = 0;
+        std::size_t taskID = taskCounter++;
+        std::size_t loopCount = 0;
         while (!isAborted()) {
-
+            if (m_msg && m_msg->testLevel(MessageLevel::VERBOSE))
+                (*m_msg) << MessageLevel::VERBOSE << "Task #" << taskID << ": Execute loop #"
+                         << loopCount++ << std::endl;
             TaskStatus status;
             try {
                 status = f();
@@ -65,15 +74,17 @@ namespace AsyncQueue {
                 abort();
                 return TaskStatus::ABORT;
             }
+            std::this_thread::sleep_for(heartbeat);
         }
         return TaskStatus::CONTINUE;
     }
 
     TaskStatus ThreadManager::doLoopTask(
-            std::condition_variable &cv, std::function<TaskStatus()> f) {
+            std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
+            std::function<TaskStatus()> f) {
         std::condition_variable *cvptr = &cv;
         reference(cvptr);
-        TaskStatus status = doLoopTask(f);
+        TaskStatus status = doLoopTask(heartbeat, f);
         dereference(cvptr);
         return status;
     }

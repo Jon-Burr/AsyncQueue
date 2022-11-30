@@ -13,7 +13,6 @@
  */
 
 namespace AsyncQueue {
-
     class SyncStream {
     public:
         static SyncStream cout();

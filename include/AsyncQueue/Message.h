@@ -10,6 +10,7 @@
 #include "AsyncQueue/AsyncQueue.h"
 
 namespace AsyncQueue {
+    /// @brief Enum to indicate the severity of a message
     enum class MessageLevel { VERBOSE = 0, DEBUG = 1, INFO = 2, WARNING = 3, ERROR = 4, ABORT = 5 };
 
     inline bool operator<=(MessageLevel lhs, MessageLevel rhs) {
@@ -36,6 +37,7 @@ namespace AsyncQueue {
 
     MessageLevel levelFromString(std::string lvl);
 
+    /// @brief Struct containing a message with its context
     struct Message {
         const std::string source;
         const std::chrono::time_point<std::chrono::high_resolution_clock> time;

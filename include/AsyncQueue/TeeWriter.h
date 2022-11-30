@@ -8,6 +8,7 @@
 #include <vector>
 
 namespace AsyncQueue {
+    /// @brief Message write that just duplicates the message and sends it to multiple other writers
     class TeeWriter : public IMessageWriter {
     public:
         TeeWriter() = default;

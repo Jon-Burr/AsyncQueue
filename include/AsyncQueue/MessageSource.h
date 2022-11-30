@@ -74,7 +74,7 @@ namespace AsyncQueue {
                 MessageLevel level = MessageLevel::INFO);
 
         /// @brief Set the level of the next message to create
-        MessageBuilder operator<<(MessageLevel level);
+        MessageBuilder operator<<(MessageLevel level) const;
 
         /// @brief Get the current output level
         MessageLevel outputLevel() const { return m_outputLvl; }

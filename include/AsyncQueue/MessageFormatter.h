@@ -12,8 +12,10 @@
 #include <iostream>
 
 namespace AsyncQueue {
+    /// @brief Basic implementation of a class that converts a message to a string to write
     class MessageFormatter {
     public:
+        /// @brief Different field types
         enum class FieldType { Name, Level, Time, Message, Literal };
         struct Field {
             FieldType type;
@@ -26,14 +28,38 @@ namespace AsyncQueue {
         static const inline Field defaultTimeField{FieldType::Time, 35, "%F %T+%+uus %Z"};
         static const inline Field defaultMessageField{FieldType::Message, 0, ""};
 
+        /// @brief Create the default formatter
         MessageFormatter();
+        /**
+         * @brief Create a custom formatter
+         *
+         * @param fields A list of fields describing the order of how to write the message
+         * @param sep A string that will be inserted between each field
+         */
         MessageFormatter(const std::vector<Field> &fields, const std::string &sep = " ");
+        /// @brief Format the message
         std::string operator()(const Message &message) { return format(message); }
+        /// @brief Format the message
         std::string format(const Message &message) const;
+        /**
+         * @brief Format an individual field
+         * @param message The original message
+         * @param field The description of the field to write
+         */
         static std::string formatField(const Message &message, const Field &field);
+        /**
+         * @tparam The type of timepoint being used
+         * @param timepoint The timepoint
+         * @param string describing the time format to use
+         *
+         * The time format string should be the same as the one used by std::put_time with one
+         * addition. The string can contain %+n, %+u or %+m which will be replaced by a
+         * representation of the nano, micro or milliseconds.
+         */
         template <typename Clock>
         static std::string formatTime(
                 const std::chrono::time_point<Clock> &timepoint, std::string format);
+        /// @brief Convert to a function object
         operator std::function<std::string(const Message &message)>() {
             return std::function<std::string(const Message &msg)>(*this);
         }

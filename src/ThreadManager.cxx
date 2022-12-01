@@ -2,6 +2,7 @@
 #include "AsyncQueue/MessageSource.h"
 
 #include <cassert>
+#include <chrono>
 #include <stdexcept>
 
 namespace AsyncQueue {
@@ -10,15 +11,22 @@ namespace AsyncQueue {
             : m_msg(std::make_unique<MessageSource>(std::move(msg))) {}
 
     void ThreadManager::abort() {
-        std::lock_guard<std::mutex> lock(m_cvMutex);
-        if (m_aborted)
-            // Nothing to do, the thread is already aborting
-            return;
+        using namespace std::chrono_literals;
+        std::unique_lock<std::mutex> lock(m_cvMutex);
         m_aborted = true;
-        for (std::pair<std::condition_variable *const, std::size_t> &cv : m_cvCounter) {
-            // Only notify if we still have a reference
-            if (cv.second > 0)
-                cv.first->notify_all();
+        bool cont = true;
+        while (cont) {
+            cont = true;
+            for (std::pair<std::condition_variable *const, std::size_t> &cv : m_cvCounter) {
+                // Only notify if we still have a reference
+                if (cv.second > 0) {
+                    cv.first->notify_all();
+                    cont = false;
+                }
+            }
+            lock.unlock();
+            std::this_thread::sleep_for(100ms);
+            lock.lock();
         }
     }
 

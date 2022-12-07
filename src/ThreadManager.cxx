@@ -4,6 +4,7 @@
 #include <cassert>
 #include <chrono>
 #include <stdexcept>
+#include <thread>
 
 namespace AsyncQueue {
 

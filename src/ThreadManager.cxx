@@ -16,12 +16,12 @@ namespace AsyncQueue {
         m_aborted = true;
         bool cont = true;
         while (cont) {
-            cont = true;
+            cont = false;
             for (std::pair<std::condition_variable *const, std::size_t> &cv : m_cvCounter) {
                 // Only notify if we still have a reference
                 if (cv.second > 0) {
                     cv.first->notify_all();
-                    cont = false;
+                    cont = true;
                 }
             }
             lock.unlock();

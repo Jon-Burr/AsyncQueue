@@ -3,17 +3,16 @@
 namespace AsyncQueue {
 
     MessageBuilder::MessageBuilder(MessageQueue &queue)
-            : m_void(true), m_queue(queue), m_lvl(MessageLevel::ABORT), m_lock(queue.lock()) {}
+            : m_void(true), m_queue(queue), m_lvl(MessageLevel::ABORT) {}
 
     MessageBuilder::MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl)
-            : m_void(false), m_name(name), m_queue(queue), m_lvl(lvl), m_lock(queue.lock()) {}
+            : m_void(false), m_name(name), m_queue(queue), m_lvl(lvl) {}
 
     void MessageBuilder::flush() {
         if (m_void || m_empty)
             return;
         m_queue.push(
-                Message{m_name, std::chrono::high_resolution_clock::now(), m_lvl, m_msg.str()},
-                m_lock);
+                Message{m_name, std::chrono::high_resolution_clock::now(), m_lvl, m_msg.str()});
         // Clear the message buffer
         m_msg.str("");
         m_empty = true;

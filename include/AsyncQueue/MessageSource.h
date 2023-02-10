@@ -58,7 +58,6 @@ namespace AsyncQueue {
         // The message level
         const MessageLevel m_lvl;
         std::ostringstream m_msg;
-        std::unique_lock<std::mutex> m_lock;
 
     }; //> end class MessageBuilder
     class MessageSource {

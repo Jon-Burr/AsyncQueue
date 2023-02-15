@@ -10,7 +10,6 @@ target_sources(AsyncQueue PRIVATE
     src/MessageManager.cxx
     src/MessageSource.cxx
     src/MessageWriter.cxx
-    src/SyncStream.cxx
     src/TeeWriter.cxx
     src/ThreadManager.cxx)
 target_include_directories(AsyncQueue PUBLIC include)

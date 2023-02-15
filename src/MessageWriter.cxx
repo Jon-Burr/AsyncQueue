@@ -1,6 +1,5 @@
 #include "AsyncQueue/MessageWriter.h"
 #include "AsyncQueue/MessageFormatter.h"
-#include "AsyncQueue/SyncStream.h"
 
 namespace AsyncQueue {
 
@@ -11,7 +10,7 @@ namespace AsyncQueue {
             : m_os(os), m_lvl(lvl), m_format(format) {}
 
     TaskStatus MessageWriter::write(const Message &message) {
-        SyncStream(m_os) << m_format(message) << std::endl;
+        m_os << m_format(message) << std::endl;
         return TaskStatus::CONTINUE;
     }
 } // namespace AsyncQueue

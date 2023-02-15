@@ -11,8 +11,7 @@ namespace AsyncQueue {
     void MessageBuilder::flush() {
         if (m_void || m_empty)
             return;
-        m_queue.push(
-                Message{m_name, std::chrono::high_resolution_clock::now(), m_lvl, m_msg.str()});
+        m_queue.push(Message{m_name, std::chrono::system_clock::now(), m_lvl, m_msg.str()});
         // Clear the message buffer
         m_msg.str("");
         m_empty = true;

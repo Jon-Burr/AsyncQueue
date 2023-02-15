@@ -8,6 +8,7 @@
 #include <type_traits>
 
 #include "AsyncQueue/AsyncQueue.h"
+#include "AsyncQueue/IConsumer.h"
 
 namespace AsyncQueue {
     /// @brief Enum to indicate the severity of a message
@@ -46,6 +47,7 @@ namespace AsyncQueue {
     };
 
     using MessageQueue = AsyncQueue<Message>;
+    using IMessageWriter = IConsumer<Message>;
 
 } // namespace AsyncQueue
 

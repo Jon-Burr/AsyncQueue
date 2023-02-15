@@ -1,0 +1,34 @@
+namespace AsyncQueue {
+    template <typename T>
+    TeeConsumer<T>::TeeConsumer(std::vector<std::unique_ptr<IConsumer<T>>> &&consumers)
+            : m_consumers(std::move(consumers)) {}
+    template <typename T>
+    void TeeConsumer<T>::addConsumer(std::unique_ptr<IConsumer<T>> &&consumer) {
+        m_consumers.push_back(std::move(consumer));
+    }
+
+    template <typename T>
+    template <typename C>
+    std::enable_if_t<std::is_base_of_v<IConsumer<T>, C>, void> TeeConsumer<T>::addConsumer(
+            C &&consumer) {
+        m_consumers.push_back(std::make_unique<C>(std::move(consumer)));
+    }
+
+    template <typename T> TaskStatus TeeConsumer<T>::consume(const T &element) {
+        auto itr = m_consumers.begin();
+        while (itr != m_consumer.end()) {
+            switch ((**itr).consume(element)) {
+            case TaskStatus::CONTINUE:
+                ++itr;
+                break;
+            case TaskStatus::HALT:
+                itr = m_consumers.erase(itr);
+                break;
+            case TaskStatus::ABORT:
+                return TaskStatus::ABORT;
+            }
+        }
+        // If we have no consumers left then halt
+        return m_consumers.empty() ? TaskStatus::HALT : TaskStatus::CONTINUE;
+    }
+} // namespace AsyncQueue

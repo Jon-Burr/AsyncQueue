@@ -18,9 +18,9 @@ namespace AsyncQueue {
         /// @brief Different field types
         enum class FieldType { Name, Level, Time, Message, Literal };
         struct Field {
-            FieldType type;
-            std::size_t minLength{0};
-            std::string extra;
+            FieldType type;           ///< The type of field
+            std::size_t minLength{0}; ///< The minimum length (i.e. padding)
+            std::string extra;        ///< Extra data used to format the field
         };
 
         static const inline Field defaultNameField{FieldType::Name, 10, ""};

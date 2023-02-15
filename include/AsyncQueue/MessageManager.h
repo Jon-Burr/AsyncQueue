@@ -1,7 +1,6 @@
 #ifndef ASYNCQUEUE_MESSAGEMANAGER_H
 #define ASYNCQUEUE_MESSAGEMANAGER_H
 
-#include "AsyncQueue/IMessageWriter.h"
 #include "AsyncQueue/Message.h"
 #include "AsyncQueue/ThreadManager.h"
 

@@ -80,6 +80,11 @@ $(function() {
   <div class="headertitle"><div class="title">AsyncQueue::MessageSource Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Thread-safe source of messages.  
+ <a href="classAsyncQueue_1_1MessageSource.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="MessageSource_8h_source.html">MessageSource.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -99,7 +104,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>testLevel</b> (Messag
 <tr class="memdesc:a9a60a38f28bb3917265345177589e3f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should we output this message? <br /></td></tr>
 <tr class="separator:a9a60a38f28bb3917265345177589e3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Thread-safe source of messages. </p>
+<p>Behaves similarly to an output stream. The first thing passed to it must be a MessageLevel at which point it creates a <a class="el" href="classAsyncQueue_1_1MessageBuilder.html" title="Creates messages and sends them to the queue.">MessageBuilder</a> which handles the creation of the <a class="el" href="structAsyncQueue_1_1Message.html" title="Struct containing a message with its context.">Message</a>. When the builder goes out of scope the created <a class="el" href="structAsyncQueue_1_1Message.html" title="Struct containing a message with its context.">Message</a> is pushed to the queue. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5ab3663274a353c7617a5c81e622977b" name="a5ab3663274a353c7617a5c81e622977b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ab3663274a353c7617a5c81e622977b">&#9670;&#160;</a></span>MessageSource()</h2>
 

@@ -97,8 +97,8 @@ Inheritance diagram for AsyncQueue::IConsumer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2fb9f4c8b5c18f67a021ec1a0ad12dba"><td class="memItemLeft" align="right" valign="top"><a id="a2fb9f4c8b5c18f67a021ec1a0ad12dba" name="a2fb9f4c8b5c18f67a021ec1a0ad12dba"></a>
-TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><b>operator()</b> (const T &amp;element)</td></tr>
+<tr class="memitem:a2fb9f4c8b5c18f67a021ec1a0ad12dba"><td class="memItemLeft" align="right" valign="top">TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1IConsumer.html#a2fb9f4c8b5c18f67a021ec1a0ad12dba">operator()</a> (const T &amp;element)</td></tr>
+<tr class="memdesc:a2fb9f4c8b5c18f67a021ec1a0ad12dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumer an element.  <br /></td></tr>
 <tr class="separator:a2fb9f4c8b5c18f67a021ec1a0ad12dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac32a0b04ec348647dcb013e897641673"><td class="memItemLeft" align="right" valign="top">virtual TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1IConsumer.html#ac32a0b04ec348647dcb013e897641673">consume</a> (const T &amp;element)=0</td></tr>
 <tr class="memdesc:ac32a0b04ec348647dcb013e897641673"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consume a single element of the queue.  <br /></td></tr>
@@ -147,8 +147,46 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Code indicating the status of the consumer </dd></dl>
 
 <p>Implemented in <a class="el" href="classAsyncQueue_1_1MessageWriter.html#a2656cfa67a99675d361b960afec18d8e">AsyncQueue::MessageWriter</a>, and <a class="el" href="classAsyncQueue_1_1TeeConsumer.html#a72d3dd5c61e46c6f92c50fe8413311cf">AsyncQueue::TeeConsumer&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a2fb9f4c8b5c18f67a021ec1a0ad12dba" name="a2fb9f4c8b5c18f67a021ec1a0ad12dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb9f4c8b5c18f67a021ec1a0ad12dba">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskStatus <a class="el" href="classAsyncQueue_1_1IConsumer.html">AsyncQueue::IConsumer</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Consumer an element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>The queue element to be consumed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Code indicating the status of the consumer </dd></dl>
 
 </div>
 </div>

@@ -80,11 +80,16 @@ $(function() {
   <div class="headertitle"><div class="title">AsyncQueue::ThreadManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class to manage threads.  
+ <a href="classAsyncQueue_1_1ThreadManager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ThreadManager_8h_source.html">ThreadManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9908f5f981ab9780fc9902f5b48fdbbf"><td class="memItemLeft" align="right" valign="top"><a id="a9908f5f981ab9780fc9902f5b48fdbbf" name="a9908f5f981ab9780fc9902f5b48fdbbf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ThreadManager</b> (<a class="el" href="classAsyncQueue_1_1MessageSource.html">MessageSource</a> &amp;&amp;msg)</td></tr>
+<tr class="memitem:a9908f5f981ab9780fc9902f5b48fdbbf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a9908f5f981ab9780fc9902f5b48fdbbf">ThreadManager</a> (<a class="el" href="classAsyncQueue_1_1MessageSource.html">MessageSource</a> &amp;&amp;msg)</td></tr>
+<tr class="memdesc:a9908f5f981ab9780fc9902f5b48fdbbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the manage.  <br /></td></tr>
 <tr class="separator:a9908f5f981ab9780fc9902f5b48fdbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bbb9cc92d7bb3a488376978f54b955a"><td class="memItemLeft" align="right" valign="top"><a id="a3bbb9cc92d7bb3a488376978f54b955a" name="a3bbb9cc92d7bb3a488376978f54b955a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>abort</b> ()</td></tr>
@@ -94,41 +99,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>abort</b> ()</td></tr
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAborted</b> () const</td></tr>
 <tr class="memdesc:a1c9f2f16a5f04c380e30cce56f36e38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the abort signal has been sent. <br /></td></tr>
 <tr class="separator:a1c9f2f16a5f04c380e30cce56f36e38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6406fbb8fdab204f287eac47542bcd82"><td class="memTemplParams" colspan="2"><a id="a6406fbb8fdab204f287eac47542bcd82" name="a6406fbb8fdab204f287eac47542bcd82"></a>
-template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a6406fbb8fdab204f287eac47542bcd82"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loop</b> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a6406fbb8fdab204f287eac47542bcd82"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a6406fbb8fdab204f287eac47542bcd82"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a6406fbb8fdab204f287eac47542bcd82">loop</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a6406fbb8fdab204f287eac47542bcd82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a functor.  <br /></td></tr>
 <tr class="separator:a6406fbb8fdab204f287eac47542bcd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="memTemplParams" colspan="2"><a id="ac28e174e9a43d3b5f283b483cad2c2f0" name="ac28e174e9a43d3b5f283b483cad2c2f0"></a>
-template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loop</b> (std::condition_variable &amp;cv, F f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#ac28e174e9a43d3b5f283b483cad2c2f0">loop</a> (std::condition_variable &amp;cv, F f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a functor which depends on a condition variable.  <br /></td></tr>
 <tr class="separator:ac28e174e9a43d3b5f283b483cad2c2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2348f33f49d9b7b66e0fe7993745054b"><td class="memTemplParams" colspan="2"><a id="a2348f33f49d9b7b66e0fe7993745054b" name="a2348f33f49d9b7b66e0fe7993745054b"></a>
-template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a2348f33f49d9b7b66e0fe7993745054b"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loop</b> (std::chrono::duration&lt; Rep, Ratio &gt; heartbeat, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a2348f33f49d9b7b66e0fe7993745054b"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a2348f33f49d9b7b66e0fe7993745054b"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a2348f33f49d9b7b66e0fe7993745054b">loop</a> (std::chrono::duration&lt; Rep, Ratio &gt; heartbeat, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a2348f33f49d9b7b66e0fe7993745054b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a functor with a pause between executios.  <br /></td></tr>
 <tr class="separator:a2348f33f49d9b7b66e0fe7993745054b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ee0df414eceae7f29b6a60d71addb5b"><td class="memTemplParams" colspan="2"><a id="a8ee0df414eceae7f29b6a60d71addb5b" name="a8ee0df414eceae7f29b6a60d71addb5b"></a>
-template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a8ee0df414eceae7f29b6a60d71addb5b"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loopTask</b> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a8ee0df414eceae7f29b6a60d71addb5b"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a8ee0df414eceae7f29b6a60d71addb5b"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a8ee0df414eceae7f29b6a60d71addb5b">loopTask</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a8ee0df414eceae7f29b6a60d71addb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a task functor.  <br /></td></tr>
 <tr class="separator:a8ee0df414eceae7f29b6a60d71addb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82d2caf79e53b05a372661b67c7850b8"><td class="memTemplParams" colspan="2"><a id="a82d2caf79e53b05a372661b67c7850b8" name="a82d2caf79e53b05a372661b67c7850b8"></a>
-template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a82d2caf79e53b05a372661b67c7850b8"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loopTask</b> (std::condition_variable &amp;cv, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a82d2caf79e53b05a372661b67c7850b8"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a82d2caf79e53b05a372661b67c7850b8"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a82d2caf79e53b05a372661b67c7850b8">loopTask</a> (std::condition_variable &amp;cv, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a82d2caf79e53b05a372661b67c7850b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a task functor which depends on a condition variable.  <br /></td></tr>
 <tr class="separator:a82d2caf79e53b05a372661b67c7850b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c08073b383d285b4c94b301cdf77c5"><td class="memTemplParams" colspan="2"><a id="a48c08073b383d285b4c94b301cdf77c5" name="a48c08073b383d285b4c94b301cdf77c5"></a>
-template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a48c08073b383d285b4c94b301cdf77c5"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>loopTask</b> (std::chrono::duration&lt; Rep, Ratio &gt; heartbeat, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:a48c08073b383d285b4c94b301cdf77c5"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a48c08073b383d285b4c94b301cdf77c5"><td class="memTemplItemLeft" align="right" valign="top">std::future&lt; TaskStatus &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a48c08073b383d285b4c94b301cdf77c5">loopTask</a> (std::chrono::duration&lt; Rep, Ratio &gt; heartbeat, F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a48c08073b383d285b4c94b301cdf77c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread to loop a task functor with a pause between executions.  <br /></td></tr>
 <tr class="separator:a48c08073b383d285b4c94b301cdf77c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacbd4261d9c04f3715b4d3bf49090d7f"><td class="memItemLeft" align="right" valign="top"><a id="aacbd4261d9c04f3715b4d3bf49090d7f" name="aacbd4261d9c04f3715b4d3bf49090d7f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>doLoop</b> (std::chrono::nanoseconds heartbeat, std::function&lt; void()&gt; f)</td></tr>
+<tr class="memitem:aacbd4261d9c04f3715b4d3bf49090d7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#aacbd4261d9c04f3715b4d3bf49090d7f">doLoop</a> (std::chrono::nanoseconds heartbeat, std::function&lt; void()&gt; f)</td></tr>
+<tr class="memdesc:aacbd4261d9c04f3715b4d3bf49090d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop a function.  <br /></td></tr>
 <tr class="separator:aacbd4261d9c04f3715b4d3bf49090d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fcd91507056daa2f14524409b00239e"><td class="memItemLeft" align="right" valign="top"><a id="a5fcd91507056daa2f14524409b00239e" name="a5fcd91507056daa2f14524409b00239e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>doLoop</b> (std::condition_variable &amp;cv, std::chrono::nanoseconds heartbeat, std::function&lt; void()&gt; f)</td></tr>
+<tr class="memitem:a5fcd91507056daa2f14524409b00239e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a5fcd91507056daa2f14524409b00239e">doLoop</a> (std::condition_variable &amp;cv, std::chrono::nanoseconds heartbeat, std::function&lt; void()&gt; f)</td></tr>
+<tr class="memdesc:a5fcd91507056daa2f14524409b00239e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop a function.  <br /></td></tr>
 <tr class="separator:a5fcd91507056daa2f14524409b00239e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a946119455e4c215b413e47e7eb1f003f"><td class="memItemLeft" align="right" valign="top"><a id="a946119455e4c215b413e47e7eb1f003f" name="a946119455e4c215b413e47e7eb1f003f"></a>
-TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><b>doLoopTask</b> (std::chrono::nanoseconds heartbeat, std::function&lt; TaskStatus()&gt; f)</td></tr>
+<tr class="memitem:a946119455e4c215b413e47e7eb1f003f"><td class="memItemLeft" align="right" valign="top">TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a946119455e4c215b413e47e7eb1f003f">doLoopTask</a> (std::chrono::nanoseconds heartbeat, std::function&lt; TaskStatus()&gt; f)</td></tr>
+<tr class="memdesc:a946119455e4c215b413e47e7eb1f003f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop a task function.  <br /></td></tr>
 <tr class="separator:a946119455e4c215b413e47e7eb1f003f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ba6edd67e1a81e5c3df0fc10c7996e7"><td class="memItemLeft" align="right" valign="top"><a id="a1ba6edd67e1a81e5c3df0fc10c7996e7" name="a1ba6edd67e1a81e5c3df0fc10c7996e7"></a>
-TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><b>doLoopTask</b> (std::condition_variable &amp;cv, std::chrono::nanoseconds heartbeat, std::function&lt; TaskStatus()&gt; f)</td></tr>
+<tr class="memitem:a1ba6edd67e1a81e5c3df0fc10c7996e7"><td class="memItemLeft" align="right" valign="top">TaskStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a1ba6edd67e1a81e5c3df0fc10c7996e7">doLoopTask</a> (std::condition_variable &amp;cv, std::chrono::nanoseconds heartbeat, std::function&lt; TaskStatus()&gt; f)</td></tr>
+<tr class="memdesc:a1ba6edd67e1a81e5c3df0fc10c7996e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop a task function.  <br /></td></tr>
 <tr class="separator:a1ba6edd67e1a81e5c3df0fc10c7996e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e70726c04b6ae7cd4014969f151f86c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAsyncQueue_1_1ThreadManager.html#a7e70726c04b6ae7cd4014969f151f86c">restart</a> ()</td></tr>
 <tr class="memdesc:a7e70726c04b6ae7cd4014969f151f86c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the status so it is no longer aborted.  <br /></td></tr>
@@ -138,7 +143,516 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMsg</b> (<a class=
 <tr class="memdesc:a1a559f86efabeb4e88568979fc1d0fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the message source. <br /></td></tr>
 <tr class="separator:a1a559f86efabeb4e88568979fc1d0fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to manage threads. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9908f5f981ab9780fc9902f5b48fdbbf" name="a9908f5f981ab9780fc9902f5b48fdbbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9908f5f981ab9780fc9902f5b48fdbbf">&#9670;&#160;</a></span>ThreadManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AsyncQueue::ThreadManager::ThreadManager </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAsyncQueue_1_1MessageSource.html">MessageSource</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create the manage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>Link the manager to a message queue so it can report its status </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aacbd4261d9c04f3715b4d3bf49090d7f" name="aacbd4261d9c04f3715b4d3bf49090d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacbd4261d9c04f3715b4d3bf49090d7f">&#9670;&#160;</a></span>doLoop() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AsyncQueue::ThreadManager::doLoop </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loop a function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">f</td><td>The function to loop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5fcd91507056daa2f14524409b00239e" name="a5fcd91507056daa2f14524409b00239e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fcd91507056daa2f14524409b00239e">&#9670;&#160;</a></span>doLoop() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AsyncQueue::ThreadManager::doLoop </td>
+          <td>(</td>
+          <td class="paramtype">std::condition_variable &amp;&#160;</td>
+          <td class="paramname"><em>cv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loop a function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">cv</td><td>The condition variable on which the functor waits </td></tr>
+    <tr><td class="paramname">f</td><td>The function to loop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a946119455e4c215b413e47e7eb1f003f" name="a946119455e4c215b413e47e7eb1f003f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a946119455e4c215b413e47e7eb1f003f">&#9670;&#160;</a></span>doLoopTask() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskStatus AsyncQueue::ThreadManager::doLoopTask </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; TaskStatus()&gt;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loop a task function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">f</td><td>The function to loop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1ba6edd67e1a81e5c3df0fc10c7996e7" name="a1ba6edd67e1a81e5c3df0fc10c7996e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ba6edd67e1a81e5c3df0fc10c7996e7">&#9670;&#160;</a></span>doLoopTask() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskStatus AsyncQueue::ThreadManager::doLoopTask </td>
+          <td>(</td>
+          <td class="paramtype">std::condition_variable &amp;&#160;</td>
+          <td class="paramname"><em>cv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::nanoseconds&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; TaskStatus()&gt;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loop a task function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">cv</td><td>The condition variable on which the functor waits </td></tr>
+    <tr><td class="paramname">f</td><td>The function to loop </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6406fbb8fdab204f287eac47542bcd82" name="a6406fbb8fdab204f287eac47542bcd82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6406fbb8fdab204f287eac47542bcd82">&#9670;&#160;</a></span>loop() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; void &gt; AsyncQueue::ThreadManager::loop </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a functor. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the result </dd></dl>
+
+</div>
+</div>
+<a id="a2348f33f49d9b7b66e0fe7993745054b" name="a2348f33f49d9b7b66e0fe7993745054b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2348f33f49d9b7b66e0fe7993745054b">&#9670;&#160;</a></span>loop() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; void &gt; AsyncQueue::ThreadManager::loop </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Ratio &gt;&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a functor with a pause between executios. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>std::chrono::duration template parameter </td></tr>
+    <tr><td class="paramname">Ratio</td><td>std::chrono::duration template parameter </td></tr>
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the functor result</dd></dl>
+<p>The heartbeat will wait <em>between</em> functor executions, from when it finished to when it starts again, not between start times. </p>
+
+</div>
+</div>
+<a id="ac28e174e9a43d3b5f283b483cad2c2f0" name="ac28e174e9a43d3b5f283b483cad2c2f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac28e174e9a43d3b5f283b483cad2c2f0">&#9670;&#160;</a></span>loop() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; void &gt; AsyncQueue::ThreadManager::loop </td>
+          <td>(</td>
+          <td class="paramtype">std::condition_variable &amp;&#160;</td>
+          <td class="paramname"><em>cv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a functor which depends on a condition variable. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cv</td><td>The condition variable on which the functor waits </td></tr>
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the functor result</dd></dl>
+<p>The condition variable will be notified if the manager is aborted. </p>
+
+</div>
+</div>
+<a id="a8ee0df414eceae7f29b6a60d71addb5b" name="a8ee0df414eceae7f29b6a60d71addb5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee0df414eceae7f29b6a60d71addb5b">&#9670;&#160;</a></span>loopTask() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; TaskStatus &gt; AsyncQueue::ThreadManager::loopTask </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a task functor. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the result </dd></dl>
+
+</div>
+</div>
+<a id="a48c08073b383d285b4c94b301cdf77c5" name="a48c08073b383d285b4c94b301cdf77c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c08073b383d285b4c94b301cdf77c5">&#9670;&#160;</a></span>loopTask() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Ratio , typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; TaskStatus &gt; AsyncQueue::ThreadManager::loopTask </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Ratio &gt;&#160;</td>
+          <td class="paramname"><em>heartbeat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a task functor with a pause between executions. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>std::chrono::duration template parameter </td></tr>
+    <tr><td class="paramname">Ratio</td><td>std::chrono::duration template parameter </td></tr>
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heartbeat</td><td>Time to wait between executions </td></tr>
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the functor result</dd></dl>
+<p>The heartbeat will wait <em>between</em> functor executions, from when it finished to when it starts again, not between start times. </p>
+
+</div>
+</div>
+<a id="a82d2caf79e53b05a372661b67c7850b8" name="a82d2caf79e53b05a372661b67c7850b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82d2caf79e53b05a372661b67c7850b8">&#9670;&#160;</a></span>loopTask() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::future&lt; TaskStatus &gt; AsyncQueue::ThreadManager::loopTask </td>
+          <td>(</td>
+          <td class="paramtype">std::condition_variable &amp;&#160;</td>
+          <td class="paramname"><em>cv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a thread to loop a task functor which depends on a condition variable. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>The type of functor </td></tr>
+    <tr><td class="paramname">...Args</td><td>The functor argument types </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cv</td><td>The condition variable on which the functor waits </td></tr>
+    <tr><td class="paramname">f</td><td>The functor </td></tr>
+    <tr><td class="paramname">...args</td><td>The functor arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Future for the functor result</dd></dl>
+<p>The condition variable will be notified if the manager is aborted. </p>
+
+</div>
+</div>
 <a id="a7e70726c04b6ae7cd4014969f151f86c" name="a7e70726c04b6ae7cd4014969f151f86c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e70726c04b6ae7cd4014969f151f86c">&#9670;&#160;</a></span>restart()</h2>
 

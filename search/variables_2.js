@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_0',['type',['../structAsyncQueue_1_1MessageFormatter_1_1Field.html#a6b4a9ab8d1da2393c242b1b1f4890eae',1,'AsyncQueue::MessageFormatter::Field']]]
+  ['level_0',['level',['../structAsyncQueue_1_1Message.html#a291c358401308e92f4bff0170facb493',1,'AsyncQueue::Message']]]
 ];

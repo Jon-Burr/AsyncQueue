@@ -253,7 +253,7 @@ template&lt;typename F , typename... Args&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mgr</td><td>The thread manager that controls the execution of this loop </td></tr>
-    <tr><td class="paramname">producer</td><td>Function that consumes the value </td></tr>
+    <tr><td class="paramname">consumer</td><td>Function that consumes the value </td></tr>
     <tr><td class="paramname">args</td><td>Any further arguments (beyond this queue) that will be provided to the function </td></tr>
   </table>
   </dd>
@@ -294,7 +294,7 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mgr</td><td>The thread manager that controls the execution of this loop </td></tr>
-    <tr><td class="paramname">producer</td><td>Function that consumes the value </td></tr>
+    <tr><td class="paramname">consumer</td><td>Function that consumes the value </td></tr>
   </table>
   </dd>
 </dl>
@@ -635,8 +635,7 @@ template&lt;typename T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to add </td></tr>
-    <tr><td class="paramname">lock</td><td>Should be an already acquired lock to the correct mutex</td></tr>
-    <tr><td class="paramname">value</td><td></td></tr>
+    <tr><td class="paramname">lock</td><td>Should be an already acquired lock to the correct mutex </td></tr>
   </table>
   </dd>
 </dl>

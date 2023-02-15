@@ -6,5 +6,6 @@ var searchData=
   ['flush_3',['flush',['../classAsyncQueue_1_1MessageBuilder.html#aba142441358bbd8e50e9c7c54744fc39',1,'AsyncQueue::MessageBuilder']]],
   ['format_4',['format',['../classAsyncQueue_1_1MessageFormatter.html#a23148d4a63327fefee9e78bc90ee81b8',1,'AsyncQueue::MessageFormatter']]],
   ['formatfield_5',['formatField',['../classAsyncQueue_1_1MessageFormatter.html#a79ef07d2379b81b666da956d2e1fdd84',1,'AsyncQueue::MessageFormatter']]],
-  ['formattime_6',['formatTime',['../classAsyncQueue_1_1MessageFormatter.html#aa2893dff82ba0426dbfc8a80612d35f2',1,'AsyncQueue::MessageFormatter']]]
+  ['formatter_5ft_6',['formatter_t',['../classAsyncQueue_1_1MessageWriter.html#a2375f55bc92b8753d197819da999241c',1,'AsyncQueue::MessageWriter']]],
+  ['formattime_7',['formatTime',['../classAsyncQueue_1_1MessageFormatter.html#aa2893dff82ba0426dbfc8a80612d35f2',1,'AsyncQueue::MessageFormatter']]]
 ];

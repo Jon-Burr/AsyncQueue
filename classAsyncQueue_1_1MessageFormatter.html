@@ -93,6 +93,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structAsyncQueue_1_1MessageFormatter_1_1Field.html">Field</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct describing an individual field.  <a href="structAsyncQueue_1_1MessageFormatter_1_1Field.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -144,15 +145,19 @@ Static Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a672fbe16ebd004b3522ffb8efc273de9"><td class="memItemLeft" align="right" valign="top"><a id="a672fbe16ebd004b3522ffb8efc273de9" name="a672fbe16ebd004b3522ffb8efc273de9"></a>
 static const <a class="el" href="structAsyncQueue_1_1MessageFormatter_1_1Field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultNameField</b> {FieldType::Name, 10, &quot;&quot;}</td></tr>
+<tr class="memdesc:a672fbe16ebd004b3522ffb8efc273de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default version of the source name field. <br /></td></tr>
 <tr class="separator:a672fbe16ebd004b3522ffb8efc273de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac728630f8cbe4ecf50c251e978fd9f54"><td class="memItemLeft" align="right" valign="top"><a id="ac728630f8cbe4ecf50c251e978fd9f54" name="ac728630f8cbe4ecf50c251e978fd9f54"></a>
 static const <a class="el" href="structAsyncQueue_1_1MessageFormatter_1_1Field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultLevelField</b> {FieldType::Level, 7, &quot;&quot;}</td></tr>
+<tr class="memdesc:ac728630f8cbe4ecf50c251e978fd9f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default version of the level field. <br /></td></tr>
 <tr class="separator:ac728630f8cbe4ecf50c251e978fd9f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1b7558d055fcb132ab642c532fd4387"><td class="memItemLeft" align="right" valign="top"><a id="ac1b7558d055fcb132ab642c532fd4387" name="ac1b7558d055fcb132ab642c532fd4387"></a>
 static const <a class="el" href="structAsyncQueue_1_1MessageFormatter_1_1Field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultTimeField</b> {FieldType::Time, 35, &quot;%F %T+%+uus %Z&quot;}</td></tr>
+<tr class="memdesc:ac1b7558d055fcb132ab642c532fd4387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default version of the time field. <br /></td></tr>
 <tr class="separator:ac1b7558d055fcb132ab642c532fd4387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8d137e1b2f65331c2c91de689d2dd07"><td class="memItemLeft" align="right" valign="top"><a id="ab8d137e1b2f65331c2c91de689d2dd07" name="ab8d137e1b2f65331c2c91de689d2dd07"></a>
 static const <a class="el" href="structAsyncQueue_1_1MessageFormatter_1_1Field.html">Field</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultMessageField</b> {FieldType::Message, 0, &quot;&quot;}</td></tr>
+<tr class="memdesc:ab8d137e1b2f65331c2c91de689d2dd07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default version of the message field. <br /></td></tr>
 <tr class="separator:ab8d137e1b2f65331c2c91de689d2dd07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -285,7 +290,7 @@ template&lt;typename Clock &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timepoint</td><td>The timepoint </td></tr>
-    <tr><td class="paramname">string</td><td>describing the time format to use</td></tr>
+    <tr><td class="paramname">format</td><td>String describing the time format to use</td></tr>
   </table>
   </dd>
 </dl>

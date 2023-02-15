@@ -17,15 +17,20 @@ namespace AsyncQueue {
     public:
         /// @brief Different field types
         enum class FieldType { Name, Level, Time, Message, Literal };
+        /// @brief Struct describing an individual field
         struct Field {
             FieldType type;           ///< The type of field
             std::size_t minLength{0}; ///< The minimum length (i.e. padding)
             std::string extra;        ///< Extra data used to format the field
         };
 
+        /// @brief Default version of the source name field
         static const inline Field defaultNameField{FieldType::Name, 10, ""};
+        /// @brief Default version of the level field
         static const inline Field defaultLevelField{FieldType::Level, 7, ""};
+        /// @brief Default version of the time field
         static const inline Field defaultTimeField{FieldType::Time, 35, "%F %T+%+uus %Z"};
+        /// @brief Default version of the message field
         static const inline Field defaultMessageField{FieldType::Message, 0, ""};
 
         /// @brief Create the default formatter
@@ -50,7 +55,7 @@ namespace AsyncQueue {
         /**
          * @tparam The type of timepoint being used
          * @param timepoint The timepoint
-         * @param string describing the time format to use
+         * @param format String describing the time format to use
          *
          * The time format string should be the same as the one used by std::put_time with one
          * addition. The string can contain %+n, %+u or %+m which will be replaced by a

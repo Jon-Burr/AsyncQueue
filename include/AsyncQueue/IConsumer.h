@@ -18,11 +18,15 @@ namespace AsyncQueue {
     public:
         virtual ~IConsumer() = default;
 
+        /// @brief Consumer an element
+        /// @param element The queue element to be consumed
+        /// @return Code indicating the status of the consumer
         TaskStatus operator()(const T &element) { return consume(element); }
 
         /**
          * @brief Consume a single element of the queue
          * @param element The element being consumed
+         * @return Code indicating the status of the consumer
          */
         virtual TaskStatus consume(const T &element) = 0;
     };

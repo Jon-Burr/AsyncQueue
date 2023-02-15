@@ -56,11 +56,8 @@ namespace AsyncQueue {
         /**
          * @brief Push a value to the queue
          *
-         *
          * @param value The value to add
          * @param lock Should be an already acquired lock to the correct mutex
-         *
-         * @param value
          */
         void push(T &&value, const std::unique_lock<std::mutex> &lock);
 
@@ -126,7 +123,7 @@ namespace AsyncQueue {
          *      its first argument.
          * @tparam Args Any other arguments that should be passed to the function
          * @param mgr The thread manager that controls the execution of this loop
-         * @param producer Function that consumes the value
+         * @param consumer Function that consumes the value
          * @param args Any further arguments (beyond this queue) that will be provided to the
          *      function
          */
@@ -164,7 +161,7 @@ namespace AsyncQueue {
          * for it.
          *
          * @param mgr The thread manager that controls the execution of this loop
-         * @param producer Function that consumes the value
+         * @param consumer Function that consumes the value
          */
         std::future<TaskStatus> loopConsumer(
                 ThreadManager &mgr, std::function<TaskStatus(const T &)> consumer);

@@ -18,6 +18,7 @@ namespace AsyncQueue {
      */
     class MessageWriter : public IConsumer<Message> {
     public:
+        /// @brief Function type converting a message to a string representation
         using formatter_t = std::function<std::string(const Message &)>;
         /// @brief Create the writer
         /// @param os The stream to write to

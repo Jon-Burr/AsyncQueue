@@ -39,6 +39,7 @@ namespace AsyncQueue {
 
         /// Handle endl by sending the message to the queue
         using stream_mod_t = std::ostream &(*)(std::ostream &);
+        /// @brief Output a stream modifier
         MessageBuilder &operator<<(stream_mod_t mod) {
             if (m_void)
                 return *this;
@@ -60,6 +61,12 @@ namespace AsyncQueue {
         std::ostringstream m_msg;
 
     }; //> end class MessageBuilder
+
+    /// @brief Thread-safe source of messages
+    ///
+    /// Behaves similarly to an output stream. The first thing passed to it must be a MessageLevel
+    /// at which point it creates a MessageBuilder which handles the creation of the Message. When
+    /// the builder goes out of scope the created Message is pushed to the queue.
     class MessageSource {
     public:
         /**

@@ -40,9 +40,13 @@ namespace AsyncQueue {
 
     /// @brief Struct containing a message with its context
     struct Message {
+        /// @brief The name of the source which generated the message
         const std::string source;
+        /// @brief The time at which it was generated
         const std::chrono::time_point<std::chrono::system_clock> time;
+        /// @brief The level (verbosity) of the message
         const MessageLevel level;
+        /// @brief The message
         const std::string message;
     };
 

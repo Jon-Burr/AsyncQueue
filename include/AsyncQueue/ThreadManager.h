@@ -11,6 +11,7 @@
 #include <map>
 #include <mutex>
 #include <optional>
+#include <shared_mutex>
 #include <type_traits>
 
 namespace AsyncQueue {
@@ -28,7 +29,7 @@ namespace AsyncQueue {
         /// @brief Signal to all running threads that they should stop
         void abort();
         /// @brief Whether the abort signal has been sent
-        bool isAborted() const { return m_aborted; }
+        bool isAborted() const;
 
         /// @brief Create a thread to loop a functor
         /// @tparam F The type of functor
@@ -146,6 +147,8 @@ namespace AsyncQueue {
 
         /// Object used to print error messages
         std::unique_ptr<MessageSource> m_msg;
+        /// Mutex for checking if something is aborted
+        mutable std::shared_mutex m_abortedMutex;
         /// Whether the thread is aborted
         bool m_aborted{false};
         /// Mutex for the map of condition variables

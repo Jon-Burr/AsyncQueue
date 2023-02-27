@@ -11,11 +11,18 @@ namespace AsyncQueue {
     ThreadManager::ThreadManager(MessageSource &&msg)
             : m_msg(std::make_unique<MessageSource>(std::move(msg))) {}
 
+    bool ThreadManager::isAborted() const {
+        std::shared_lock<std::shared_mutex> lock(m_abortedMutex);
+        return m_aborted;
+    }
+
     void ThreadManager::abort() {
         using namespace std::chrono_literals;
-        std::unique_lock<std::mutex> lock(m_cvMutex);
+        std::unique_lock<std::shared_mutex> abortLock(m_abortedMutex);
         m_aborted = true;
+        abortLock.unlock();
         bool cont = true;
+        std::unique_lock<std::mutex> lock(m_cvMutex);
         while (cont) {
             cont = false;
             for (std::pair<std::condition_variable *const, std::size_t> &cv : m_cvCounter) {

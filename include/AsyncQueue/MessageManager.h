@@ -18,6 +18,8 @@ namespace AsyncQueue {
         /**
          * @brief Create the manager
          * @param outputLevel The default output level for sources
+         *
+         * Uses a message writer which just writes to std::cout
          */
         MessageManager(MessageLevel outputLevel = MessageLevel::INFO);
 
@@ -64,37 +66,11 @@ namespace AsyncQueue {
          */
         MessageSource createSource(const std::string &name, MessageLevel outputLevel);
 
-        /**
-         * @brief Set a new writer
-         * @param writer The new writer
-         * @return The old writer (if any)
-         *
-         * The manager will be aborted and restarted and the writing thread will be joined.
-         */
-        std::unique_ptr<IMessageWriter> setWriter(std::unique_ptr<IMessageWriter> writer);
-
-        /**
-         * @brief Set a new writer
-         * @tparam T The type of writer
-         * @param writer The new writer
-         * @return The old writer (if any)
-         *
-         * The manager will be aborted and restarted and the writing thread will be joined.
-         */
-        template <typename T>
-        std::enable_if_t<std::is_base_of_v<IMessageWriter, T>, std::unique_ptr<IMessageWriter>>
-        setWriter(T &&writer) {
-            return setWriter(std::make_unique<T>(std::move(writer)));
-        }
-
-        /// Do we have an active writer
-        bool hasWriter() const;
-
     private:
-        ThreadManager m_mgr;
-        MessageQueue m_queue;
-        MessageLevel m_defaultOutputLevel;
         std::unique_ptr<IMessageWriter> m_writer;
+        MessageQueue m_queue;
+        ThreadManager m_mgr;
+        MessageLevel m_defaultOutputLevel;
         std::future<TaskStatus> m_writerStatus;
     }; //> end class MessageManager
 } // namespace AsyncQueue

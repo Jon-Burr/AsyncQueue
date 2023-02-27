@@ -128,14 +128,6 @@ namespace AsyncQueue {
                 std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
                 std::function<TaskStatus()> f);
 
-        /**
-         * @brief Reset the status so it is no longer aborted
-         *
-         * Note that the user is responsible for race conditions here and ensuring all managed
-         * threads have aborted before calling this.
-         */
-        void restart() { m_aborted = false; }
-
         /// Set the message source
         void setMsg(MessageSource &&msg);
 

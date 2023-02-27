@@ -131,11 +131,28 @@ namespace AsyncQueue {
         /// Set the message source
         void setMsg(MessageSource &&msg);
 
+        /// @brief Create a thread that will abort the manager after the specified time
+        /// @param duration How long to wait before aborting
+        /// @return A future returning true if this thread caused the manager to abort
+        ///
+        /// If some other source aborts the manager the thread will be notified and ended
+        template <typename Rep, typename Period>
+        std::future<bool> setTimeout(const std::chrono::duration<Rep, Period> &duration);
+
+        /// @brief Create a thread that will abort the manager at the specified time
+        /// @param duration When to abort the thread
+        /// @return A future returning true if this thread caused the manager to abort
+        ///
+        /// If some other source aborts the manager the thread will be notified and ended
+        std::future<bool> setTimeout(const std::chrono::steady_clock::time_point &until);
+
     private:
         /// @brief Add a reference to the condition variable
         void reference(std::condition_variable *cv);
         /// @brief Remove a reference to the condition variable
         void dereference(std::condition_variable *cv);
+        /// @brief The actual timeout function
+        bool doTimeout(const std::chrono::steady_clock::time_point &until);
 
         /// Object used to print error messages
         std::unique_ptr<MessageSource> m_msg;
@@ -147,6 +164,8 @@ namespace AsyncQueue {
         std::mutex m_cvMutex;
         /// Reference counter for condition variables
         std::map<std::condition_variable *, std::size_t> m_cvCounter;
+        /// Condition variable for aborting thread
+        std::condition_variable_any m_abortCV;
     }; //> end class ThreadManager
 } // namespace AsyncQueue
 

@@ -21,6 +21,8 @@ namespace AsyncQueue {
         std::unique_lock<std::shared_mutex> abortLock(m_abortedMutex);
         m_aborted = true;
         abortLock.unlock();
+        // Notify any threads that want to abort the manager that it's too late.
+        m_abortCV.notify_all();
         bool cont = true;
         std::unique_lock<std::mutex> lock(m_cvMutex);
         while (cont) {
@@ -103,6 +105,28 @@ namespace AsyncQueue {
         TaskStatus status = doLoopTask(heartbeat, f);
         dereference(cvptr);
         return status;
+    }
+
+    std::future<bool> ThreadManager::setTimeout(
+            const std::chrono::steady_clock::time_point &until) {
+        return std::async(&ThreadManager::doTimeout, this, until);
+    }
+
+    bool ThreadManager::doTimeout(const std::chrono::steady_clock::time_point &until) {
+        std::shared_lock<std::shared_mutex> lock(m_abortedMutex);
+        while (true) {
+            switch (m_abortCV.wait_until(lock, until)) {
+            case std::cv_status::no_timeout:
+                if (m_aborted)
+                    return false;
+                break;
+            case std::cv_status::timeout:
+                lock.unlock();
+                abort();
+                return true;
+            }
+        }
+        return false;
     }
 
     void ThreadManager::reference(std::condition_variable *cv) {

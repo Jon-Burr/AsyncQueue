@@ -59,4 +59,10 @@ namespace AsyncQueue {
                 f_);
     }
 
+    template <typename Rep, typename Period>
+    std::future<bool> ThreadManager::setTimeout(
+            const std::chrono::duration<Rep, Period> &duration) {
+        return setTimeout(std::chrono::steady_clock::now() + duration);
+    }
+
 } // namespace AsyncQueue

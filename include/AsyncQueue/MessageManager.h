@@ -29,6 +29,18 @@ namespace AsyncQueue {
         MessageManager(
                 std::unique_ptr<IMessageWriter> writer,
                 MessageLevel outputLevel = MessageLevel::INFO);
+
+        /**
+         * @brief Create the manager
+         * @tparam T The type of writer to use
+         * @param writer The writer to use
+         * @param outputLevel The default output level for sources
+         */
+        template <
+                typename T, typename = std::enable_if_t<std::is_base_of_v<IMessageWriter, T>, void>>
+        MessageManager(T &&writer, MessageLevel outputLevel = MessageLevel::INFO)
+                : MessageManager(std::make_unique<T>(std::move(writer))) {}
+
         ~MessageManager();
 
         /// @brief The default output level for new message sources
@@ -60,6 +72,20 @@ namespace AsyncQueue {
          * The manager will be aborted and restarted and the writing thread will be joined.
          */
         std::unique_ptr<IMessageWriter> setWriter(std::unique_ptr<IMessageWriter> writer);
+
+        /**
+         * @brief Set a new writer
+         * @tparam T The type of writer
+         * @param writer The new writer
+         * @return The old writer (if any)
+         *
+         * The manager will be aborted and restarted and the writing thread will be joined.
+         */
+        template <typename T>
+        std::enable_if_t<std::is_base_of_v<IMessageWriter, T>, std::unique_ptr<IMessageWriter>>
+        setWriter(T &&writer) {
+            return setWriter(std::make_unique<T>(std::move(writer)));
+        }
 
         /// Do we have an active writer
         bool hasWriter() const;

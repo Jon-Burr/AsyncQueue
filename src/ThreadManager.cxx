@@ -122,6 +122,8 @@ namespace AsyncQueue {
                 break;
             case std::cv_status::timeout:
                 lock.unlock();
+                if (m_msg)
+                    *m_msg << MessageLevel::ABORT << "Abort after timeout" << std::endl;
                 abort();
                 return true;
             }

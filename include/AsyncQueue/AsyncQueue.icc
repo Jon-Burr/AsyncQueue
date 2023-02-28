@@ -66,6 +66,19 @@ namespace AsyncQueue {
         return loopProducer(mgr, cv, f);
     }
     template <typename T>
+    template <typename Rep, typename Period, typename F, typename... Args>
+    std::future<TaskStatus> AsyncQueue<T>::loopProducer(
+            ThreadManager &mgr, const std::chrono::duration<Rep, Period> &heartbeat, F &&producer,
+            Args &&...args) {
+        static_assert(
+                std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
+                "The passed function is incorrect");
+        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
+                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        return mgr.loopTask(heartbeat, f, std::ref(*this));
+    }
+
+    template <typename T>
     template <typename F, typename... Args>
     std::future<TaskStatus> AsyncQueue<T>::loopConsumer(
             ThreadManager &mgr, F &&consumer, Args &&...args) {

@@ -113,6 +113,24 @@ namespace AsyncQueue {
                 ThreadManager &mgr, std::condition_variable &cv, F &&producer, Args &&...args);
 
         /**
+         * @brief Start looping a task that produces items and adds them to the queue
+         * @tparam Rep std::chrono::duration template parameter
+         * @tparam Period std::chrono::duration template parameter
+         * @tparam F The function producing the values. It *must* take a reference to this queue as
+         *      its first argument.
+         * @tparam Args Any other arguments that should be passed to the function
+         * @param mgr The thread manager that controls the execution of this loop
+         * @param producer Function that produces the value
+         * @param heartbeat Time to wait between executions
+         * @param args Any further arguments (beyond this queue) that will be provided to the
+         *      function
+         */
+        template <typename Rep, typename Period, typename F, typename... Args>
+        std::future<TaskStatus> loopProducer(
+                ThreadManager &mgr, const std::chrono::duration<Rep, Period> &heartbeat,
+                F &&producer, Args &&...args);
+
+        /**
          * @brief Start looping a task that consumes items from the list
          *
          * Multiple consumers can be registered with a queue but each item from the queue will go

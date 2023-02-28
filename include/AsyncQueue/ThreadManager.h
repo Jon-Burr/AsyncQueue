@@ -51,9 +51,9 @@ namespace AsyncQueue {
         template <typename F, typename... Args>
         std::future<void> loop(std::condition_variable &cv, F f, Args &&...args);
 
-        /// @brief Create a thread to loop a functor with a pause between executios
+        /// @brief Create a thread to loop a functor with a pause between executions
         /// @tparam Rep std::chrono::duration template parameter
-        /// @tparam Ratio std::chrono::duration template parameter
+        /// @tparam Period std::chrono::duration template parameter
         /// @tparam F The type of functor
         /// @tparam ...Args The functor argument types
         /// @param heartbeat Time to wait between executions
@@ -63,8 +63,8 @@ namespace AsyncQueue {
         ///
         /// The heartbeat will wait *between* functor executions, from when it finished to when it
         /// starts again, not between start times.
-        template <typename Rep, typename Ratio, typename F, typename... Args>
-        std::future<void> loop(std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args);
+        template <typename Rep, typename Period, typename F, typename... Args>
+        std::future<void> loop(std::chrono::duration<Rep, Period> heartbeat, F &&f, Args &&...args);
 
         /// @brief Create a thread to loop a task functor
         /// @tparam F The type of functor
@@ -88,7 +88,7 @@ namespace AsyncQueue {
         std::future<TaskStatus> loopTask(std::condition_variable &cv, F &&f, Args &&...args);
         /// @brief Create a thread to loop a task functor with a pause between executions
         /// @tparam Rep std::chrono::duration template parameter
-        /// @tparam Ratio std::chrono::duration template parameter
+        /// @tparam Period std::chrono::duration template parameter
         /// @tparam F The type of functor
         /// @tparam ...Args The functor argument types
         /// @param heartbeat Time to wait between executions
@@ -98,9 +98,9 @@ namespace AsyncQueue {
         ///
         /// The heartbeat will wait *between* functor executions, from when it finished to when it
         /// starts again, not between start times.
-        template <typename Rep, typename Ratio, typename F, typename... Args>
+        template <typename Rep, typename Period, typename F, typename... Args>
         std::future<TaskStatus> loopTask(
-                std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args);
+                std::chrono::duration<Rep, Period> heartbeat, F &&f, Args &&...args);
 
         /// @brief Loop a function
         /// @param heartbeat Time to wait between executions

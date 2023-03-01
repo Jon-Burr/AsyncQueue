@@ -1,22 +1,29 @@
 namespace AsyncQueue {
     template <typename T>
-    TeeConsumer<T>::TeeConsumer(std::vector<std::unique_ptr<IConsumer<T>>> &&consumers)
-            : m_consumers(std::move(consumers)) {}
+    TeeConsumer<T>::TeeConsumer(std::vector<std::unique_ptr<IConsumer<T>>> &&consumers) {
+        for (auto ptr : consumers)
+            addConsumer(std::move(ptr));
+    }
     template <typename T>
     void TeeConsumer<T>::addConsumer(std::unique_ptr<IConsumer<T>> &&consumer) {
-        m_consumers.push_back(std::move(consumer));
+        m_ownedConsumers.push_back(std::move(consumer));
+        addConsumer(consumer.get());
     }
 
     template <typename T>
     template <typename C>
-    std::enable_if_t<std::is_base_of_v<IConsumer<T>, C>, void> TeeConsumer<T>::addConsumer(
-            C &&consumer) {
-        m_consumers.push_back(std::make_unique<C>(std::move(consumer)));
+    std::enable_if_t<std::is_base_of_v<IConsumer<T>, C> && std::is_move_constructible_v<C>, void>
+    TeeConsumer<T>::addConsumer(C &&consumer) {
+        addConsumer(std::make_unique<C>(std::move(consumer)));
+    }
+
+    template <typename T> void TeeConsumer<T>::addConsumer(IConsumer<T> *consumer) {
+        m_consumers.push_back(consumer);
     }
 
     template <typename T> TaskStatus TeeConsumer<T>::consume(const T &element) {
         auto itr = m_consumers.begin();
-        while (itr != m_consumer.end()) {
+        while (itr != m_consumers.end()) {
             switch ((**itr).consume(element)) {
             case TaskStatus::CONTINUE:
                 ++itr;

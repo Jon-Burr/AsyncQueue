@@ -4,6 +4,8 @@
 #include "AsyncQueue/Message.h"
 #include "AsyncQueue/MessageSource.h"
 
+#include <vector>
+
 namespace AsyncQueue {
 
     /**
@@ -43,9 +45,12 @@ namespace AsyncQueue {
         MessageBuilder &operator<<(stream_mod_t mod) {
             if (m_void)
                 return *this;
-            if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>)
-                flush();
-            else
+            if (mod == &std::endl<std::ostream::char_type, std::ostream::traits_type>) {
+                m_messages.push_back(m_msg.str());
+                // Clear the message buffer
+                m_msg.str("");
+                m_empty = true;
+            } else
                 // OK - this was actually a generic stream modifier, not endl
                 m_msg << mod;
             return *this;
@@ -59,6 +64,7 @@ namespace AsyncQueue {
         // The message level
         const MessageLevel m_lvl;
         std::ostringstream m_msg;
+        std::vector<std::string> m_messages;
 
     }; //> end class MessageBuilder
 

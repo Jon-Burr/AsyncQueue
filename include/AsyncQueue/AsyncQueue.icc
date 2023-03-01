@@ -44,8 +44,7 @@ namespace AsyncQueue {
         return {};
     }
 
-    template <typename T>
-    std::size_t AsyncQueue<T>::size() const {
+    template <typename T> std::size_t AsyncQueue<T>::size() const {
         auto lock_ = this->lock();
         return m_queue.size();
     }
@@ -57,8 +56,12 @@ namespace AsyncQueue {
         static_assert(
                 std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
                 "The passed function is incorrect");
-        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
-                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        std::function<TaskStatus(AsyncQueue<T> &)> f;
+        if constexpr (std::is_lvalue_reference_v<F>)
+            f = std::bind(std::ref(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        else
+            f = std::bind(
+                    std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
         return loopProducer(mgr, f);
     }
     template <typename T>
@@ -68,8 +71,12 @@ namespace AsyncQueue {
         static_assert(
                 std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
                 "The passed function is incorrect");
-        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
-                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        std::function<TaskStatus(AsyncQueue<T> &)> f;
+        if constexpr (std::is_lvalue_reference_v<F>)
+            f = std::bind(std::ref(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        else
+            f = std::bind(
+                    std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
         return loopProducer(mgr, cv, f);
     }
     template <typename T>
@@ -80,8 +87,12 @@ namespace AsyncQueue {
         static_assert(
                 std::is_invocable_r_v<TaskStatus, F, AsyncQueue<T> &, Args...>,
                 "The passed function is incorrect");
-        std::function<TaskStatus(AsyncQueue<T> &)> f = std::bind(
-                std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        std::function<TaskStatus(AsyncQueue<T> &)> f;
+        if constexpr (std::is_lvalue_reference_v<F>)
+            f = std::bind(std::ref(producer), std::placeholders::_1, std::forward<Args>(args)...);
+        else
+            f = std::bind(
+                    std::forward<F>(producer), std::placeholders::_1, std::forward<Args>(args)...);
         return mgr.loopTask(heartbeat, f, std::ref(*this));
     }
 
@@ -89,8 +100,12 @@ namespace AsyncQueue {
     template <typename F, typename... Args>
     std::future<TaskStatus> AsyncQueue<T>::loopConsumer(
             ThreadManager &mgr, F &&consumer, Args &&...args) {
-        std::function<TaskStatus(const T &)> f = std::bind(
-                std::forward<F>(consumer), std::placeholders::_1, std::forward<Args>(args)...);
+        std::function<TaskStatus(const T &)> f;
+        if constexpr (std::is_lvalue_reference_v<F>)
+            f = std::bind(std::ref(consumer), std::placeholders::_1, std::forward<Args>(args)...);
+        else
+            f = std::bind(
+                    std::forward<F>(consumer), std::placeholders::_1, std::forward<Args>(args)...);
         return loopConsumer(mgr, f);
     }
 

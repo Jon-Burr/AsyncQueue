@@ -41,12 +41,12 @@ namespace AsyncQueue {
         template <
                 typename T, typename = std::enable_if_t<std::is_base_of_v<IMessageWriter, T>, void>>
         MessageManager(T &&writer, MessageLevel outputLevel = MessageLevel::INFO)
-                : MessageManager(std::make_unique<T>(std::move(writer))) {}
+                : MessageManager(std::make_unique<T>(std::move(writer)), outputLevel) {}
 
         ~MessageManager();
 
         /// @brief The default output level for new message sources
-        MessageLevel defaultOuputLevel() const { return m_defaultOutputLevel; }
+        MessageLevel defaultOutputLevel() const { return m_defaultOutputLevel; }
         /// @brief Set the default output level for new message sources
         void setDefaultOutputLevel(MessageLevel lvl) { m_defaultOutputLevel = lvl; }
 

@@ -49,7 +49,7 @@ namespace AsyncQueue {
         ///
         /// The condition variable will be notified if the manager is aborted.
         template <typename F, typename... Args>
-        std::future<void> loop(std::condition_variable &cv, F &&f, Args &&...args);
+        std::future<void> loop(std::condition_variable &cv, F f, Args &&...args);
 
         /// @brief Create a thread to loop a functor with a pause between executions
         /// @tparam Rep std::chrono::duration template parameter

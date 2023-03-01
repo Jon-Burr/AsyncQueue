@@ -1,5 +1,3 @@
-#include <type_traits>
-
 namespace AsyncQueue {
 
     template <typename F, typename... Args>
@@ -9,13 +7,9 @@ namespace AsyncQueue {
     }
 
     template <typename F, typename... Args>
-    std::future<void> ThreadManager::loop(std::condition_variable &cv, F &&f, Args &&...args) {
+    std::future<void> ThreadManager::loop(std::condition_variable &cv, F f, Args &&...args) {
         using namespace std::chrono_literals;
-        std::function<void()> f_;
-        if constexpr (std::is_lvalue_reference_v<F>)
-            f_ = std::bind(std::ref(f), std::forward<Args>(args)...);
-        else
-            f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        std::function<void()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
         // Resolve the overloaded function for async
         void (ThreadManager::*doLoop)(
                 std::condition_variable &, std::chrono::nanoseconds, std::function<void()>) =
@@ -27,11 +21,7 @@ namespace AsyncQueue {
     template <typename Rep, typename Ratio, typename F, typename... Args>
     std::future<void> ThreadManager::loop(
             std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args) {
-        std::function<void()> f_;
-        if constexpr (std::is_lvalue_reference_v<F>)
-            f_ = std::bind(std::ref(f), std::forward<Args>(args)...);
-        else
-            f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        std::function<void()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
         // Resolve the overloaded function for async
         void (ThreadManager::*doLoop)(std::chrono::nanoseconds, std::function<void()>) =
                 &ThreadManager::doLoop;
@@ -49,11 +39,7 @@ namespace AsyncQueue {
     std::future<TaskStatus> ThreadManager::loopTask(
             std::condition_variable &cv, F &&f, Args &&...args) {
         using namespace std::chrono_literals;
-        std::function<TaskStatus()> f_;
-        if constexpr (std::is_lvalue_reference_v<F>)
-            f_ = std::bind(std::ref(f), std::forward<Args>(args)...);
-        else
-            f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        std::function<TaskStatus()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
         // Resolve the overloaded function for async
         TaskStatus (ThreadManager::*doLoopTask)(
                 std::condition_variable &, std::chrono::nanoseconds, std::function<TaskStatus()>) =
@@ -64,11 +50,7 @@ namespace AsyncQueue {
     template <typename Rep, typename Ratio, typename F, typename... Args>
     std::future<TaskStatus> ThreadManager::loopTask(
             std::chrono::duration<Rep, Ratio> heartbeat, F &&f, Args &&...args) {
-        std::function<TaskStatus()> f_;
-        if constexpr (std::is_lvalue_reference_v<F>)
-            f_ = std::bind(std::ref(f), std::forward<Args>(args)...);
-        else
-            f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        std::function<TaskStatus()> f_ = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
         // Resolve the overloaded function for async
         TaskStatus (ThreadManager::*doLoopTask)(
                 std::chrono::nanoseconds, std::function<TaskStatus()>) = &ThreadManager::doLoopTask;

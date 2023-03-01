@@ -9,12 +9,17 @@ namespace AsyncQueue {
             : m_void(false), m_name(name), m_queue(queue), m_lvl(lvl) {}
 
     void MessageBuilder::flush() {
-        if (m_void || m_empty)
+        if (m_void || (m_empty && m_messages.empty()))
             return;
-        m_queue.push(Message{m_name, std::chrono::system_clock::now(), m_lvl, m_msg.str()});
-        // Clear the message buffer
-        m_msg.str("");
-        m_empty = true;
+        if (!m_empty) {
+            m_messages.push_back(m_msg.str());
+            // Clear the message buffer
+            m_msg.str("");
+            m_empty = true;
+        }
+        auto lock = m_queue.lock();
+        for (const std::string &msg : m_messages)
+            m_queue.push(Message{m_name, std::chrono::system_clock::now(), m_lvl, msg}, lock);
     }
 
     MessageSource::MessageSource(const std::string &name, MessageQueue &queue, MessageLevel level)

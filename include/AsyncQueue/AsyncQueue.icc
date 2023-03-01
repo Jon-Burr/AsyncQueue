@@ -43,6 +43,13 @@ namespace AsyncQueue {
         }
         return {};
     }
+
+    template <typename T>
+    std::size_t AsyncQueue<T>::size() const {
+        auto lock_ = this->lock();
+        return m_queue.size();
+    }
+
     template <typename T>
     template <typename F, typename... Args>
     std::future<TaskStatus> AsyncQueue<T>::loopProducer(

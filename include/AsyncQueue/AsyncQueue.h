@@ -79,6 +79,9 @@ namespace AsyncQueue {
          */
         std::optional<T> extract(const std::unique_lock<std::mutex> &lock);
 
+        /// @brief Get the number of elements in the queue
+        std::size_t size() const;
+
         /**
          * @brief Start looping a task that produces items and adds them to the queue
          * @tparam F The function producing the values. It *must* take a reference to this queue as

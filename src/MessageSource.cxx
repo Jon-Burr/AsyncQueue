@@ -8,6 +8,14 @@ namespace AsyncQueue {
     MessageBuilder::MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl)
             : m_void(false), m_name(name), m_queue(queue), m_lvl(lvl) {}
 
+    MessageBuilder::MessageBuilder(MessageBuilder &&other)
+            : m_void(other.m_void), m_empty(other.m_empty), m_name(std::move(other.m_name)),
+              m_queue(other.m_queue), m_lvl(other.m_lvl), m_msg(std::move(other.m_msg)),
+              m_messages(std::move(other.m_messages)) {
+        other.m_empty = true;
+        other.m_messages.clear();
+    }
+
     void MessageBuilder::flush() {
         if (m_void || (m_empty && m_messages.empty()))
             return;

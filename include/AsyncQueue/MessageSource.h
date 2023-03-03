@@ -19,6 +19,7 @@ namespace AsyncQueue {
         MessageBuilder(MessageQueue &queue);
         /// Create a builder with the specified message level
         MessageBuilder(MessageQueue &queue, const std::string &name, MessageLevel lvl);
+        MessageBuilder(MessageBuilder &&other);
         ~MessageBuilder() { flush(); }
         /**
          * @brief Send the current message to the queue

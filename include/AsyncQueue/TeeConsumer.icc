@@ -6,8 +6,8 @@ namespace AsyncQueue {
     }
     template <typename T>
     void TeeConsumer<T>::addConsumer(std::unique_ptr<IConsumer<T>> &&consumer) {
-        m_ownedConsumers.push_back(std::move(consumer));
         addConsumer(consumer.get());
+        m_ownedConsumers.push_back(std::move(consumer));
     }
 
     template <typename T>

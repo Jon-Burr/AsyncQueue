@@ -2,7 +2,6 @@
 #define ASYNCQUEUE_MESSAGESOURCE_H
 
 #include "AsyncQueue/Message.h"
-#include "AsyncQueue/MessageSource.h"
 
 #include <vector>
 
@@ -89,7 +88,7 @@ namespace AsyncQueue {
         /// @brief Set the level of the next message to create
         MessageBuilder operator<<(MessageLevel level) const;
 
-        /// @brief Get the current output level
+        /// @brief Get the output level
         MessageLevel outputLevel() const { return m_outputLvl; }
 
         /// @brief Should we output this message?

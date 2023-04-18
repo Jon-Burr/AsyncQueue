@@ -1,10 +1,11 @@
-#include "AsyncQueue/Message.h"
+#include "AsyncQueue/Message.hxx"
+
 #include <algorithm>
-#include <cctype>
+#include <stdexcept>
 
 namespace AsyncQueue {
 
-    std::string to_string(MessageLevel lvl) {
+    std::string toString(MessageLevel lvl) {
         switch (lvl) {
         case MessageLevel::VERBOSE:
             return "VERBOSE";

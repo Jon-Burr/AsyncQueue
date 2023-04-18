@@ -1,8 +1,7 @@
-#include "AsyncQueue/MessageWriter.h"
-#include "AsyncQueue/MessageFormatter.h"
+#include "AsyncQueue/MessageWriter.hxx"
+#include "AsyncQueue/MessageFormatter.hxx"
 
 namespace AsyncQueue {
-
     MessageWriter::MessageWriter(std::ostream &os, MessageLevel lvl)
             : MessageWriter(os, MessageFormatter(), lvl) {}
 

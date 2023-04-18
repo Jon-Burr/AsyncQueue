@@ -1,13 +1,13 @@
-#ifndef ASYNCQUEUE_MESSAGEWRITER_H
-#define ASYNCQUEUE_MESSAGEWRITER_H
+#ifndef ASYNCQUEUE_MESSAGEWRITER_HXX
+#define ASYNCQUEUE_MESSAGEWRITER_HXX
 
-#include <iostream>
-#include <mutex>
+#include "AsyncQueue/Fwd.hxx"
+#include "AsyncQueue/IConsumer.hxx"
+#include "AsyncQueue/Message.hxx"
+
+#include <functional>
 #include <ostream>
 #include <string>
-
-#include "AsyncQueue/IConsumer.h"
-#include "AsyncQueue/Message.h"
 
 namespace AsyncQueue {
     /**
@@ -16,7 +16,7 @@ namespace AsyncQueue {
      * Note that this class is not threadsafe - it should only run in *one* thread.
      * Making it fully threadsafe would require C++20 syncstream.
      */
-    class MessageWriter : public IConsumer<Message> {
+    class MessageWriter : public IMessageWriter {
     public:
         /// @brief Function type converting a message to a string representation
         using formatter_t = std::function<std::string(const Message &)>;
@@ -38,7 +38,6 @@ namespace AsyncQueue {
         MessageLevel m_lvl;
         formatter_t m_format;
     };
-
 } // namespace AsyncQueue
 
-#endif //> !ASYNCQUEUE_MESSAGEWRITER_H
+#endif //> !ASYNCQUEUE_MESSAGEWRITER_HXX

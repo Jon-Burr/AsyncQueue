@@ -1,15 +1,13 @@
-#ifndef ASYNCQUEUE_MESSAGEFORMATTER_H
-#define ASYNCQUEUE_MESSAGEFORMATTER_H
+#ifndef ASYNCQUEUE_MESSAGEFORMATTER_HXX
+#define ASYNCQUEUE_MESSAGEFORMATTER_HXX
 
-#include "AsyncQueue/Message.h"
+#include "AsyncQueue/Message.hxx"
 
 #include <chrono>
 #include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
-
-#include <iostream>
 
 namespace AsyncQueue {
     /// @brief Basic implementation of a class that converts a message to a string to write
@@ -105,4 +103,4 @@ namespace AsyncQueue {
     }
 } // namespace AsyncQueue
 
-#endif //> !ASYNCQUEUE_MESSAGEFORMATTER_H
+#endif //> !ASYNCQUEUE_MESSAGEFORMATTER_HXX

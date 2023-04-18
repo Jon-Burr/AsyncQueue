@@ -1,149 +1,96 @@
-#include "AsyncQueue/ThreadManager.h"
-#include "AsyncQueue/MessageSource.h"
-
-#include <cassert>
-#include <chrono>
-#include <stdexcept>
-#include <thread>
+#include "AsyncQueue/ThreadManager.hxx"
+#include "AsyncQueue/utils.hxx"
 
 namespace AsyncQueue {
-
     ThreadManager::ThreadManager(MessageSource &&msg)
-            : m_msg(std::make_unique<MessageSource>(std::move(msg))) {}
+            : MessageComponent(std::move(msg)), m_abortFuture(m_abortPromise.get_future()) {}
 
-    bool ThreadManager::isAborted() const {
-        std::shared_lock<std::shared_mutex> lock(m_abortedMutex);
-        return m_aborted;
-    }
+    bool ThreadManager::isAborted() const { return isAborted(std::shared_lock(m_abortMutex)); }
 
     void ThreadManager::abort() {
-        using namespace std::chrono_literals;
-        std::unique_lock<std::shared_mutex> abortLock(m_abortedMutex);
-        m_aborted = true;
-        abortLock.unlock();
-        // Notify any threads that want to abort the manager that it's too late.
-        m_abortCV.notify_all();
-        bool cont = true;
-        std::unique_lock<std::mutex> lock(m_cvMutex);
-        while (cont) {
-            cont = false;
-            for (std::pair<std::condition_variable *const, std::size_t> &cv : m_cvCounter) {
-                // Only notify if we still have a reference
-                if (cv.second > 0) {
-                    cv.first->notify_all();
-                    cont = true;
-                }
-            }
-            lock.unlock();
-            std::this_thread::sleep_for(100ms);
-            lock.lock();
+        // Acquire a lock on the abort mutex to make sure that nothing can abort this halfway
+        // through the call
+        auto lock = std::unique_lock(m_abortMutex);
+        // Make sure we haven't already aborted
+        if (isAborted(lock))
+            return;
+        m_abortPromise.set_value();
+        // Also notify any CVs
+        {
+            auto cvLock_ = std::unique_lock(m_cvMutex);
+            for (auto &cvPair : m_cvRefCounter)
+                cvPair.first->notify_all();
+        }
+        {
+            auto cvLock_ = std::unique_lock(m_cvAnyMutex);
+            for (auto &cvPair : m_cvAnyRefCounter)
+                cvPair.first->notify_all();
         }
     }
 
-    void ThreadManager::doLoop(std::chrono::nanoseconds heartbeat, std::function<void()> f) {
-        while (!isAborted()) {
-            try {
-                f();
-            } catch (const std::exception &e) {
-                if (m_msg)
-                    (*m_msg) << MessageLevel::ABORT << "Raised exception: " << e.what()
-                             << std::endl;
-                abort();
-                return;
-            }
-            std::this_thread::sleep_for(heartbeat);
-        }
+    template <typename CV> ThreadManager::CVReference<CV>::~CVReference() {
+        if (m_cv)
+            m_mgr->decreaseRefCounter(m_cv);
     }
 
-    void ThreadManager::doLoop(
-            std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
-            std::function<void()> f) {
-        std::condition_variable *cvptr = &cv;
-        reference(cvptr);
-        doLoop(heartbeat, f);
-        dereference(cvptr);
+    template <typename CV>
+    ThreadManager::CVReference<CV>::CVReference(CVReference &&other)
+            : m_mgr(other.m_mgr), m_cv(other.m_cv) {
+        other.m_cv = nullptr;
     }
 
-    TaskStatus ThreadManager::doLoopTask(
-            std::chrono::nanoseconds heartbeat, std::function<TaskStatus()> f) {
-        static std::atomic<std::size_t> taskCounter = 0;
-        std::size_t taskID = taskCounter++;
-        std::size_t loopCount = 0;
-        while (!isAborted()) {
-            if (m_msg && m_msg->testLevel(MessageLevel::VERBOSE))
-                (*m_msg) << MessageLevel::VERBOSE << "Task #" << taskID << ": Execute loop #"
-                         << loopCount++ << std::endl;
-            TaskStatus status;
-            try {
-                status = f();
-            } catch (const std::exception &e) {
-                if (m_msg)
-                    (*m_msg) << MessageLevel::ABORT << "Raised exception: " << e.what()
-                             << std::endl;
-                abort();
-                return TaskStatus::ABORT;
-            }
-            switch (status) {
-            case TaskStatus::CONTINUE:
-                break;
-            case TaskStatus::HALT:
-                return TaskStatus::HALT;
-            case TaskStatus::ABORT:
-                abort();
-                return TaskStatus::ABORT;
-            }
-            std::this_thread::sleep_for(heartbeat);
-        }
-        return TaskStatus::CONTINUE;
+    template <typename CV>
+    ThreadManager::CVReference<CV>::CVReference(ThreadManager *mgr, CV *cv) : m_mgr(mgr), m_cv(cv) {
+        m_mgr->increaseRefCounter(m_cv);
     }
 
-    TaskStatus ThreadManager::doLoopTask(
-            std::condition_variable &cv, std::chrono::nanoseconds heartbeat,
-            std::function<TaskStatus()> f) {
-        std::condition_variable *cvptr = &cv;
-        reference(cvptr);
-        TaskStatus status = doLoopTask(heartbeat, f);
-        dereference(cvptr);
-        return status;
+    ThreadManager::CVReference<std::condition_variable> ThreadManager::registerConditionVariable(
+            std::condition_variable &cv) {
+        return CVReference(this, &cv);
     }
 
-    std::future<bool> ThreadManager::setTimeout(
-            const std::chrono::steady_clock::time_point &until) {
-        return std::async(&ThreadManager::doTimeout, this, until);
+    ThreadManager::CVReference<std::condition_variable_any> ThreadManager::
+            registerConditionVariable(std::condition_variable_any &cv) {
+        return CVReference(this, &cv);
     }
 
-    bool ThreadManager::doTimeout(const std::chrono::steady_clock::time_point &until) {
-        std::shared_lock<std::shared_mutex> lock(m_abortedMutex);
-        while (true) {
-            switch (m_abortCV.wait_until(lock, until)) {
-            case std::cv_status::no_timeout:
-                if (m_aborted)
-                    return false;
-                break;
-            case std::cv_status::timeout:
-                lock.unlock();
-                if (m_msg)
-                    *m_msg << MessageLevel::ABORT << "Abort after timeout" << std::endl;
-                abort();
-                return true;
-            }
-        }
-        return false;
+    bool ThreadManager::isAborted(const std::unique_lock<std::shared_mutex> &) const {
+        return isFutureReady(m_abortFuture);
     }
 
-    void ThreadManager::reference(std::condition_variable *cv) {
-        std::lock_guard<std::mutex> lock(m_cvMutex);
-        ++m_cvCounter[cv];
+    bool ThreadManager::isAborted(const std::shared_lock<std::shared_mutex> &) const {
+        return isFutureReady(m_abortFuture);
     }
 
-    void ThreadManager::dereference(std::condition_variable *cv) {
-        std::lock_guard<std::mutex> lock(m_cvMutex);
-        std::size_t &counter = m_cvCounter[cv];
-        assert(counter != 0);
-        --counter;
+    void ThreadManager::increaseRefCounter(std::condition_variable *cv) {
+        auto lock = std::unique_lock(m_cvMutex);
+        ++m_cvRefCounter[cv];
     }
 
-    void ThreadManager::setMsg(MessageSource &&msg) {
-        m_msg = std::make_unique<MessageSource>(std::move(msg));
+    void ThreadManager::increaseRefCounter(std::condition_variable_any *cv) {
+        auto lock = std::unique_lock(m_cvAnyMutex);
+        ++m_cvAnyRefCounter[cv];
     }
+
+    void ThreadManager::decreaseRefCounter(std::condition_variable *cv) {
+        auto lock = std::unique_lock(m_cvMutex);
+        auto itr = m_cvRefCounter.find(cv);
+        if (itr == m_cvRefCounter.end())
+            throw std::out_of_range("Cannot deregister unregistered CV!");
+        if (--(itr->second) == 0)
+            m_cvRefCounter.erase(itr);
+    }
+
+    void ThreadManager::decreaseRefCounter(std::condition_variable_any *cv) {
+        auto lock = std::unique_lock(m_cvAnyMutex);
+        auto itr = m_cvAnyRefCounter.find(cv);
+        if (itr == m_cvAnyRefCounter.end())
+            throw std::out_of_range("Cannot deregister unregistered CV!");
+        if (--(itr->second) == 0)
+            m_cvAnyRefCounter.erase(itr);
+    }
+
+    template class ThreadManager::CVReference<std::condition_variable>;
+    template class ThreadManager::CVReference<std::condition_variable_any>;
+
 } // namespace AsyncQueue

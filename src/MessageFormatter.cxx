@@ -1,4 +1,4 @@
-#include "AsyncQueue/MessageFormatter.h"
+#include "AsyncQueue/MessageFormatter.hxx"
 
 namespace AsyncQueue {
 
@@ -19,7 +19,7 @@ namespace AsyncQueue {
             value = message.source;
             break;
         case FieldType::Level:
-            value = to_string(message.level);
+            value = toString(message.level);
             break;
         case FieldType::Time:
             value = formatTime(message.time, field.extra);

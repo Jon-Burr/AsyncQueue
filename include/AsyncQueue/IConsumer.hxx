@@ -1,10 +1,11 @@
-#ifndef ASYNCQUEUE_ICONSUMER
-#define ASYNCQUEUE_ICONSUMER
+#ifndef ASYNCQUEUE_ICONSUMER_HXX
+#define ASYNCQUEUE_ICONSUMER_HXX
 
-#include "AsyncQueue/TaskStatus.h"
+#include "AsyncQueue/Fwd.hxx"
+#include "AsyncQueue/TaskStatus.hxx"
 
 /**
- * @file IConsumer.h
+ * @file IConsumer.hxx
  *
  * Templated base class for objects which consume queue elements
  */
@@ -32,4 +33,4 @@ namespace AsyncQueue {
     };
 } // namespace AsyncQueue
 
-#endif //> !ASYNCQUEUE_ICONSUMER
+#endif //> !ASYNCQUEUE_ICONSUMER_HXX

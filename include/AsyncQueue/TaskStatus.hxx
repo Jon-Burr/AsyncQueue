@@ -1,5 +1,5 @@
-#ifndef ASYNCQUEUE_TASKSTATUS_H
-#define ASYNCQUEUE_TASKSTATUS_H
+#ifndef ASYNCQUEUE_TASKSTATUS_HXX
+#define ASYNCQUEUE_TASKSTATUS_HXX
 
 namespace AsyncQueue {
     /**
@@ -15,4 +15,4 @@ namespace AsyncQueue {
     };
 } // namespace AsyncQueue
 
-#endif //> !ASYNCQUEUE_TASKSTATUS_H
+#endif //> !ASYNCQUEUE_TASKSTATUS_HXX

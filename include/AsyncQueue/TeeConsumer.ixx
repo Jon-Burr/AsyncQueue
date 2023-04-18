@@ -1,13 +1,16 @@
 namespace AsyncQueue {
     template <typename T>
-    TeeConsumer<T>::TeeConsumer(std::vector<std::unique_ptr<IConsumer<T>>> &&consumers) {
-        for (auto ptr : consumers)
-            addConsumer(std::move(ptr));
+    template <typename... Cs, typename>
+    TeeConsumer<T>::TeeConsumer(Cs &&...consumers) {
+        (addConsumer(std::move(consumers)), ...);
     }
+
+    template <typename T> std::size_t TeeConsumer<T>::size() const { return m_consumers.size(); }
+
     template <typename T>
     void TeeConsumer<T>::addConsumer(std::unique_ptr<IConsumer<T>> &&consumer) {
         addConsumer(consumer.get());
-        m_ownedConsumers.push_back(std::move(consumer));
+        m_owned.push_back(std::move(consumer));
     }
 
     template <typename T>
@@ -28,9 +31,18 @@ namespace AsyncQueue {
             case TaskStatus::CONTINUE:
                 ++itr;
                 break;
-            case TaskStatus::HALT:
+            case TaskStatus::HALT: {
+                // See if this is an owned consumer
+                auto ownedItr = std::find_if(
+                        m_owned.begin(), m_owned.end(),
+                        [itr](const std::unique_ptr<IConsumer<T>> &ptr) {
+                            return ptr.get() == *itr;
+                        });
+                if (ownedItr != m_owned.end())
+                    m_owned.erase(ownedItr);
                 itr = m_consumers.erase(itr);
                 break;
+            }
             case TaskStatus::ABORT:
                 return TaskStatus::ABORT;
             }

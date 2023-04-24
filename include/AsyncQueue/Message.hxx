@@ -4,6 +4,8 @@
 #include "Fwd.hxx"
 
 #include <chrono>
+#include <istream>
+#include <ostream>
 #include <string>
 
 namespace AsyncQueue {
@@ -16,7 +18,7 @@ namespace AsyncQueue {
 
     /// @brief Convert a string to the corresponding message level
     /// @param lvl The string form of a message level, case insensitive
-    MessageLevel levelFromString(const std::string &lvl);
+    MessageLevel levelFromString(std::string lvl);
 
     /// @brief Struct containing a message with its context
     struct Message {
@@ -53,6 +55,9 @@ namespace AsyncQueue {
                static_cast<std::underlying_type_t<MessageLevel>>(rhs);
     }
     /// @}
+
+    std::istream &operator>>(std::istream &is, MessageLevel &lvl);
+    std::ostream &operator<<(std::ostream &os, MessageLevel lvl);
 
 } // namespace AsyncQueue
 

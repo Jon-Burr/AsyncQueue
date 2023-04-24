@@ -40,4 +40,13 @@ namespace AsyncQueue {
             throw std::invalid_argument(lvl);
         return MessageLevel::ABORT;
     }
+
+    std::istream &operator>>(std::istream &is, MessageLevel &lvl) {
+        std::string s;
+        is >> s;
+        lvl = levelFromString(s);
+        return is;
+    }
+
+    std::ostream &operator<<(std::ostream &os, MessageLevel lvl) { return os << toString(lvl); }
 } // namespace AsyncQueue

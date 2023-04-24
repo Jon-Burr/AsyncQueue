@@ -28,6 +28,8 @@ namespace AsyncQueue {
         }
     }
 
+    void ThreadManager::wait() const { getAbortFuture().wait(); }
+
     template <typename CV> ThreadManager::CVReference<CV>::~CVReference() {
         if (m_cv)
             m_mgr->decreaseRefCounter(m_cv);

@@ -19,8 +19,6 @@
 // TODO: std::condition_variable_any loops
 
 namespace AsyncQueue {
-    namespace detail {
-    }
 
     /**
      * @brief Class responsible for managing the execution of threads
@@ -40,6 +38,9 @@ namespace AsyncQueue {
         ///
         /// Note, this is idempotent: calling abort on an already aborted manager is a no-op
         void abort();
+
+        /// @brief Wait for the manager to be aborted
+        void wait() const;
 
         /// @brief Get a copy of the shared_future for the abort signal
         std::shared_future<void> getAbortFuture() const { return m_abortFuture; }

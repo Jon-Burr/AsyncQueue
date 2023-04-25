@@ -10,3 +10,4 @@ target_sources(AsyncQueue PRIVATE
 )
 target_include_directories(AsyncQueue PUBLIC ../include)
 target_compile_features(AsyncQueue PUBLIC cxx_std_17)
+target_link_libraries(AsyncQueue PUBLIC Threads::Threads)

@@ -9,9 +9,6 @@
 #include <vector>
 
 namespace AsyncQueue {
-    // Forward declare
-    class MessageBuilder;
-    template <typename T> MessageBuilder &operator<<(MessageBuilder &b, T &&t);
     /// @brief Creates messages and sends them to the queue
     ///
     /// Multiple messages can be held and will be sent at the same time on flush.
@@ -65,11 +62,41 @@ namespace AsyncQueue {
                 MessageLevel lvl = MessageLevel::INFO);
 
         /// @brief Begin a message of the specified severity
-        MessageBuilder operator<<(MessageLevel lvl) const;
+        MessageBuilder operator<<(MessageLevel lvl) const { return msg(lvl); }
         /// @brief The output level
         MessageLevel outputLevel() const { return m_outputLvl; }
         /// @brief Should we output a message of this severity?
         bool testLevel(MessageLevel level) const { return m_outputLvl <= level; }
+        /// @brief Begin a message of the specified severity
+        MessageBuilder msg(MessageLevel lvl) const;
+        /// @name Message helpers
+        /// Helper functions to produce specific message levels
+        /// @{
+        MessageBuilder verboseMsg() const { return msg(MessageLevel::VERBOSE); }
+        template <typename... Args> void verboseMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        MessageBuilder debugMsg() const { return msg(MessageLevel::DEBUG); }
+        template <typename... Args> void debugMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        MessageBuilder infoMsg() const { return msg(MessageLevel::INFO); }
+        template <typename... Args> void infoMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        MessageBuilder warningMsg() const { return msg(MessageLevel::WARNING); }
+        template <typename... Args> void warningMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        MessageBuilder errorMsg() const { return msg(MessageLevel::ERROR); }
+        template <typename... Args> void errorMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        MessageBuilder abortMsg() const { return msg(MessageLevel::ABORT); }
+        template <typename... Args> void abortMsg(Args &&... args) const {
+            return msg(lvl) << ... << args;
+        }
+        /// @}
 
     private:
         MessageQueue &m_queue;
@@ -77,14 +104,7 @@ namespace AsyncQueue {
         const MessageLevel m_outputLvl;
     };
 
-    // TODO - interaction with std::endl
-
     template <typename T> MessageBuilder &operator<<(MessageBuilder &b, T &&t) {
-        if constexpr (std::is_same_v<std::decay_t<T>, std::decay_t<decltype(std::endl(b.m_msg))>>)
-            if (t == &std::endl<std::ostream::char_type, std::ostream::traits_type>) {
-                b.completeMessage();
-                return b;
-            }
         b.m_msg << t;
         return b;
     }

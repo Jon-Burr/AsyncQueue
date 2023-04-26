@@ -19,36 +19,31 @@ namespace AsyncQueue {
         /// @brief Get the MessageSource
         virtual const MessageSource &msgSource() const = 0;
         /// @brief Get a builder for the specified level
-        virtual MessageBuilder msg(MessageLevel lvl) const { return std::move(msgSource() << lvl); }
+        virtual MessageBuilder msg(MessageLevel lvl) const { return msgSource().msg(lvl); }
 
-        template <typename... Args> void sendMsg(MessageLevel lvl, Args &&...args) const {
-            if (msgSource().testLevel(lvl))
-                (msg(lvl) << ... << args) << std::endl;
-        }
-
-        MessageBuilder verboseMsg() const { return msg(MessageLevel::VERBOSE); }
+        MessageBuilder verboseMsg() const { return msgSource().verboseMsg(); }
         template <typename... Args> void verboseMsg(Args &&...args) const {
-            sendMsg(MessageLevel::VERBOSE, std::forward<Args>(args)...);
+            msgSource().verboseMsg(std::forward<Args>(args)...);
         }
-        MessageBuilder debugMsg() const { return msg(MessageLevel::DEBUG); }
+        MessageBuilder debugMsg() const { return msgSource().debugMsg(); }
         template <typename... Args> void debugMsg(Args &&...args) const {
-            sendMsg(MessageLevel::DEBUG, std::forward<Args>(args)...);
+            msgSource().debugMsg(std::forward<Args>(args)...);
         }
-        MessageBuilder infoMsg() const { return msg(MessageLevel::INFO); }
+        MessageBuilder infoMsg() const { return msgSource().infoMsg(); }
         template <typename... Args> void infoMsg(Args &&...args) const {
-            sendMsg(MessageLevel::INFO, std::forward<Args>(args)...);
+            msgSource().infoMsg(std::forward<Args>(args)...);
         }
-        MessageBuilder warningMsg() const { return msg(MessageLevel::WARNING); }
+        MessageBuilder warningMsg() const { return msgSource().warningMsg(); }
         template <typename... Args> void warningMsg(Args &&...args) const {
-            sendMsg(MessageLevel::WARNING, std::forward<Args>(args)...);
+            msgSource().warningMsg(std::forward<Args>(args)...);
         }
-        MessageBuilder errorMsg() const { return msg(MessageLevel::ERROR); }
+        MessageBuilder errorMsg() const { return msgSource().errorMsg(); }
         template <typename... Args> void errorMsg(Args &&...args) const {
-            sendMsg(MessageLevel::ERROR, std::forward<Args>(args)...);
+            msgSource().errorMsg(std::forward<Args>(args)...);
         }
-        MessageBuilder abortMsg() const { return msg(MessageLevel::ABORT); }
+        MessageBuilder abortMsg() const { return msgSource().abortMsg(); }
         template <typename... Args> void abortMsg(Args &&...args) const {
-            sendMsg(MessageLevel::ABORT, std::forward<Args>(args)...);
+            msgSource().abortMsg(std::forward<Args>(args)...);
         }
     };
 

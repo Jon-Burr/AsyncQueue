@@ -35,7 +35,7 @@ namespace AsyncQueue {
             const std::string &name, MessageQueue &queue, MessageLevel outputLvl)
             : m_queue(queue), m_name(name), m_outputLvl(outputLvl) {}
 
-    MessageBuilder MessageSource::operator<<(MessageLevel lvl) const {
+    MessageBuilder MessageSource::msg(MessageLevel lvl) const {
         if (testLevel(lvl))
             return MessageBuilder(m_queue, m_name, lvl);
         else

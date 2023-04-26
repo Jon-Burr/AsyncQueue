@@ -3,6 +3,7 @@
 
 #include "AsyncQueue/MessageComponent.hxx"
 #include "AsyncQueue/TaskStatus.hxx"
+#include "AsyncQueue/concepts.hxx"
 #include "AsyncQueue/packManipulation.hxx"
 #include "AsyncQueue/utils.hxx"
 
@@ -46,95 +47,26 @@ namespace AsyncQueue {
         std::shared_future<void> getAbortFuture() const { return m_abortFuture; }
 
         /// @brief Create a thread that causes an abort after a set period of time
-        template <typename Rep, typename Period>
-        std::future<bool> setTimeout(const std::chrono::duration<Rep, Period> &duration);
+        template <concepts::Duration T> std::future<bool> setTimeout(const T &duration);
 
         /// @brief Create a thread that causes an abort after a set time point
-        template <typename Clock, typename Duration>
-        std::future<bool> setTimeout(const std::chrono::time_point<Clock, Duration> &timeout);
+        template <concepts::TimePoint T> std::future<bool> setTimeout(const T &timeout);
 
-        /// @brief Loop a function call
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
-        template <
-                typename F, typename... Args,
-                // Ensure this doesn't participate when a duration is provided
-                typename = std::enable_if_t<!detail::is_duration_v<F>, void>>
-        std::future<void> loop(F &&f, Args &&...args);
-
-        /// @brief Loop a function call
-        /// @param heartbeat Time to wait between functor calls
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
-        template <
-                typename Duration, typename F, typename... Args,
-                typename = std::enable_if_t<detail::is_duration_v<Duration>, void>>
-        std::future<void> loop(const Duration &heartbeat, F &&f, Args &&...args);
-
-        /// @brief Loop a function call
-        /// @param cv A condition variable on which the functor depends.
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// The condition variable should be one on which the functor depends. It will be notified
-        /// when the manager is aborted.
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
         template <typename F, typename... Args>
-        std::future<void> loopCV(std::condition_variable &cv, F &&f, Args &&...args);
+        requires concepts::Loopable<F, Args...> std::future<TaskStatus> loop(
+                F &&f, Args &&... args);
 
-        /// @brief Loop a function call
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
-        ///
-        /// The functor must return a TaskStatus enum. If this is HALT then the loop on this functor
-        /// will be stopped. If it is ABORT then the entire manager will be aborted.
-        template <
-                typename F, typename... Args,
-                // Ensure this doesn't participate when a duration is provided
-                typename = std::enable_if_t<!detail::is_duration_v<F>, void>>
-        std::future<TaskStatus> loopTask(F &&f, Args &&...args);
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::Loopable<F, Args...> std::future<TaskStatus> loop(
+                const D &heartbeat, F &&f, Args &&... args);
 
-        /// @brief Loop a function call
-        /// @param heartbeat Time to wait between functor calls
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
-        ///
-        /// The functor must return a TaskStatus enum. If this is HALT then the loop on this functor
-        /// will be stopped. If it is ABORT then the entire manager will be aborted.
-        template <
-                typename Duration, typename F, typename... Args,
-                typename = std::enable_if_t<detail::is_duration_v<Duration>, void>>
-        std::future<TaskStatus> loopTask(const Duration &heartbeat, F &&f, Args &&...args);
-
-        /// @brief Loop a function call
-        /// @param cv A condition variable on which the functor depends.
-        /// @param f A functor object
-        /// @param args The arguments to the functor
-        ///
-        /// The condition variable should be one on which the functor depends. It will be notified
-        /// when the manager is aborted.
-        ///
-        /// Any return value to the functor will be discarded. If the functor raises an exception it
-        /// will cause the manager to abort.
-        ///
-        /// The functor must return a TaskStatus enum. If this is HALT then the loop on this functor
-        /// will be stopped. If it is ABORT then the entire manager will be aborted.
         template <typename F, typename... Args>
-        std::future<TaskStatus> loopTaskCV(std::condition_variable &cv, F &&f, Args &&...args);
+        requires concepts::Loopable<F, Args...> std::future<TaskStatus> loop(
+                std::condition_variable &cv, F &&f, Args &&... args);
+
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::Loopable<F, Args...> std::future<TaskStatus> loop(
+                std::condition_variable &cv, const D &heartbeat, F &&f, Args &&... args);
 
         /// @brief RAII-type class that maintains a reference to a condition_variable
         ///
@@ -166,24 +98,23 @@ namespace AsyncQueue {
         bool isAborted(const std::unique_lock<std::shared_mutex> &) const;
         bool isAborted(const std::shared_lock<std::shared_mutex> &) const;
         /// @brief The actual function that performs the timeout
-        template <typename Clock, typename Duration>
-        bool doTimeout(const std::chrono::time_point<Clock, Duration> &timeout);
+        template <concepts::TimePoint T> bool doTimeout(const T &timeout);
 
-        /// @brief The actual function that performs the loop
-        template <typename Duration, typename F, typename... Args>
-        void doLoop(const Duration &heartbeat, F f, std::tuple<Args...> args);
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::LoopableVoid<F, Args...> TaskStatus
+        doLoop(const D &heartbeat, F f, std::tuple<Args...> args);
 
-        /// @brief The actual function that performs a loop that depends on a condition variable
-        template <typename F, typename... Args>
-        void doLoopCV(std::condition_variable &cv, F f, std::tuple<Args...> args);
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::LoopableTask<F, Args...> TaskStatus
+        doLoop(const D &heartbeat, F f, std::tuple<Args...> args);
 
-        /// @brief The actual function that performs the loop
-        template <typename Duration, typename F, typename... Args>
-        TaskStatus doLoopTask(const Duration &heartbeat, F f, std::tuple<Args...> args);
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::LoopableVoid<F, Args...> TaskStatus
+        doLoop(std::condition_variable &cv, const D &heartbeat, F f, std::tuple<Args...> args);
 
-        /// @brief The actual function that performs a loop that depends on a condition variable
-        template <typename F, typename... Args>
-        TaskStatus doLoopTaskCV(std::condition_variable &cv, F f, std::tuple<Args...> args);
+        template <concepts::Duration D, typename F, typename... Args>
+        requires concepts::LoopableTask<F, Args...> TaskStatus
+        doLoop(std::condition_variable &cv, const D &heartbeat, F f, std::tuple<Args...> args);
 
         void increaseRefCounter(std::condition_variable *cv);
         void increaseRefCounter(std::condition_variable_any *cv);

@@ -8,6 +8,7 @@
 #include "AsyncQueue/MessageSource.hxx"
 #include "AsyncQueue/ThreadManager.hxx"
 
+#include <concepts>
 #include <future>
 #include <memory>
 #include <type_traits>
@@ -19,9 +20,10 @@ namespace AsyncQueue {
         MessageManager(
                 std::unique_ptr<IMessageWriter> writer,
                 MessageLevel outputLvl = MessageLevel::INFO);
-        template <
-                typename T, typename = std::enable_if_t<std::is_base_of_v<IMessageWriter, T>, void>>
-        MessageManager(T &&writer, MessageLevel outputLvl = MessageLevel::INFO)
+
+        template <std::move_constructible T>
+        requires std::derived_from<T, IMessageWriter> MessageManager(
+                T &&writer, MessageLevel outputLvl = MessageLevel::INFO)
                 : MessageManager(std::make_unique<T>(std::move(writer)), outputLvl) {}
 
         ~MessageManager();

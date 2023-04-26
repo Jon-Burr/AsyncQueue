@@ -1,6 +1,8 @@
 #ifndef ASYNCQUEUE_SIGNAL_HXX
 #define ASYNCQUEUE_SIGNAL_HXX
 
+#include "AsyncQueue/concepts.hxx"
+
 #include <condition_variable>
 #include <mutex>
 #include <type_traits>
@@ -28,12 +30,10 @@ namespace AsyncQueue {
             lock_t l = lock();
             cv().wait(l);
         }
-        template <typename Rep, typename Period>
-        std::cv_status wait_for(const std::chrono::duration<Rep, Period> &duration) {
+        template <concepts::Duration D> std::cv_status wait_for(const D &duration) {
             return cv().wait_for(lock(), duration);
         }
-        template <typename Clock, typename Duration>
-        std::cv_status wait_until(const std::chrono::time_point<Clock, Duration> &timeout) {
+        template <concepts::TimePoint T> std::cv_status wait_until(const T &timeout) {
             return cv().wait_until(lock(), timeout);
         }
 

@@ -9,6 +9,7 @@
 #include "AsyncQueue/Fwd.hxx"
 #include "AsyncQueue/TaskStatus.hxx"
 #include "AsyncQueue/ThreadManager.hxx"
+#include "AsyncQueue/concepts.hxx"
 #include "AsyncQueue/packManipulation.hxx"
 
 #include <condition_variable>
@@ -20,17 +21,6 @@
 #include <utility>
 
 namespace AsyncQueue {
-    namespace detail {
-        template <std::size_t I, typename T, typename... Args>
-        using consumer_args_t = detail::insert_tuple_element_t<I, T, std::tuple<Args...>>;
-
-        template <std::size_t I, typename F, typename T, typename... Args>
-        static constexpr inline bool is_consumer_v =
-                detail::is_async_applicable_v<F, consumer_args_t<I, T, Args...>>;
-
-        template <std::size_t I, typename F, typename T, typename... Args>
-        using consumer_result_t = detail::async_result_t<F, consumer_args_t<I, T, Args...>>;
-    } // namespace detail
 
     /// @brief Asynchronous queue implementation
     /// @tparam T The data type stored in the queue
@@ -91,25 +81,45 @@ namespace AsyncQueue {
         /// @brief Is the queue empty?
         bool empty(const lock_t &) const;
 
-        template <
-                std::size_t I = 0, typename F, typename... Args,
-                typename = std::enable_if_t<!detail::is_duration_v<F>, void>>
-        std::future<TaskStatus> loopProducer(ThreadManager &mgr, F &&f, Args &&...args);
+        template <std::size_t I = 0, typename F, typename... Args>
+        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
+                ThreadManager &mgr, F &&f, Args &&... args);
 
-        template <
-                std::size_t I = 0, typename Duration, typename F, typename... Args,
-                typename = std::enable_if_t<detail::is_duration_v<Duration>, void>>
-        std::future<TaskStatus> loopProducer(
-                ThreadManager &mgr, const Duration &duration, F &&f, Args &&...args);
+        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
+        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
+                ThreadManager &mgr, const D &heartbeat, F &&f, Args &&... args);
 
         template <std::size_t I = 0, typename F, typename... Args>
-        std::future<TaskStatus> loopConsumer(ThreadManager &mgr, F &&f, Args &&...args);
+        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
+                ThreadManager &mgr, std::condition_variable &cv, F &&f, Args &&... args);
+
+        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
+        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
+                ThreadManager &mgr, std::condition_variable &cv, const D &heartbeat, F &&f,
+                Args &&... args);
+
+        template <std::size_t I = 0, typename F, typename... Args>
+        requires concepts::Consumer<I, F, T, Args...> std::future<TaskStatus> loopConsumer(
+                ThreadManager &mgr, F &&f, Args &&... args);
+
+        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
+        requires concepts::Consumer<I, F, T, Args...> std::future<TaskStatus> loopConsumer(
+                ThreadManager &mgr, const D &heartbeat, F &&f, Args &&... args);
 
     private:
         template <std::size_t I, typename F, typename... Args>
-        TaskStatus doLoopProducer(F f, Args... args);
+        requires concepts::ProducerTask<I, F, T, Args...> TaskStatus
+        doLoopProducer(F f, Args... args);
+
         template <std::size_t I, typename F, typename... Args>
-        TaskStatus doLoopConsumer(F f, Args... args);
+        requires concepts::ProducerVoid<I, F, T, Args...> void doLoopProducer(F f, Args... args);
+
+        template <std::size_t I, typename F, typename... Args>
+        requires concepts::ConsumerTask<I, F, T, Args...> TaskStatus
+        doLoopConsumer(F f, Args... args);
+
+        template <std::size_t I, typename F, typename... Args>
+        requires concepts::ConsumerVoid<I, F, T, Args...> void doLoopConsumer(F f, Args... args);
 
         std::queue<T> m_queue;
         mutable std::mutex m_mutex;

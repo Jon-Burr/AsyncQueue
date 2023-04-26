@@ -1,7 +1,8 @@
 namespace AsyncQueue {
     template <typename T>
-    template <typename... Cs, typename>
-    TeeConsumer<T>::TeeConsumer(Cs &&...consumers) {
+    template <std::move_constructible... Cs>
+    requires(std::derived_from<Cs, IConsumer<T>> &&...)
+            TeeConsumer<T>::TeeConsumer(Cs &&... consumers) {
         (addConsumer(std::move(consumers)), ...);
     }
 
@@ -14,9 +15,8 @@ namespace AsyncQueue {
     }
 
     template <typename T>
-    template <typename C>
-    std::enable_if_t<std::is_base_of_v<IConsumer<T>, C> && std::is_move_constructible_v<C>, void>
-    TeeConsumer<T>::addConsumer(C &&consumer) {
+    template <std::move_constructible C>
+    requires std::derived_from<C, IConsumer<T>> void TeeConsumer<T>::addConsumer(C &&consumer) {
         addConsumer(std::make_unique<C>(std::move(consumer)));
     }
 

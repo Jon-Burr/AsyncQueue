@@ -3,6 +3,7 @@
 
 #include "AsyncQueue/IConsumer.hxx"
 
+#include <concepts>
 #include <memory>
 #include <type_traits>
 #include <vector>
@@ -16,13 +17,8 @@ namespace AsyncQueue {
         TeeConsumer() = default;
 
         /// @brief Create a consumer from multiple others
-        template <
-                typename... Cs, typename = std::enable_if_t<
-                                        std::conjunction_v<
-                                                std::is_base_of<IConsumer<T>, Cs>...,
-                                                std::is_move_constructible<Cs>...>,
-                                        void>>
-        TeeConsumer(Cs &&...consumers);
+        template <std::move_constructible... Cs>
+        requires(std::derived_from<Cs, IConsumer<T>> &&...) TeeConsumer(Cs &&... consumers);
 
         /// @brief The number of contained consumers
         std::size_t size() const;
@@ -31,10 +27,8 @@ namespace AsyncQueue {
         void addConsumer(std::unique_ptr<IConsumer<T>> &&consumer);
 
         /// @brief Add a new consumer to thiis
-        template <typename C>
-        std::enable_if_t<
-                std::is_base_of_v<IConsumer<T>, C> && std::is_move_constructible_v<C>, void>
-        addConsumer(C &&consumer);
+        template <std::move_constructible C>
+        requires std::derived_from<C, IConsumer<T>> void addConsumer(C &&consumer);
 
         /// @brief Add a new consumer to this that is managed outside this class
         void addConsumer(IConsumer<T> *consumer);

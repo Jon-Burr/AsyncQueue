@@ -74,27 +74,27 @@ namespace AsyncQueue {
         /// @{
         MessageBuilder verboseMsg() const { return msg(MessageLevel::VERBOSE); }
         template <typename... Args> void verboseMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (verboseMsg() << ... << args);
         }
         MessageBuilder debugMsg() const { return msg(MessageLevel::DEBUG); }
         template <typename... Args> void debugMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (debugMsg() << ... << args);
         }
         MessageBuilder infoMsg() const { return msg(MessageLevel::INFO); }
         template <typename... Args> void infoMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (infoMsg() << ... << args);
         }
         MessageBuilder warningMsg() const { return msg(MessageLevel::WARNING); }
         template <typename... Args> void warningMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (warningMsg() << ... << args);
         }
         MessageBuilder errorMsg() const { return msg(MessageLevel::ERROR); }
         template <typename... Args> void errorMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (errorMsg() << ... << args);
         }
         MessageBuilder abortMsg() const { return msg(MessageLevel::ABORT); }
         template <typename... Args> void abortMsg(Args &&... args) const {
-            return msg(lvl) << ... << args;
+            (abortMsg() << ... << args);
         }
         /// @}
 

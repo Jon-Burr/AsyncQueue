@@ -32,29 +32,11 @@ namespace AsyncQueue {
         const std::string message;
     };
 
-    /// @name Comparison methods
-    /// Comparison methods for the MessageLevel enum
-    /// @{
-    inline bool operator<=(MessageLevel lhs, MessageLevel rhs) {
-        return static_cast<std::underlying_type_t<MessageLevel>>(lhs) <=
-               static_cast<std::underlying_type_t<MessageLevel>>(rhs);
+    /// @brief Three-way comparison operator for the MessageLevel enum
+    inline constexpr std::strong_ordering operator<=>(MessageLevel lhs, MessageLevel rhs) {
+        return static_cast<std::underlying_type_t<MessageLevel>>(lhs) <=> static_cast<std::underlying_type_t<MessageLevel>>(rhs);
     }
 
-    inline bool operator<(MessageLevel lhs, MessageLevel rhs) {
-        return static_cast<std::underlying_type_t<MessageLevel>>(lhs) <
-               static_cast<std::underlying_type_t<MessageLevel>>(rhs);
-    }
-
-    inline bool operator>(MessageLevel lhs, MessageLevel rhs) {
-        return static_cast<std::underlying_type_t<MessageLevel>>(lhs) >
-               static_cast<std::underlying_type_t<MessageLevel>>(rhs);
-    }
-
-    inline bool operator>=(MessageLevel lhs, MessageLevel rhs) {
-        return static_cast<std::underlying_type_t<MessageLevel>>(lhs) >=
-               static_cast<std::underlying_type_t<MessageLevel>>(rhs);
-    }
-    /// @}
 
     std::istream &operator>>(std::istream &is, MessageLevel &lvl);
     std::ostream &operator<<(std::ostream &os, MessageLevel lvl);

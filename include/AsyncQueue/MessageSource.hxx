@@ -61,6 +61,19 @@ namespace AsyncQueue {
                 const std::string &name, MessageQueue &queue,
                 MessageLevel lvl = MessageLevel::INFO);
 
+        /// @brief Create a new subsource
+        /// @param subName The name of the new source will be "<our name>:<subName>"
+        ///
+        /// The message level will be set to the same as ours
+        MessageSource createSubSource(const std::string &subName) const;
+        /// @brief Create a new subsource
+        /// @param subName The name of the new source will be "<our name>:<subName>"
+        /// @param lvl The output level. Only messages with a greater or equal severity will be
+        /// output
+        MessageSource createSubSource(const std::string &subName, MessageLevel lvl) const;
+        /// @brief Create a subsource named after the current thread
+        MessageSource createThreadSubSource() const;
+
         /// @brief Begin a message of the specified severity
         MessageBuilder operator<<(MessageLevel lvl) const { return msg(lvl); }
         /// @brief The output level
@@ -73,27 +86,27 @@ namespace AsyncQueue {
         /// Helper functions to produce specific message levels
         /// @{
         MessageBuilder verboseMsg() const { return msg(MessageLevel::VERBOSE); }
-        template <typename... Args> void verboseMsg(Args &&... args) const {
+        template <typename... Args> void verboseMsg(Args &&...args) const {
             (verboseMsg() << ... << args);
         }
         MessageBuilder debugMsg() const { return msg(MessageLevel::DEBUG); }
-        template <typename... Args> void debugMsg(Args &&... args) const {
+        template <typename... Args> void debugMsg(Args &&...args) const {
             (debugMsg() << ... << args);
         }
         MessageBuilder infoMsg() const { return msg(MessageLevel::INFO); }
-        template <typename... Args> void infoMsg(Args &&... args) const {
+        template <typename... Args> void infoMsg(Args &&...args) const {
             (infoMsg() << ... << args);
         }
         MessageBuilder warningMsg() const { return msg(MessageLevel::WARNING); }
-        template <typename... Args> void warningMsg(Args &&... args) const {
+        template <typename... Args> void warningMsg(Args &&...args) const {
             (warningMsg() << ... << args);
         }
         MessageBuilder errorMsg() const { return msg(MessageLevel::ERROR); }
-        template <typename... Args> void errorMsg(Args &&... args) const {
+        template <typename... Args> void errorMsg(Args &&...args) const {
             (errorMsg() << ... << args);
         }
         MessageBuilder abortMsg() const { return msg(MessageLevel::ABORT); }
-        template <typename... Args> void abortMsg(Args &&... args) const {
+        template <typename... Args> void abortMsg(Args &&...args) const {
             (abortMsg() << ... << args);
         }
         /// @}
@@ -105,11 +118,17 @@ namespace AsyncQueue {
     };
 
     template <typename T> MessageBuilder &operator<<(MessageBuilder &b, T &&t) {
-        b.m_msg << t;
+        if (!b.m_void) {
+            b.m_msg << t;
+            b.m_empty = false;
+        }
         return b;
     }
     template <typename T> MessageBuilder &&operator<<(MessageBuilder &&b, T &&t) {
-        b.m_msg << t;
+        if (!b.m_void) {
+            b.m_msg << t;
+            b.m_empty = false;
+        }
         return std::move(b);
     }
 

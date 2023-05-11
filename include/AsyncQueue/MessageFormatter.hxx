@@ -4,6 +4,7 @@
 #include "AsyncQueue/Message.hxx"
 
 #include <chrono>
+#include <functional>
 #include <iomanip>
 #include <sstream>
 #include <string>

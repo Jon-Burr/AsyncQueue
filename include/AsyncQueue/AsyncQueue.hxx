@@ -7,6 +7,7 @@
 #define ASYNCQUEUE_ASYNCQUEUE_HXX
 
 #include "AsyncQueue/Fwd.hxx"
+#include "AsyncQueue/Loop.hxx"
 #include "AsyncQueue/TaskStatus.hxx"
 #include "AsyncQueue/ThreadManager.hxx"
 #include "AsyncQueue/concepts.hxx"
@@ -21,6 +22,12 @@
 #include <utility>
 
 namespace AsyncQueue {
+
+    template <typename F, typename T, typename... Args>
+    concept Producer = LoopingTask<F, std::reference_wrapper<AsyncQueue<T>>, Args...>;
+
+    template <typename F, typename T, typename... Args>
+    concept Consumer = LoopingTask<F, T, Args...>;
 
     /// @brief Asynchronous queue implementation
     /// @tparam T The data type stored in the queue
@@ -37,7 +44,7 @@ namespace AsyncQueue {
         /// @brief Acquire a lock on the queue
         lock_t lock() const;
         /// @brief Get the condition variable for the queue
-        std::condition_variable &cv();
+        std::condition_variable_any &cv();
 
         /// @name Push methods
         /// The push methods take a const reference (copy) or an rvalue reference (move) to a value
@@ -81,49 +88,27 @@ namespace AsyncQueue {
         /// @brief Is the queue empty?
         bool empty(const lock_t &) const;
 
-        template <std::size_t I = 0, typename F, typename... Args>
-        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
-                ThreadManager &mgr, F &&f, Args &&... args);
+        template <typename F, typename... Args>
+            requires Producer<F, T, Args...>
+        std::future<TaskStatus> loopProducer(std::stop_source ss, F &&f, Args &&...args) {
+            return loop(ss, std::forward<F>(f), std::ref(*this), std::forward<Args>(args)...);
+        }
 
-        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
-        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
-                ThreadManager &mgr, const D &heartbeat, F &&f, Args &&... args);
+        template <concepts::Duration D, typename F, typename... Args>
+            requires Producer<F, T, Args...>
+        std::future<TaskStatus> loopProducer(
+                std::stop_source ss, const D &d, F &&f, Args &&...args) {
+            return loop(ss, d, std::forward<F>(f), std::ref(*this), std::forward<Args>(args)...);
+        }
 
-        template <std::size_t I = 0, typename F, typename... Args>
-        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
-                ThreadManager &mgr, std::condition_variable &cv, F &&f, Args &&... args);
-
-        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
-        requires concepts::Producer<I, F, T, Args...> std::future<TaskStatus> loopProducer(
-                ThreadManager &mgr, std::condition_variable &cv, const D &heartbeat, F &&f,
-                Args &&... args);
-
-        template <std::size_t I = 0, typename F, typename... Args>
-        requires concepts::Consumer<I, F, T, Args...> std::future<TaskStatus> loopConsumer(
-                ThreadManager &mgr, F &&f, Args &&... args);
-
-        template <std::size_t I = 0, concepts::Duration D, typename F, typename... Args>
-        requires concepts::Consumer<I, F, T, Args...> std::future<TaskStatus> loopConsumer(
-                ThreadManager &mgr, const D &heartbeat, F &&f, Args &&... args);
+        template <typename F, typename... Args>
+            requires Consumer<F, T, Args...>
+        std::future<TaskStatus> loopConsumer(std::stop_source ss, F &&f, Args &&...args);
 
     private:
-        template <std::size_t I, typename F, typename... Args>
-        requires concepts::ProducerTask<I, F, T, Args...> TaskStatus
-        doLoopProducer(F f, Args... args);
-
-        template <std::size_t I, typename F, typename... Args>
-        requires concepts::ProducerVoid<I, F, T, Args...> void doLoopProducer(F f, Args... args);
-
-        template <std::size_t I, typename F, typename... Args>
-        requires concepts::ConsumerTask<I, F, T, Args...> TaskStatus
-        doLoopConsumer(F f, Args... args);
-
-        template <std::size_t I, typename F, typename... Args>
-        requires concepts::ConsumerVoid<I, F, T, Args...> void doLoopConsumer(F f, Args... args);
-
         std::queue<T> m_queue;
         mutable std::mutex m_mutex;
-        std::condition_variable m_cv;
+        std::condition_variable_any m_cv;
     }; //> end class AsyncQueue<T>
 } // namespace AsyncQueue
 

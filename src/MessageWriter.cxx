@@ -19,7 +19,7 @@ namespace AsyncQueue {
         m_os
 #endif
 
-                << m_format(message) << std::endl;
+                << m_format(message);
         return TaskStatus::CONTINUE;
     }
 } // namespace AsyncQueue

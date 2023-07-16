@@ -9,8 +9,9 @@ namespace AsyncQueue {
 
               }) {}
 
-    MessageFormatter::MessageFormatter(const std::vector<Field> &fields, const std::string &sep)
-            : m_fields(fields), m_sep(sep) {}
+    MessageFormatter::MessageFormatter(
+            const std::vector<Field> &fields, const std::string &sep, bool repeatInfo)
+            : m_fields(fields), m_sep(sep), m_repeatInfo(repeatInfo) {}
 
     std::string MessageFormatter::formatField(const Message &message, const Field &field) {
         std::string value = "";
@@ -40,10 +41,30 @@ namespace AsyncQueue {
         std::string value = "";
         if (m_fields.size() == 0)
             return value;
-        auto itr = m_fields.begin();
-        value += formatField(message, *itr);
-        for (++itr; itr != m_fields.end(); ++itr)
-            value += m_sep + formatField(message, *itr);
+        std::string prefix;
+        std::string suffix;
+        bool seenMsg = false;
+        // TODO: This doesn't allow for multiple copies of message
+        for (const Field &field : m_fields) {
+            if (!seenMsg) {
+                if (!prefix.empty())
+                    prefix += m_sep;
+                if (field.type == FieldType::Message)
+                    seenMsg = true;
+                else
+                    prefix += formatField(message, field);
+            } else
+                suffix += m_sep + formatField(message, field);
+        }
+        std::size_t pos = 0;
+        while (true) {
+            std::size_t next = message.message.find('\n', pos);
+            value += prefix + message.message.substr(pos, next - pos) + suffix + '\n';
+            if (next >= message.message.size())
+                break;
+            else
+                pos = next + 1;
+        }
         return value;
     }
 

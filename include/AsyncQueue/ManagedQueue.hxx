@@ -23,6 +23,7 @@ namespace AsyncQueue {
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(Consumer &&consumer);
+        ~ManagedQueue();
 
         /// @brief Get the mutex protecting the queue
         std::mutex &mutex() const { return m_queue.mutex(); }
@@ -36,6 +37,8 @@ namespace AsyncQueue {
         std::stop_token stopToken() const { return m_ss.get_token(); }
         /// @brief Access the future of the consuming thread
         std::future<TaskStatus> &consumerStatus() { return m_consumerStatus; }
+        /// @brief Access the async queue
+        AsyncQueue<T> &queue() { return m_queue; }
 
         /// @name Push methods
         /// The push methods take a const reference (copy) or an rvalue reference (move) to a value

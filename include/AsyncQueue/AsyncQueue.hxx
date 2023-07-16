@@ -9,9 +9,7 @@
 #include "AsyncQueue/Fwd.hxx"
 #include "AsyncQueue/Loop.hxx"
 #include "AsyncQueue/TaskStatus.hxx"
-#include "AsyncQueue/ThreadManager.hxx"
 #include "AsyncQueue/concepts.hxx"
-#include "AsyncQueue/packManipulation.hxx"
 
 #include <condition_variable>
 #include <future>

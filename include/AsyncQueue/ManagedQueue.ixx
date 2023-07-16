@@ -62,6 +62,9 @@ namespace AsyncQueue {
     ManagedQueue<T>::ManagedQueue(Consumer &&consumer)
             : ManagedQueue(std::stop_source(), std::make_unique<Consumer>(std::move(consumer))) {}
 
+    template <typename T>
+    ManagedQueue<T>::~ManagedQueue() { m_ss.request_stop(); }
+
     template <typename T> bool ManagedQueue<T>::push(const T &value, const lock_t &lock) {
         if (m_ss.stop_requested())
             return false;

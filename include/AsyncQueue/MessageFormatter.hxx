@@ -38,9 +38,13 @@ namespace AsyncQueue {
          * @brief Create a custom formatter
          *
          * @param fields A list of fields describing the order of how to write the message
-         * @param sep A string that will be inserted between each field
+         * @param sep A string that will be inserted between each non-empty field
+         * @param repeatInfo If a message contains newlines, repeat the name, level and time strings
+         *                   on the newline. If false the blankspace will still be kept.
          */
-        MessageFormatter(const std::vector<Field> &fields, const std::string &sep = " ");
+        MessageFormatter(
+                const std::vector<Field> &fields, const std::string &sep = " ",
+                bool repeatInfo = false);
         /// @brief Format the message
         std::string operator()(const Message &message) { return format(message); }
         /// @brief Format the message
@@ -71,6 +75,7 @@ namespace AsyncQueue {
     private:
         std::vector<Field> m_fields;
         std::string m_sep;
+        bool m_repeatInfo;
     };
 
     template <typename Clock>

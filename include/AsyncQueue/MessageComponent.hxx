@@ -50,7 +50,7 @@ namespace AsyncQueue {
     class MessageComponent : virtual public IMessageComponent {
     public:
         /// @brief Create the component from its wrapped source object
-        MessageComponent(MessageSource &&msg) : m_msg(std::move(msg)) {}
+        MessageComponent(const MessageSource &msg) : m_msg(msg) {}
 
         const MessageSource &msgSource() const override final { return m_msg; }
 

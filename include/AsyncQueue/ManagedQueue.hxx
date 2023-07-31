@@ -118,10 +118,9 @@ namespace AsyncQueue {
         std::stop_source m_ss;
 #endif
         AsyncQueue<T> m_queue;
-        std::unique_ptr<IConsumer<T>> m_consumer;
-#ifdef AsyncQueue_MULTITHREAD
         IConsumer<T> *m_consumer;
         std::unique_ptr<IConsumer<T>> m_consumerOwning;
+#ifdef AsyncQueue_MULTITHREAD
         std::future<TaskStatus> m_consumerStatus;
 #endif
     };

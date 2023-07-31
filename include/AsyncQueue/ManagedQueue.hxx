@@ -10,11 +10,15 @@ namespace AsyncQueue {
     /// @tparam T The data type stored in the queue
     ///
     /// When the associated stop has been requested any remaining elements of the queue will be
-    /// processed by the consumer, but no new elements will be accepted.
+    /// processed by the consumer, but no new elements will be accepted. The consumer pointer can be
+    /// owned and managed by the queue, or it can merely hold an observing pointer.
     template <typename T> class ManagedQueue {
     public:
         using lock_t = std::unique_lock<std::mutex>;
 #ifdef AsyncQueue_MULTITHREAD
+
+        ManagedQueue(std::stop_source ss, std::unique_ptr<IConsumer<T>> consumer);
+        ManagedQueue(std::stop_source ss, IConsumer<T> *consumer);
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(std::stop_source ss, Consumer &&consumer);
@@ -27,6 +31,7 @@ namespace AsyncQueue {
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(Consumer &&consumer);
+        ManagedQueue(IConsumer<T> *consumer);
         ~ManagedQueue();
 
         /// @brief Get the mutex protecting the queue
@@ -109,11 +114,14 @@ namespace AsyncQueue {
 
     private:
 #ifdef AsyncQueue_MULTITHREAD
+        TaskStatus consumerThread();
         std::stop_source m_ss;
 #endif
         AsyncQueue<T> m_queue;
         std::unique_ptr<IConsumer<T>> m_consumer;
 #ifdef AsyncQueue_MULTITHREAD
+        IConsumer<T> *m_consumer;
+        std::unique_ptr<IConsumer<T>> m_consumerOwning;
         std::future<TaskStatus> m_consumerStatus;
 #endif
     };

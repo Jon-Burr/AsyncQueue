@@ -2,7 +2,9 @@ namespace AsyncQueue {
 
     template <typename T>
     ManagedQueue<T>::ManagedQueue(std::unique_ptr<IConsumer<T>> consumer)
-            : m_consumer(std::move(consumer)) {}
+            : m_consumer(consumer.get()), m_consumerOwning(std::move(consumer)) {}
+    template <typename T>
+    ManagedQueue<T>::ManagedQueue(IConsumer<T> *consumer) : m_consumer(consumer) {}
     template <typename T>
     template <std::derived_from<IConsumer<T>> Consumer>
         requires std::move_constructible<Consumer>

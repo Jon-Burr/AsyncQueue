@@ -14,12 +14,16 @@ namespace AsyncQueue {
     template <typename T> class ManagedQueue {
     public:
         using lock_t = std::unique_lock<std::mutex>;
-
-        ManagedQueue(std::stop_source ss, std::unique_ptr<IConsumer<T>> consumer);
-        ManagedQueue(std::unique_ptr<IConsumer<T>> consumer);
+#ifdef AsyncQueue_MULTITHREAD
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(std::stop_source ss, Consumer &&consumer);
+        ManagedQueue(std::stop_source ss, std::unique_ptr<IConsumer<T>> consumer);
+        template <std::derived_from<IConsumer<T>> Consumer>
+            requires std::move_constructible<Consumer>
+        ManagedQueue(std::stop_source ss, Consumer &&consumer);
+#endif
+        ManagedQueue(std::unique_ptr<IConsumer<T>> consumer);
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(Consumer &&consumer);
@@ -31,12 +35,18 @@ namespace AsyncQueue {
         lock_t lock() const { return m_queue.lock(); }
         /// @brief Get the condition variable for the queue
         std::condition_variable_any &cv() { return m_queue.cv(); }
+
+#ifdef AsyncQueue_MULTITHREAD
+        template <std::derived_from<IConsumer<T>> Consumer>
+            requires std::move_constructible<Consumer>
+        ManagedQueue(std::stop_source ss, Consumer &&consumer);
         /// @brief Get the stop source
         std::stop_source stopSource() { return m_ss; }
         /// @brief Get a stop token for the associated source
         std::stop_token stopToken() const { return m_ss.get_token(); }
         /// @brief Access the future of the consuming thread
         std::future<TaskStatus> &consumerStatus() { return m_consumerStatus; }
+#endif
         /// @brief Access the async queue
         AsyncQueue<T> &queue() { return m_queue; }
 
@@ -83,6 +93,7 @@ namespace AsyncQueue {
         /// @brief Is the queue empty?
         bool empty(const lock_t &lock) const { return m_queue.empty(lock); }
 
+#ifdef AsyncQueue_MULTITHREAD
         template <typename F, typename... Args>
             requires Producer<F, T, Args...>
         std::future<TaskStatus> loopProducer(F &&f, Args &&...args) {
@@ -94,15 +105,24 @@ namespace AsyncQueue {
         std::future<TaskStatus> loopProducer(const D &d, F &&f, Args &&...args) {
             return m_queue.loopProducer(m_ss, d, std::forward<F>(f), std::forward<Args>(args)...);
         }
+#endif
 
     private:
+#ifdef AsyncQueue_MULTITHREAD
         std::stop_source m_ss;
+#endif
         AsyncQueue<T> m_queue;
         std::unique_ptr<IConsumer<T>> m_consumer;
+#ifdef AsyncQueue_MULTITHREAD
         std::future<TaskStatus> m_consumerStatus;
+#endif
     };
 } // namespace AsyncQueue
 
+#ifdef AsyncQueue_MULTITHREAD
 #include "AsyncQueue/ManagedQueue.ixx"
+#else
+#include "AsyncQueue/ManagedQueue_noMT.ixx"
+#endif
 
 #endif //> !ASYNCQUEUE_MANAGEDQUEUE_HXX

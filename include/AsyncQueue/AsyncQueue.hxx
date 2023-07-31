@@ -20,13 +20,13 @@
 #include <utility>
 
 namespace AsyncQueue {
-
+#ifdef AsyncQueue_MULTITHREAD
     template <typename F, typename T, typename... Args>
     concept Producer = LoopingTask<F, std::reference_wrapper<AsyncQueue<T>>, Args...>;
 
     template <typename F, typename T, typename... Args>
     concept Consumer = LoopingTask<F, T, Args...>;
-
+#endif
     /// @brief Asynchronous queue implementation
     /// @tparam T The data type stored in the queue
     ///
@@ -86,6 +86,7 @@ namespace AsyncQueue {
         /// @brief Is the queue empty?
         bool empty(const lock_t &) const;
 
+#ifdef AsyncQueue_MULTITHREAD
         template <typename F, typename... Args>
             requires Producer<F, T, Args...>
         std::future<TaskStatus> loopProducer(std::stop_source ss, F &&f, Args &&...args) {
@@ -102,7 +103,7 @@ namespace AsyncQueue {
         template <typename F, typename... Args>
             requires Consumer<F, T, Args...>
         std::future<TaskStatus> loopConsumer(std::stop_source ss, F &&f, Args &&...args);
-
+#endif
     private:
         std::queue<T> m_queue;
         mutable std::mutex m_mutex;

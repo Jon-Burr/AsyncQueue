@@ -47,6 +47,7 @@ namespace AsyncQueue {
         return m_queue.empty();
     }
 
+#ifdef AsyncQueue_MULTITHREAD
     template <typename T>
     template <typename F, typename... Args>
         requires Consumer<F, T, Args...>
@@ -88,5 +89,5 @@ namespace AsyncQueue {
                 },
                 ss, std::forward<F>(f), std::forward<Args>(args)...);
     }
-
+#endif
 } // namespace AsyncQueue

@@ -15,18 +15,20 @@
 namespace AsyncQueue {
     class MessageManager {
     public:
+#ifdef AsyncQueue_MULTITHREAD
         MessageManager(
                 std::stop_source ss, std::unique_ptr<IMessageWriter> writer,
                 MessageLevel outputLvl = MessageLevel::INFO);
-        MessageManager(
-                std::unique_ptr<IMessageWriter> writer,
-                MessageLevel outputLvl = MessageLevel::INFO);
         MessageManager(std::stop_source ss, MessageLevel outputLvl = MessageLevel::INFO);
-        MessageManager(MessageLevel outputLvl = MessageLevel::INFO);
         template <std::derived_from<IMessageWriter> T>
             requires std::move_constructible<T>
         MessageManager(
                 std::stop_source ss, T &&writer, MessageLevel outputLvl = MessageLevel::INFO);
+#endif
+        MessageManager(
+                std::unique_ptr<IMessageWriter> writer,
+                MessageLevel outputLvl = MessageLevel::INFO);
+        MessageManager(MessageLevel outputLvl = MessageLevel::INFO);
         template <std::derived_from<IMessageWriter> T>
             requires std::move_constructible<T>
         MessageManager(T &&writer, MessageLevel outputLvl = MessageLevel::INFO);

@@ -1,3 +1,4 @@
+#ifdef AsyncQueue_MULTITHREAD
 #ifndef ASYNCQUEUE_LOOP_HXX
 #define ASYNCQUEUE_LOOP_HXX
 
@@ -122,3 +123,4 @@ namespace AsyncQueue {
 #include "AsyncQueue/Loop.ixx"
 
 #endif //> !ASYNCQUEUE_LOOP_HXX
+#endif //> AsyncQueue_MULTITHREAD

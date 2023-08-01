@@ -23,13 +23,13 @@ namespace AsyncQueue {
         /// @param source The name of the message source
         MessageQueueBuffer(MessageQueue &queue, MessageLevel lvl, const std::string &source);
 
-        MessageQueueBuffer(MessageQueueBuffer &&) = default;
+        MessageQueueBuffer(MessageQueueBuffer &&other);
 
     protected:
         int sync() override;
 
     private:
-        MessageQueue *const m_queue{nullptr};
+        MessageQueue *m_queue{nullptr};
         const MessageLevel m_lvl{MessageLevel::ABORT};
         const std::string m_source;
     };

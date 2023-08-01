@@ -11,6 +11,7 @@ namespace AsyncQueue {
     public:
         MessageQueueStream();
         MessageQueueStream(MessageQueue &queue, MessageLevel lvl, const std::string &source);
+        MessageQueueStream(MessageQueueStream &&other);
         ~MessageQueueStream();
 
     private:

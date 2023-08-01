@@ -8,6 +8,13 @@ namespace AsyncQueue {
             MessageQueue &queue, MessageLevel lvl, const std::string &source)
             : std::stringbuf(std::ios::out), m_queue(&queue), m_lvl(lvl), m_source(source) {}
 
+    MessageQueueBuffer::MessageQueueBuffer(MessageQueueBuffer &&other)
+            : std::stringbuf(std::move(other)), m_queue(other.m_queue), m_lvl(other.m_lvl),
+              m_source(other.m_source) {
+        // Set the other queue to null so it is unable to push
+        other.m_queue = nullptr;
+    }
+
     int MessageQueueBuffer::sync() {
         if (m_queue)
             m_queue->push(

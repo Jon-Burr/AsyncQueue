@@ -22,10 +22,6 @@ namespace AsyncQueue {
         template <std::derived_from<IConsumer<T>> Consumer>
             requires std::move_constructible<Consumer>
         ManagedQueue(std::stop_source ss, Consumer &&consumer);
-        ManagedQueue(std::stop_source ss, std::unique_ptr<IConsumer<T>> consumer);
-        template <std::derived_from<IConsumer<T>> Consumer>
-            requires std::move_constructible<Consumer>
-        ManagedQueue(std::stop_source ss, Consumer &&consumer);
 #endif
         ManagedQueue(std::unique_ptr<IConsumer<T>> consumer);
         template <std::derived_from<IConsumer<T>> Consumer>
@@ -42,9 +38,6 @@ namespace AsyncQueue {
         std::condition_variable_any &cv() { return m_queue.cv(); }
 
 #ifdef AsyncQueue_MULTITHREAD
-        template <std::derived_from<IConsumer<T>> Consumer>
-            requires std::move_constructible<Consumer>
-        ManagedQueue(std::stop_source ss, Consumer &&consumer);
         /// @brief Get the stop source
         std::stop_source stopSource() { return m_ss; }
         /// @brief Get a stop token for the associated source

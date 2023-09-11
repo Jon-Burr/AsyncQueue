@@ -60,7 +60,7 @@ namespace AsyncQueue {
         while (true) {
             std::size_t next = message.message.find('\n', pos);
             value += prefix + message.message.substr(pos, next - pos) + suffix + '\n';
-            if (next >= message.message.size())
+            if (next >= message.message.size() - 1)
                 break;
             else
                 pos = next + 1;

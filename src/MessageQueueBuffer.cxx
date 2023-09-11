@@ -16,7 +16,7 @@ namespace AsyncQueue {
     }
 
     int MessageQueueBuffer::sync() {
-        if (m_queue)
+        if (m_queue && !str().empty())
             m_queue->push(
                     {.source = m_source,
                      .time = std::chrono::system_clock::now(),

@@ -90,6 +90,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>rule_t</b> = std::fu
 <tr class="memitem:ae8159ebd4080838138912d2741804636" id="r_ae8159ebd4080838138912d2741804636"><td class="memItemLeft" align="right" valign="top"><a id="ae8159ebd4080838138912d2741804636" name="ae8159ebd4080838138912d2741804636"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ruleFun_t</b> = <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a>(*)(const std::vector&lt; std::pair&lt; H5::DataType, const void * &gt; &gt; &amp;)</td></tr>
 <tr class="separator:ae8159ebd4080838138912d2741804636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d50444aa728a14ea3edd8d88b910ef4" id="r_a5d50444aa728a14ea3edd8d88b910ef4"><td class="memItemLeft" align="right" valign="top"><a id="a5d50444aa728a14ea3edd8d88b910ef4" name="a5d50444aa728a14ea3edd8d88b910ef4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>rule_t</b> = std::function&lt; <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a>(const std::vector&lt; <a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a> &gt; &amp;)&gt;</td></tr>
+<tr class="memdesc:a5d50444aa728a14ea3edd8d88b910ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for merge rules. <br /></td></tr>
+<tr class="separator:a5d50444aa728a14ea3edd8d88b910ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -111,24 +115,103 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (<a clas
 <tr class="memitem:a7b7fe293c45c02c02a0ae0d8df26065b" id="r_a7b7fe293c45c02c02a0ae0d8df26065b"><td class="memItemLeft" align="right" valign="top"><a id="a7b7fe293c45c02c02a0ae0d8df26065b" name="a7b7fe293c45c02c02a0ae0d8df26065b"></a>
 <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>merge</b> (<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id, const std::vector&lt; <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a> &gt; &amp;buffers) const</td></tr>
 <tr class="separator:a7b7fe293c45c02c02a0ae0d8df26065b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a614d57d37d3813568fbbd808272919" id="r_a6a614d57d37d3813568fbbd808272919"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1MergeFactory.html#a6a614d57d37d3813568fbbd808272919">registerRule</a> (<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id, rule_t rule)</td></tr>
+<tr class="memdesc:a6a614d57d37d3813568fbbd808272919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a new rule.  <br /></td></tr>
+<tr class="separator:a6a614d57d37d3813568fbbd808272919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a731bcd21832e1bcf1aaad27e873b5ba3" id="r_a731bcd21832e1bcf1aaad27e873b5ba3"><td class="memItemLeft" align="right" valign="top">rule_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1MergeFactory.html#a731bcd21832e1bcf1aaad27e873b5ba3">retrieve</a> (<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id) const</td></tr>
+<tr class="memdesc:a731bcd21832e1bcf1aaad27e873b5ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a registered rule.  <br /></td></tr>
+<tr class="separator:a731bcd21832e1bcf1aaad27e873b5ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb211a9c060061da3306cbfd20db8d32" id="r_adb211a9c060061da3306cbfd20db8d32"><td class="memItemLeft" align="right" valign="top"><a id="adb211a9c060061da3306cbfd20db8d32" name="adb211a9c060061da3306cbfd20db8d32"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id) const</td></tr>
+<tr class="memdesc:adb211a9c060061da3306cbfd20db8d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has a rule been registered? <br /></td></tr>
+<tr class="separator:adb211a9c060061da3306cbfd20db8d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd6a34f35882d3f1e9b16219c1115b46" id="r_acd6a34f35882d3f1e9b16219c1115b46"><td class="memItemLeft" align="right" valign="top"><a id="acd6a34f35882d3f1e9b16219c1115b46" name="acd6a34f35882d3f1e9b16219c1115b46"></a>
+<a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>merge</b> (<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id, const std::vector&lt; <a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a> &gt; &amp;buffers) const</td></tr>
+<tr class="memdesc:acd6a34f35882d3f1e9b16219c1115b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge data from multiple buffers. <br /></td></tr>
+<tr class="separator:acd6a34f35882d3f1e9b16219c1115b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a867f8dc223d771be772695c9c34650bc" id="r_a867f8dc223d771be772695c9c34650bc"><td class="memItemLeft" align="right" valign="top"><a id="a867f8dc223d771be772695c9c34650bc" name="a867f8dc223d771be772695c9c34650bc"></a>
 static <a class="el" href="classH5Composites_1_1MergeFactory.html">MergeFactory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> ()</td></tr>
 <tr class="separator:a867f8dc223d771be772695c9c34650bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa94df993de4475e53f1aa7a7f2262f2" id="r_afa94df993de4475e53f1aa7a7f2262f2"><td class="memItemLeft" align="right" valign="top"><a id="afa94df993de4475e53f1aa7a7f2262f2" name="afa94df993de4475e53f1aa7a7f2262f2"></a>
+<tr class="memitem:a4d9c3eb9af1c2e24ee4c738029e9e6a9" id="r_a4d9c3eb9af1c2e24ee4c738029e9e6a9"><td class="memItemLeft" align="right" valign="top"><a id="a4d9c3eb9af1c2e24ee4c738029e9e6a9" name="a4d9c3eb9af1c2e24ee4c738029e9e6a9"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>setMergeRule</b> (const H5::DataSet &amp;dataSet, const H5::EnumType &amp;dtype, <a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> id)</td></tr>
-<tr class="separator:afa94df993de4475e53f1aa7a7f2262f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84cc2380abd4b648f8ce61612e486bf6" id="r_a84cc2380abd4b648f8ce61612e486bf6"><td class="memItemLeft" align="right" valign="top"><a id="a84cc2380abd4b648f8ce61612e486bf6" name="a84cc2380abd4b648f8ce61612e486bf6"></a>
+<tr class="separator:a4d9c3eb9af1c2e24ee4c738029e9e6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae917779b9940a1d39fccd1c11fd3b9" id="r_aaae917779b9940a1d39fccd1c11fd3b9"><td class="memItemLeft" align="right" valign="top"><a id="aaae917779b9940a1d39fccd1c11fd3b9" name="aaae917779b9940a1d39fccd1c11fd3b9"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>setMergeRule</b> (const H5::DataSet &amp;dataSet, const H5::EnumType &amp;dtype, const std::string &amp;name)</td></tr>
-<tr class="separator:a84cc2380abd4b648f8ce61612e486bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae40ace73643f9dc64a19ddb2d1654ec1" id="r_ae40ace73643f9dc64a19ddb2d1654ec1"><td class="memItemLeft" align="right" valign="top"><a id="ae40ace73643f9dc64a19ddb2d1654ec1" name="ae40ace73643f9dc64a19ddb2d1654ec1"></a>
+<tr class="separator:aaae917779b9940a1d39fccd1c11fd3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c0ae72ed1676acc641220596d789c4" id="r_ad3c0ae72ed1676acc641220596d789c4"><td class="memItemLeft" align="right" valign="top"><a id="ad3c0ae72ed1676acc641220596d789c4" name="ad3c0ae72ed1676acc641220596d789c4"></a>
 static <a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getMergeRuleID</b> (const H5::DataSet &amp;dataSet)</td></tr>
-<tr class="separator:ae40ace73643f9dc64a19ddb2d1654ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad3c0ae72ed1676acc641220596d789c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b8c589de6ae474e35a2adc894f94b5" id="r_a25b8c589de6ae474e35a2adc894f94b5"><td class="memItemLeft" align="right" valign="top"><a id="a25b8c589de6ae474e35a2adc894f94b5" name="a25b8c589de6ae474e35a2adc894f94b5"></a>
+static <a class="el" href="classH5Composites_1_1MergeFactory.html">MergeFactory</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> ()</td></tr>
+<tr class="memdesc:a25b8c589de6ae474e35a2adc894f94b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the factory instance. <br /></td></tr>
+<tr class="separator:a25b8c589de6ae474e35a2adc894f94b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6a614d57d37d3813568fbbd808272919" name="a6a614d57d37d3813568fbbd808272919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a614d57d37d3813568fbbd808272919">&#9670;&#160;</a></span>registerRule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool H5Composites::MergeFactory::registerRule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rule_t&#160;</td>
+          <td class="paramname"><em>rule</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register a new rule. </p>
+<p>This will fail if the ID already has a rule registered</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The registered type ID </td></tr>
+    <tr><td class="paramname">rule</td><td>The function showing how to merge buffers of this type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a731bcd21832e1bcf1aaad27e873b5ba3" name="a731bcd21832e1bcf1aaad27e873b5ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a731bcd21832e1bcf1aaad27e873b5ba3">&#9670;&#160;</a></span>retrieve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rule_t H5Composites::MergeFactory::retrieve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve a registered rule. </p>
+<p>Returns an empty std::function object if no rule exists </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/github/workspace/include/H5Composites/<a class="el" href="MergeFactory_8h_source.html">MergeFactory.h</a></li>
+<li>/github/workspace/include/H5Composites/<a class="el" href="MergeFactory_8hxx_source.html">MergeFactory.hxx</a></li>
 <li>/github/workspace/src/<b>MergeFactory.cxx</b></li>
 </ul>
 </div><!-- contents -->

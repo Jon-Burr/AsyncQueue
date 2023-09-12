@@ -80,90 +80,324 @@ $(function() {
   <div class="headertitle"><div class="title">H5Composites::GroupWrapper Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Helper class to wrap input and output files.  
+ <a href="classH5Composites_1_1GroupWrapper.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GroupWrapper_8hxx_source.html">GroupWrapper.hxx</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0853715a8ba440a251bb54eccb0fdedf" id="r_a0853715a8ba440a251bb54eccb0fdedf"><td class="memItemLeft" align="right" valign="top"><a id="a0853715a8ba440a251bb54eccb0fdedf" name="a0853715a8ba440a251bb54eccb0fdedf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GroupWrapper</b> (const H5::Group &amp;inputGroup, const H5::EnumType &amp;registerType)</td></tr>
+<tr class="memitem:a0853715a8ba440a251bb54eccb0fdedf" id="r_a0853715a8ba440a251bb54eccb0fdedf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#a0853715a8ba440a251bb54eccb0fdedf">GroupWrapper</a> (const H5::Group &amp;inputGroup, const H5::EnumType &amp;registerType)</td></tr>
+<tr class="memdesc:a0853715a8ba440a251bb54eccb0fdedf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the wrapper.  <br /></td></tr>
 <tr class="separator:a0853715a8ba440a251bb54eccb0fdedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da822caf65831c8337aa0cb1f9d6243" id="r_a6da822caf65831c8337aa0cb1f9d6243"><td class="memItemLeft" align="right" valign="top"><a id="a6da822caf65831c8337aa0cb1f9d6243" name="a6da822caf65831c8337aa0cb1f9d6243"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GroupWrapper</b> (const H5::H5File &amp;inputFile, const H5::EnumType &amp;registerType)</td></tr>
-<tr class="separator:a6da822caf65831c8337aa0cb1f9d6243"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3531a06d5da3e28464800a7403bdc7e5" id="r_a3531a06d5da3e28464800a7403bdc7e5"><td class="memItemLeft" align="right" valign="top"><a id="a3531a06d5da3e28464800a7403bdc7e5" name="a3531a06d5da3e28464800a7403bdc7e5"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
-<tr class="separator:a3531a06d5da3e28464800a7403bdc7e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3091ddbaf41e1a0bde08aaa5243f7569" id="r_a3091ddbaf41e1a0bde08aaa5243f7569"><td class="memItemLeft" align="right" valign="top"><a id="a3091ddbaf41e1a0bde08aaa5243f7569" name="a3091ddbaf41e1a0bde08aaa5243f7569"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>typeNameOf</b> (std::size_t idx, std::size_t nameSize=100) const</td></tr>
-<tr class="separator:a3091ddbaf41e1a0bde08aaa5243f7569"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abeb98291ec94d1aced4da0e5b54b15b7" id="r_abeb98291ec94d1aced4da0e5b54b15b7"><td class="memItemLeft" align="right" valign="top"><a id="abeb98291ec94d1aced4da0e5b54b15b7" name="abeb98291ec94d1aced4da0e5b54b15b7"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>typeNameOf</b> (const std::string &amp;name, std::size_t nameSize=100) const</td></tr>
-<tr class="separator:abeb98291ec94d1aced4da0e5b54b15b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad7ce6615cac344f7315f7c09bd70e33" id="r_aad7ce6615cac344f7315f7c09bd70e33"><td class="memItemLeft" align="right" valign="top"><a id="aad7ce6615cac344f7315f7c09bd70e33" name="aad7ce6615cac344f7315f7c09bd70e33"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>typeNameOf</b> (const H5::DataSet &amp;dataSet, std::size_t nameSize=100) const</td></tr>
-<tr class="separator:aad7ce6615cac344f7315f7c09bd70e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dee4984d89b2c6c425b8a83f09bd10e" id="r_a7dee4984d89b2c6c425b8a83f09bd10e"><td class="memItemLeft" align="right" valign="top"><a id="a7dee4984d89b2c6c425b8a83f09bd10e" name="a7dee4984d89b2c6c425b8a83f09bd10e"></a>
-<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>typeIDOf</b> (std::size_t idx) const</td></tr>
-<tr class="separator:a7dee4984d89b2c6c425b8a83f09bd10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fec0d11cd328f3f4fbbc2917411b153" id="r_a0fec0d11cd328f3f4fbbc2917411b153"><td class="memItemLeft" align="right" valign="top"><a id="a0fec0d11cd328f3f4fbbc2917411b153" name="a0fec0d11cd328f3f4fbbc2917411b153"></a>
-<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>typeIDOf</b> (const std::string &amp;name) const</td></tr>
-<tr class="separator:a0fec0d11cd328f3f4fbbc2917411b153"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f5b70df44eef79b0cce34aa19d91707" id="r_a0f5b70df44eef79b0cce34aa19d91707"><td class="memItemLeft" align="right" valign="top"><a id="a0f5b70df44eef79b0cce34aa19d91707" name="a0f5b70df44eef79b0cce34aa19d91707"></a>
-<a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>typeIDOf</b> (const H5::DataSet &amp;dataset) const</td></tr>
-<tr class="separator:a0f5b70df44eef79b0cce34aa19d91707"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abccfc0257b3d93eb5a034d8aa8b688d7" id="r_abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memTemplParams" colspan="2"><a id="abccfc0257b3d93eb5a034d8aa8b688d7" name="abccfc0257b3d93eb5a034d8aa8b688d7"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memTemplItemLeft" align="right" valign="top">UnderlyingType_t&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readScalar</b> (const std::string &amp;name) const</td></tr>
-<tr class="separator:abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3aa3d2ee5e91c37911bc712387d8273b" id="r_a3aa3d2ee5e91c37911bc712387d8273b"><td class="memTemplParams" colspan="2"><a id="a3aa3d2ee5e91c37911bc712387d8273b" name="a3aa3d2ee5e91c37911bc712387d8273b"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a3aa3d2ee5e91c37911bc712387d8273b"><td class="memTemplItemLeft" align="right" valign="top">H5::DataSet&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeScalar</b> (const UnderlyingType_t&lt; T &gt; &amp;obj, const std::string &amp;name)</td></tr>
-<tr class="separator:a3aa3d2ee5e91c37911bc712387d8273b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a238c0da85350454a3f02ee3f22fd138e" id="r_a238c0da85350454a3f02ee3f22fd138e"><td class="memTemplParams" colspan="2"><a id="a238c0da85350454a3f02ee3f22fd138e" name="a238c0da85350454a3f02ee3f22fd138e"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a238c0da85350454a3f02ee3f22fd138e"><td class="memTemplItemLeft" align="right" valign="top">H5::DataSet&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeScalar</b> (const UnderlyingType_t&lt; T &gt; &amp;obj, const std::string &amp;name, const std::string &amp;typeName)</td></tr>
-<tr class="separator:a238c0da85350454a3f02ee3f22fd138e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00254d1f7080af019eef6d81ea433226" id="r_a00254d1f7080af019eef6d81ea433226"><td class="memTemplParams" colspan="2"><a id="a00254d1f7080af019eef6d81ea433226" name="a00254d1f7080af019eef6d81ea433226"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a00254d1f7080af019eef6d81ea433226"><td class="memTemplItemLeft" align="right" valign="top">H5::DataSet&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeScalar</b> (const UnderlyingType_t&lt; T &gt; &amp;obj, const std::string &amp;name, <a class="el" href="structH5Composites_1_1TypeRegister_1_1id__t.html">TypeRegister::id_t</a> typeID)</td></tr>
-<tr class="separator:a00254d1f7080af019eef6d81ea433226"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70599001323601bcc4d3b3f6e19200bb" id="r_a70599001323601bcc4d3b3f6e19200bb"><td class="memItemLeft" align="right" valign="top"><a id="a70599001323601bcc4d3b3f6e19200bb" name="a70599001323601bcc4d3b3f6e19200bb"></a>
 <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readGroup</b> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:a70599001323601bcc4d3b3f6e19200bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the named group. <br /></td></tr>
 <tr class="separator:a70599001323601bcc4d3b3f6e19200bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0c58256547dd425e31704bbc49acc50" id="r_ae0c58256547dd425e31704bbc49acc50"><td class="memItemLeft" align="right" valign="top"><a id="ae0c58256547dd425e31704bbc49acc50" name="ae0c58256547dd425e31704bbc49acc50"></a>
 <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createGroup</b> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:ae0c58256547dd425e31704bbc49acc50"><td class="mdescLeft">&#160;</td><td class="mdescRight">create and return the named group <br /></td></tr>
 <tr class="separator:ae0c58256547dd425e31704bbc49acc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9944efc79faf356a706126d0cd8c843" id="r_ae9944efc79faf356a706126d0cd8c843"><td class="memItemLeft" align="right" valign="top"><a id="ae9944efc79faf356a706126d0cd8c843" name="ae9944efc79faf356a706126d0cd8c843"></a>
 H5::Group &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>group</b> ()</td></tr>
+<tr class="memdesc:ae9944efc79faf356a706126d0cd8c843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the underlying group. <br /></td></tr>
 <tr class="separator:ae9944efc79faf356a706126d0cd8c843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac697ed363ecca6a62d274d54b0dbbe4c" id="r_ac697ed363ecca6a62d274d54b0dbbe4c"><td class="memItemLeft" align="right" valign="top"><a id="ac697ed363ecca6a62d274d54b0dbbe4c" name="ac697ed363ecca6a62d274d54b0dbbe4c"></a>
 const H5::Group &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>group</b> () const</td></tr>
 <tr class="separator:ac697ed363ecca6a62d274d54b0dbbe4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21d937cc9cd4288e31fe7def8f9716bf" id="r_a21d937cc9cd4288e31fe7def8f9716bf"><td class="memTemplParams" colspan="2"><a id="a21d937cc9cd4288e31fe7def8f9716bf" name="a21d937cc9cd4288e31fe7def8f9716bf"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a21d937cc9cd4288e31fe7def8f9716bf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classH5Composites_1_1TypedWriter.html">TypedWriter</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>makeDataSetWriter</b> (const std::string &amp;name, std::size_t cacheSize=2048, std::size_t chunkSize=-1)</td></tr>
+<tr class="memitem:a21d937cc9cd4288e31fe7def8f9716bf" id="r_a21d937cc9cd4288e31fe7def8f9716bf"><td class="memTemplParams" colspan="2">template&lt;WithStaticH5DType T&gt; </td></tr>
+<tr class="memitem:a21d937cc9cd4288e31fe7def8f9716bf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classH5Composites_1_1TypedWriter.html">TypedWriter</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#a21d937cc9cd4288e31fe7def8f9716bf">makeDataSetWriter</a> (const std::string &amp;name, std::size_t cacheSize=2048, std::size_t chunkSize=-1)</td></tr>
+<tr class="memdesc:a21d937cc9cd4288e31fe7def8f9716bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new dataset writer.  <br /></td></tr>
 <tr class="separator:a21d937cc9cd4288e31fe7def8f9716bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7ba7beb7c25ca6ac252325deea9f866" id="r_ac7ba7beb7c25ca6ac252325deea9f866"><td class="memTemplParams" colspan="2"><a id="ac7ba7beb7c25ca6ac252325deea9f866" name="ac7ba7beb7c25ca6ac252325deea9f866"></a>
-template&lt;typename T , typename... Args&gt; </td></tr>
-<tr class="memitem:ac7ba7beb7c25ca6ac252325deea9f866"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; std::is_constructible_v&lt; UnderlyingType_t&lt; T &gt;, Args... &gt;, <a class="el" href="classH5Composites_1_1ScalarWriter.html">ScalarWriter</a>&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>makeScalarWriter</b> (const std::string &amp;name, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ac7ba7beb7c25ca6ac252325deea9f866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab6a97b452ab8024dd25116cd2130b6" id="r_a8ab6a97b452ab8024dd25116cd2130b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classH5Composites_1_1Writer.html">Writer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#a8ab6a97b452ab8024dd25116cd2130b6">makeDataSetWriter</a> (const std::string &amp;name, const H5::DataType &amp;dtype, std::size_t cacheSize=2048, std::size_t chunkSize=-1)</td></tr>
+<tr class="memdesc:a8ab6a97b452ab8024dd25116cd2130b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new dataset writer.  <br /></td></tr>
+<tr class="separator:a8ab6a97b452ab8024dd25116cd2130b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:ad3d2474493db862085dc83c8ba4d82dc" id="r_ad3d2474493db862085dc83c8ba4d82dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#ad3d2474493db862085dc83c8ba4d82dc">isScalar</a> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:ad3d2474493db862085dc83c8ba4d82dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods for reading and writing scalars.  <br /></td></tr>
+<tr class="separator:ad3d2474493db862085dc83c8ba4d82dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9dc9f6e86bfbf1cd1eb25c88c7f19a2" id="r_ad9dc9f6e86bfbf1cd1eb25c88c7f19a2"><td class="memItemLeft" align="right" valign="top"><a id="ad9dc9f6e86bfbf1cd1eb25c88c7f19a2" name="ad9dc9f6e86bfbf1cd1eb25c88c7f19a2"></a>
+<a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readScalarBuffer</b> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:ad9dc9f6e86bfbf1cd1eb25c88c7f19a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a scalar from a file. <br /></td></tr>
+<tr class="separator:ad9dc9f6e86bfbf1cd1eb25c88c7f19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abccfc0257b3d93eb5a034d8aa8b688d7" id="r_abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memTemplParams" colspan="2"><a id="abccfc0257b3d93eb5a034d8aa8b688d7" name="abccfc0257b3d93eb5a034d8aa8b688d7"></a>
+template&lt;BufferConstructible T&gt; </td></tr>
+<tr class="memitem:abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memTemplItemLeft" align="right" valign="top">UnderlyingType_t&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readScalar</b> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:abccfc0257b3d93eb5a034d8aa8b688d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a scalar from a file. <br /></td></tr>
+<tr class="separator:abccfc0257b3d93eb5a034d8aa8b688d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8845c10d228c5d9af5e0c4a7b56496b7" id="r_a8845c10d228c5d9af5e0c4a7b56496b7"><td class="memItemLeft" align="right" valign="top"><a id="a8845c10d228c5d9af5e0c4a7b56496b7" name="a8845c10d228c5d9af5e0c4a7b56496b7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>writeScalarBuffer</b> (const std::string &amp;name, const <a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a> &amp;buffer)</td></tr>
+<tr class="memdesc:a8845c10d228c5d9af5e0c4a7b56496b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a scalar to a file. <br /></td></tr>
+<tr class="separator:a8845c10d228c5d9af5e0c4a7b56496b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff171f7738a4cefa93d04f5b7cdc3513" id="r_aff171f7738a4cefa93d04f5b7cdc3513"><td class="memTemplParams" colspan="2"><a id="aff171f7738a4cefa93d04f5b7cdc3513" name="aff171f7738a4cefa93d04f5b7cdc3513"></a>
+template&lt;BufferWritable T&gt; <br />
+requires WrapperTrait&lt;T&gt;</td></tr>
+<tr class="memitem:aff171f7738a4cefa93d04f5b7cdc3513"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeScalar</b> (const std::string &amp;name, const UnderlyingType_t&lt; T &gt; &amp;value)</td></tr>
+<tr class="memdesc:aff171f7738a4cefa93d04f5b7cdc3513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a scalar to a file. <br /></td></tr>
+<tr class="separator:aff171f7738a4cefa93d04f5b7cdc3513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa301fcea4536a04d6b7ce5b12abe584b" id="r_aa301fcea4536a04d6b7ce5b12abe584b"><td class="memTemplParams" colspan="2"><a id="aa301fcea4536a04d6b7ce5b12abe584b" name="aa301fcea4536a04d6b7ce5b12abe584b"></a>
+template&lt;BufferWritable T&gt; <br />
+requires (!WrapperTrait&lt;T&gt;)</td></tr>
+<tr class="memitem:aa301fcea4536a04d6b7ce5b12abe584b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>writeScalar</b> (const std::string &amp;name, const T &amp;value)</td></tr>
+<tr class="memdesc:aa301fcea4536a04d6b7ce5b12abe584b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a scalar to a file. <br /></td></tr>
+<tr class="separator:aa301fcea4536a04d6b7ce5b12abe584b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a44d37064711001be9aa6cedb5bf6736a" id="r_a44d37064711001be9aa6cedb5bf6736a"><td class="memItemLeft" align="right" valign="top"><a id="a44d37064711001be9aa6cedb5bf6736a" name="a44d37064711001be9aa6cedb5bf6736a"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasTypeEnum</b> (const H5::Group &amp;group)</td></tr>
-<tr class="separator:a44d37064711001be9aa6cedb5bf6736a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1c1e74c6b9bbb60fd7df0770bb69820" id="r_ac1c1e74c6b9bbb60fd7df0770bb69820"><td class="memItemLeft" align="right" valign="top"><a id="ac1c1e74c6b9bbb60fd7df0770bb69820" name="ac1c1e74c6b9bbb60fd7df0770bb69820"></a>
-static H5::EnumType&#160;</td><td class="memItemRight" valign="bottom"><b>getTypeEnum</b> (const H5::Group &amp;group)</td></tr>
-<tr class="separator:ac1c1e74c6b9bbb60fd7df0770bb69820"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5edd0942bcf6b3e3c85eb5bfb17cc75d" id="r_a5edd0942bcf6b3e3c85eb5bfb17cc75d"><td class="memItemLeft" align="right" valign="top"><a id="a5edd0942bcf6b3e3c85eb5bfb17cc75d" name="a5edd0942bcf6b3e3c85eb5bfb17cc75d"></a>
-static <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><b>readFile</b> (const std::string &amp;name, bool update=false)</td></tr>
+<tr class="memitem:a5edd0942bcf6b3e3c85eb5bfb17cc75d" id="r_a5edd0942bcf6b3e3c85eb5bfb17cc75d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#a5edd0942bcf6b3e3c85eb5bfb17cc75d">readFile</a> (const std::string &amp;name, bool update=false)</td></tr>
+<tr class="memdesc:a5edd0942bcf6b3e3c85eb5bfb17cc75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open a file for reading.  <br /></td></tr>
 <tr class="separator:a5edd0942bcf6b3e3c85eb5bfb17cc75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a735c34d829eed02ade1d11cc9fbeac7b" id="r_a735c34d829eed02ade1d11cc9fbeac7b"><td class="memItemLeft" align="right" valign="top"><a id="a735c34d829eed02ade1d11cc9fbeac7b" name="a735c34d829eed02ade1d11cc9fbeac7b"></a>
-static <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFile</b> (const std::string &amp;name, bool overwrite=false)</td></tr>
+<tr class="memitem:a735c34d829eed02ade1d11cc9fbeac7b" id="r_a735c34d829eed02ade1d11cc9fbeac7b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1GroupWrapper.html#a735c34d829eed02ade1d11cc9fbeac7b">createFile</a> (const std::string &amp;name, bool overwrite=false)</td></tr>
+<tr class="memdesc:a735c34d829eed02ade1d11cc9fbeac7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new file.  <br /></td></tr>
 <tr class="separator:a735c34d829eed02ade1d11cc9fbeac7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae368f1b58ec9d5aaaeb91a4cd3b16504" id="r_ae368f1b58ec9d5aaaeb91a4cd3b16504"><td class="memItemLeft" align="right" valign="top"><a id="ae368f1b58ec9d5aaaeb91a4cd3b16504" name="ae368f1b58ec9d5aaaeb91a4cd3b16504"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasTypeRegister</b> (const H5::Group &amp;<a class="el" href="classH5Composites_1_1GroupWrapper.html#ae9944efc79faf356a706126d0cd8c843">group</a>)</td></tr>
+<tr class="memdesc:ae368f1b58ec9d5aaaeb91a4cd3b16504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to check if a file contains an instance of the type register. <br /></td></tr>
+<tr class="separator:ae368f1b58ec9d5aaaeb91a4cd3b16504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5d4a49002906077020b44cd6a228e2b" id="r_ad5d4a49002906077020b44cd6a228e2b"><td class="memItemLeft" align="right" valign="top"><a id="ad5d4a49002906077020b44cd6a228e2b" name="ad5d4a49002906077020b44cd6a228e2b"></a>
+static H5::EnumType&#160;</td><td class="memItemRight" valign="bottom"><b>getTypeRegister</b> (const H5::Group &amp;<a class="el" href="classH5Composites_1_1GroupWrapper.html#ae9944efc79faf356a706126d0cd8c843">group</a>)</td></tr>
+<tr class="memdesc:ad5d4a49002906077020b44cd6a228e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to retrieve the type register from a group. <br /></td></tr>
+<tr class="separator:ad5d4a49002906077020b44cd6a228e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper class to wrap input and output files. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0853715a8ba440a251bb54eccb0fdedf" name="a0853715a8ba440a251bb54eccb0fdedf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0853715a8ba440a251bb54eccb0fdedf">&#9670;&#160;</a></span>GroupWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">H5Composites::GroupWrapper::GroupWrapper </td>
+          <td>(</td>
+          <td class="paramtype">const H5::Group &amp;&#160;</td>
+          <td class="paramname"><em>inputGroup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const H5::EnumType &amp;&#160;</td>
+          <td class="paramname"><em>registerType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create the wrapper. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputGroup</td><td>The wrapped H5 group </td></tr>
+    <tr><td class="paramname">registerType</td><td>The enum containing the mapping from ID to type name for the file</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>In general the <a class="el" href="classH5Composites_1_1GroupWrapper.html#a5edd0942bcf6b3e3c85eb5bfb17cc75d">readFile</a> and <a class="el" href="classH5Composites_1_1GroupWrapper.html#a735c34d829eed02ade1d11cc9fbeac7b">createFile</a> methods should be preferred for opening files and the <a class="el" href="classH5Composites_1_1GroupWrapper.html#a70599001323601bcc4d3b3f6e19200bb">readGroup</a> and <a class="el" href="classH5Composites_1_1GroupWrapper.html#ae0c58256547dd425e31704bbc49acc50">createGroup</a> methods should be preferred for opening groups from existing files. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a735c34d829eed02ade1d11cc9fbeac7b" name="a735c34d829eed02ade1d11cc9fbeac7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735c34d829eed02ade1d11cc9fbeac7b">&#9670;&#160;</a></span>createFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a> H5Composites::GroupWrapper::createFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>overwrite</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a new file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the file </td></tr>
+    <tr><td class="paramname">overwrite</td><td>If true, overwrite any existing file, otherwise an existing file will cause this call to fail </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad3d2474493db862085dc83c8ba4d82dc" name="ad3d2474493db862085dc83c8ba4d82dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d2474493db862085dc83c8ba4d82dc">&#9670;&#160;</a></span>isScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool H5Composites::GroupWrapper::isScalar </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Methods for reading and writing scalars. </p>
+<p>Check if the named element is a scalar </p>
+
+</div>
+</div>
+<a id="a8ab6a97b452ab8024dd25116cd2130b6" name="a8ab6a97b452ab8024dd25116cd2130b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ab6a97b452ab8024dd25116cd2130b6">&#9670;&#160;</a></span>makeDataSetWriter() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classH5Composites_1_1Writer.html">Writer</a> H5Composites::GroupWrapper::makeDataSetWriter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const H5::DataType &amp;&#160;</td>
+          <td class="paramname"><em>dtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>cacheSize</em> = <code>2048</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>chunkSize</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new dataset writer. </p>
+<p>See <a class="el" href="classH5Composites_1_1Writer.html">Writer</a> documentation for the meaning of the parameters </p>
+
+</div>
+</div>
+<a id="a21d937cc9cd4288e31fe7def8f9716bf" name="a21d937cc9cd4288e31fe7def8f9716bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d937cc9cd4288e31fe7def8f9716bf">&#9670;&#160;</a></span>makeDataSetWriter() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;WithStaticH5DType T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classH5Composites_1_1TypedWriter.html">TypedWriter</a>&lt; T &gt; H5Composites::GroupWrapper::makeDataSetWriter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>cacheSize</em> = <code>2048</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>chunkSize</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new dataset writer. </p>
+<p>See <a class="el" href="classH5Composites_1_1TypedWriter.html">TypedWriter</a> documentation for the meaning of the parameters </p>
+
+</div>
+</div>
+<a id="a5edd0942bcf6b3e3c85eb5bfb17cc75d" name="a5edd0942bcf6b3e3c85eb5bfb17cc75d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5edd0942bcf6b3e3c85eb5bfb17cc75d">&#9670;&#160;</a></span>readFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classH5Composites_1_1GroupWrapper.html">GroupWrapper</a> H5Composites::GroupWrapper::readFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Open a file for reading. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the file </td></tr>
+    <tr><td class="paramname">update</td><td>If true, open the file in read/write mode, otherwise read only </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/github/workspace/include/H5Composites/<a class="el" href="GroupWrapper_8h_source.html">GroupWrapper.h</a></li>
+<li>/github/workspace/include/H5Composites/<a class="el" href="GroupWrapper_8hxx_source.html">GroupWrapper.hxx</a></li>
+<li>/github/workspace/include/H5Composites/<a class="el" href="GroupWrapper_8ixx_source.html">GroupWrapper.ixx</a></li>
 <li>/github/workspace/src/<b>GroupWrapper.cxx</b></li>
 </ul>
 </div><!-- contents -->

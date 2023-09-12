@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['arraytraits_2eh_0',['ArrayTraits.h',['../ArrayTraits_8h.html',1,'']]]
+  ['bufferreadtraits_2ehxx_0',['BufferReadTraits.hxx',['../BufferReadTraits_8hxx.html',1,'']]]
 ];

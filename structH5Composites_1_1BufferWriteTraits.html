@@ -73,47 +73,11 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="structH5Composites_1_1BufferWriteTraits-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">H5Composites::BufferWriteTraits&lt; T &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Default implementation for the buffer write traits.  
- <a href="structH5Composites_1_1BufferWriteTraits.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="BufferWriteTraits_8h_source.html">BufferWriteTraits.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a1f5581e1e7fc88403c716efe104e66c5" id="r_a1f5581e1e7fc88403c716efe104e66c5"><td class="memItemLeft" align="right" valign="top"><a id="a1f5581e1e7fc88403c716efe104e66c5" name="a1f5581e1e7fc88403c716efe104e66c5"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>write_t</b> = UnderlyingType_t&lt; T &gt;</td></tr>
-<tr class="separator:a1f5581e1e7fc88403c716efe104e66c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a38ce1b63f254b551583fee50999ff9c8" id="r_a38ce1b63f254b551583fee50999ff9c8"><td class="memTemplParams" colspan="2"><a id="a38ce1b63f254b551583fee50999ff9c8" name="a38ce1b63f254b551583fee50999ff9c8"></a>
-template&lt;typename U  = write_t&gt; </td></tr>
-<tr class="memitem:a38ce1b63f254b551583fee50999ff9c8"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt; std::is_base_of_v&lt; <a class="el" href="classH5Composites_1_1IBufferWriter.html">IBufferWriter</a>, U &gt;, void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const U &amp;u, void *buffer, const H5::DataType &amp;targetDType)</td></tr>
-<tr class="separator:a38ce1b63f254b551583fee50999ff9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f82e924b8e0a68de98b7067289155bd" id="r_a3f82e924b8e0a68de98b7067289155bd"><td class="memTemplParams" colspan="2"><a id="a3f82e924b8e0a68de98b7067289155bd" name="a3f82e924b8e0a68de98b7067289155bd"></a>
-template&lt;typename U  = write_t&gt; </td></tr>
-<tr class="memitem:a3f82e924b8e0a68de98b7067289155bd"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt;!std::is_base_of_v&lt; <a class="el" href="classH5Composites_1_1IBufferWriter.html">IBufferWriter</a>, U &gt;, void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const U &amp;u, void *buffer, const H5::DataType &amp;targetDType)</td></tr>
-<tr class="separator:a3f82e924b8e0a68de98b7067289155bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-struct H5Composites::BufferWriteTraits&lt; T &gt;</div><p>Default implementation for the buffer write traits. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>template type </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/github/workspace/include/H5Composites/<a class="el" href="BufferWriteTraits_8h_source.html">BufferWriteTraits.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/github/workspace/include/H5Composites/<a class="el" href="BufferWriteTraits_8hxx_source.html">BufferWriteTraits.hxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

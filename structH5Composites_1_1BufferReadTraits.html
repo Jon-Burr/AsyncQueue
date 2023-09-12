@@ -73,48 +73,11 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="structH5Composites_1_1BufferReadTraits-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">H5Composites::BufferReadTraits&lt; T &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Default implementation for the buffer read traits.  
- <a href="structH5Composites_1_1BufferReadTraits.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="BufferReadTraits_8h_source.html">BufferReadTraits.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a2079d999dff0dca3e8c20169a657c201" id="r_a2079d999dff0dca3e8c20169a657c201"><td class="memItemLeft" align="right" valign="top"><a id="a2079d999dff0dca3e8c20169a657c201" name="a2079d999dff0dca3e8c20169a657c201"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>read_t</b> = UnderlyingType_t&lt; T &gt;</td></tr>
-<tr class="separator:a2079d999dff0dca3e8c20169a657c201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af082017f07e7a8fcc793c78e4b0f381f" id="r_af082017f07e7a8fcc793c78e4b0f381f"><td class="memTemplParams" colspan="2"><a id="af082017f07e7a8fcc793c78e4b0f381f" name="af082017f07e7a8fcc793c78e4b0f381f"></a>
-template&lt;typename U  = read_t&gt; </td></tr>
-<tr class="memitem:af082017f07e7a8fcc793c78e4b0f381f"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt; is_buffer_readable_v&lt; read_t &gt;, U &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>read</b> (const void *buffer, const H5::DataType &amp;dtype)</td></tr>
-<tr class="separator:af082017f07e7a8fcc793c78e4b0f381f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4ff6dd3936476d3cd52a3c8007956a5" id="r_ab4ff6dd3936476d3cd52a3c8007956a5"><td class="memTemplParams" colspan="2"><a id="ab4ff6dd3936476d3cd52a3c8007956a5" name="ab4ff6dd3936476d3cd52a3c8007956a5"></a>
-template&lt;typename U  = read_t&gt; </td></tr>
-<tr class="memitem:ab4ff6dd3936476d3cd52a3c8007956a5"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt;!is_buffer_readable_v&lt; read_t &gt;, U &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>read</b> (const void *buffer, const H5::DataType &amp;dtype)</td></tr>
-<tr class="separator:ab4ff6dd3936476d3cd52a3c8007956a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-struct H5Composites::BufferReadTraits&lt; T &gt;</div><p>Default implementation for the buffer read traits. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>template type</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>To use this implementation the underlying type must either be a standard layout class or it must have a constructor with a signature of T(const void *buffer, const H5::DataType &amp;) </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/github/workspace/include/H5Composites/<a class="el" href="BufferReadTraits_8h_source.html">BufferReadTraits.h</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/github/workspace/include/H5Composites/<a class="el" href="BufferReadTraits_8hxx_source.html">BufferReadTraits.hxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

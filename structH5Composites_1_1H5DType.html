@@ -82,85 +82,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a48d9490a27113971e19bb2319585d601" id="r_a48d9490a27113971e19bb2319585d601"><td class="memTemplParams" colspan="2">template&lt;typename U  = T&gt; </td></tr>
-<tr class="memitem:a48d9490a27113971e19bb2319585d601"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt; has_static_member_function_h5DType&lt; U, H5::DataType()&gt;::value, H5::DataType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structH5Composites_1_1H5DType.html#a48d9490a27113971e19bb2319585d601">getType</a> ()</td></tr>
-<tr class="memdesc:a48d9490a27113971e19bb2319585d601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the H5 data type for this class.  <br /></td></tr>
-<tr class="separator:a48d9490a27113971e19bb2319585d601"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73e5250cca7e6afb6738ad8a16b82667" id="r_a73e5250cca7e6afb6738ad8a16b82667"><td class="memTemplParams" colspan="2">template&lt;typename U  = UnderlyingType_t&lt;T&gt;&gt; </td></tr>
-<tr class="memitem:a73e5250cca7e6afb6738ad8a16b82667"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if_t&lt; has_member_function_h5DType&lt; const U, H5::DataType &gt;::value, H5::DataType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structH5Composites_1_1H5DType.html#a73e5250cca7e6afb6738ad8a16b82667">getType</a> (const U &amp;u)</td></tr>
-<tr class="memdesc:a73e5250cca7e6afb6738ad8a16b82667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the H5 data type for an instance of this class.  <br /></td></tr>
-<tr class="separator:a73e5250cca7e6afb6738ad8a16b82667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7653dd87284a10e722a384c87ea3c90b" id="r_a7653dd87284a10e722a384c87ea3c90b"><td class="memItemLeft" align="right" valign="top"><a id="a7653dd87284a10e722a384c87ea3c90b" name="a7653dd87284a10e722a384c87ea3c90b"></a>
+static auto&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:a7653dd87284a10e722a384c87ea3c90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172bc899f6eafd04f963e76580997440" id="r_a172bc899f6eafd04f963e76580997440"><td class="memItemLeft" align="right" valign="top"><a id="a172bc899f6eafd04f963e76580997440" name="a172bc899f6eafd04f963e76580997440"></a>
+static auto&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> (const UnderlyingType_t&lt; T &gt; &amp;t)</td></tr>
+<tr class="separator:a172bc899f6eafd04f963e76580997440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a48d9490a27113971e19bb2319585d601" name="a48d9490a27113971e19bb2319585d601"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48d9490a27113971e19bb2319585d601">&#9670;&#160;</a></span>getType() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename U  = T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static std::enable_if_t&lt; has_static_member_function_h5DType&lt; U, H5::DataType()&gt;::value, H5::DataType &gt; <a class="el" href="structH5Composites_1_1H5DType.html">H5Composites::H5DType</a>&lt; T &gt;::getType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the H5 data type for this class. </p>
-<dl class="section return"><dt>Returns</dt><dd>The H5 data type for this class</dd></dl>
-<p>Only defined if the class has a static h5DType function returning a H5::DataType </p>
-
-</div>
-</div>
-<a id="a73e5250cca7e6afb6738ad8a16b82667" name="a73e5250cca7e6afb6738ad8a16b82667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73e5250cca7e6afb6738ad8a16b82667">&#9670;&#160;</a></span>getType() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename U  = UnderlyingType_t&lt;T&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static std::enable_if_t&lt; has_member_function_h5DType&lt; const U, H5::DataType &gt;::value, H5::DataType &gt; <a class="el" href="structH5Composites_1_1H5DType.html">H5Composites::H5DType</a>&lt; T &gt;::getType </td>
-          <td>(</td>
-          <td class="paramtype">const U &amp;&#160;</td>
-          <td class="paramname"><em>u</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the H5 data type for an instance of this class. </p>
-<dl class="section return"><dt>Returns</dt><dd>The H5 data type for this instance</dd></dl>
-<p>Only defined if the underlying class has a non-static h5DType function returning a H5::DataType </p>
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/github/workspace/include/H5Composites/<a class="el" href="DTypes_8h_source.html">DTypes.h</a></li>
+<li>/github/workspace/include/H5Composites/<a class="el" href="H5DType_8hxx_source.html">H5DType.hxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

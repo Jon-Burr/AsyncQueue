@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['bitfieldtraits_2eh_0',['BitfieldTraits.h',['../BitfieldTraits_8h.html',1,'']]],
-  ['bufferreadtraits_2eh_1',['BufferReadTraits.h',['../BufferReadTraits_8h.html',1,'']]],
-  ['bufferwritetraits_2eh_2',['BufferWriteTraits.h',['../BufferWriteTraits_8h.html',1,'']]]
+  ['compdtypeutils_2ehxx_0',['CompDTypeUtils.hxx',['../CompDTypeUtils_8hxx.html',1,'']]],
+  ['concepts_2ehxx_1',['concepts.hxx',['../concepts_8hxx.html',1,'']]]
 ];

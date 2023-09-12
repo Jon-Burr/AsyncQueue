@@ -1,14 +1,18 @@
 var searchData=
 [
-  ['ibufferwriter_0',['IBufferWriter',['../classH5Composites_1_1IBufferWriter.html',1,'H5Composites']]],
-  ['ibufferwriter_2ecxx_1',['IBufferWriter.cxx',['../IBufferWriter_8cxx.html',1,'']]],
-  ['ibufferwriter_2eh_2',['IBufferWriter.h',['../IBufferWriter_8h.html',1,'']]],
-  ['id_5ft_3',['id_t',['../structH5Composites_1_1TypeRegister_1_1id__t.html',1,'H5Composites::TypeRegister']]],
-  ['instance_4',['instance',['../classH5Composites_1_1TypeRegister.html#aefa569007e52e50fc5d14873ac961a0a',1,'H5Composites::TypeRegister']]],
-  ['intdtype_5',['intDType',['../classH5Composites_1_1DTypeIterator.html#af3912211a778a4b1849a66d7cf870b75',1,'H5Composites::DTypeIterator']]],
-  ['integer_6',['Integer',['../classH5Composites_1_1DTypeIterator.html#ad7587182ad4c04609cf6b804d0a5b1b7aa0faef0851b4294c06f2b94bb1cb2044',1,'H5Composites::DTypeIterator']]],
-  ['invalid_5fcall_5ft_7',['invalid_call_t',['../structH5Composites_1_1detail_1_1invalid__call__t.html',1,'H5Composites::detail']]],
-  ['isnativepredefineddtype_8',['isNativePredefinedDType',['../DTypeUtils_8h.html#a5b7acb7855cef42fab15f9f97c8475f8',1,'H5Composites']]],
-  ['isnumericdtype_9',['isNumericDType',['../DTypeUtils_8h.html#a63e00806125a711e02d9577cc963581b',1,'H5Composites']]],
-  ['isvalid_10',['isValid',['../classH5Composites_1_1DTypeConverter.html#ae3ea556da8c7160d806982d31c7d290f',1,'H5Composites::DTypeConverter']]]
+  ['id_5ft_0',['id_t',['../structH5Composites_1_1TypeRegister_1_1id__t.html',1,'H5Composites::TypeRegister']]],
+  ['indentwidth_1',['indentWidth',['../structH5Composites_1_1DTypePrintData.html#a7996ea3acc28ac16c260353da6ce3b1c',1,'H5Composites::DTypePrintData']]],
+  ['indexer_2',['indexer',['../structH5Composites_1_1H5BufferConstView_1_1Indexer.html',1,'H5Composites::H5BufferConstView::Indexer'],['../structH5Composites_1_1H5BufferView_1_1Indexer.html',1,'H5Composites::H5BufferView::Indexer'],['../classH5Composites_1_1H5BufferView.html#a1c24e27435673aa166b305b7098f880e',1,'H5Composites::H5BufferView::indexer() const'],['../classH5Composites_1_1H5BufferConstView.html#a1c24e27435673aa166b305b7098f880e',1,'H5Composites::H5BufferConstView::indexer()']]],
+  ['instance_3',['instance',['../classH5Composites_1_1MergeFactory.html#a25b8c589de6ae474e35a2adc894f94b5',1,'H5Composites::MergeFactory::instance()'],['../classH5Composites_1_1TypeRegister.html#aefa569007e52e50fc5d14873ac961a0a',1,'H5Composites::TypeRegister::instance()']]],
+  ['intdtype_4',['intDType',['../classH5Composites_1_1DTypeIterator.html#af3912211a778a4b1849a66d7cf870b75',1,'H5Composites::DTypeIterator']]],
+  ['integer_5',['Integer',['../classH5Composites_1_1DTypeIterator.html#ad7587182ad4c04609cf6b804d0a5b1b7aa0faef0851b4294c06f2b94bb1cb2044',1,'H5Composites::DTypeIterator']]],
+  ['invalid_5fcall_5ft_6',['invalid_call_t',['../structH5Composites_1_1detail_1_1invalid__call__t.html',1,'H5Composites::detail']]],
+  ['invalid_5ffunctor_5fresult_7',['invalid_functor_result',['../structH5Composites_1_1detail_1_1invalid__functor__result.html',1,'H5Composites::detail']]],
+  ['invalidconversionerror_8',['InvalidConversionError',['../classH5Composites_1_1InvalidConversionError.html',1,'H5Composites']]],
+  ['is_5fspecialisation_5fof_9',['is_specialisation_of',['../structH5Composites_1_1detail_1_1is__specialisation__of.html',1,'H5Composites::detail']]],
+  ['is_5fspecialisation_5fof_3c_20c_3c_20args_2e_2e_2e_20_3e_2c_20c_20_3e_10',['is_specialisation_of&lt; C&lt; Args... &gt;, C &gt;',['../structH5Composites_1_1detail_1_1is__specialisation__of_3_01C_3_01Args_8_8_8_01_4_00_01C_01_4.html',1,'H5Composites::detail']]],
+  ['isnativepredefineddtype_11',['isNativePredefinedDType',['../DTypeUtils_8hxx.html#a5b7acb7855cef42fab15f9f97c8475f8',1,'H5Composites']]],
+  ['isnumericdtype_12',['isNumericDType',['../DTypeUtils_8hxx.html#a63e00806125a711e02d9577cc963581b',1,'H5Composites']]],
+  ['isscalar_13',['isscalar',['../classH5Composites_1_1GroupWrapper.html#ad3d2474493db862085dc83c8ba4d82dc',1,'H5Composites::GroupWrapper::isScalar()'],['../classH5Composites_1_1H5BufferConstView.html#ac14b67359a434681a006eeff0fef2c4a',1,'H5Composites::H5BufferConstView::isScalar()']]],
+  ['iterator_14',['iterator',['../classH5Composites_1_1H5BufferConstView_1_1iterator.html#a4380cf2377166298dee9e1edf29ecdb9',1,'H5Composites::H5BufferConstView::iterator::iterator()'],['../classH5Composites_1_1H5BufferConstView_1_1iterator.html#a1d47d136855cc2d3a7905bc5b2ae1466',1,'H5Composites::H5BufferConstView::iterator::iterator(const Indexer &amp;indexer)'],['../classH5Composites_1_1H5BufferConstView_1_1iterator.html#ad45d5f785d7b2bf018f3db1814deeb1d',1,'H5Composites::H5BufferConstView::iterator::iterator(const Indexer &amp;indexer, std::size_t idx)'],['../classH5Composites_1_1H5BufferView_1_1iterator.html#aac6277308cbed5a58a53a9944343c858',1,'H5Composites::H5BufferView::iterator::iterator()'],['../classH5Composites_1_1H5BufferView_1_1iterator.html#af46fb1f93910fd6e55167c9a501375e0',1,'H5Composites::H5BufferView::iterator::iterator(const Indexer &amp;indexer)'],['../classH5Composites_1_1H5BufferView_1_1iterator.html#af3563021c7a558212caf04d9b9df3972',1,'H5Composites::H5BufferView::iterator::iterator(const Indexer &amp;indexer, std::size_t idx)'],['../classH5Composites_1_1H5BufferConstView_1_1iterator.html',1,'H5Composites::H5BufferConstView::iterator'],['../classH5Composites_1_1H5BufferView_1_1iterator.html',1,'H5Composites::H5BufferView::iterator']]]
 ];

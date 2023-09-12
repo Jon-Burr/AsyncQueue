@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['add_0',['add',['../classH5Composites_1_1CompositeDefinition.html#ad209b9da34db139be19d66ffd1fa0415',1,'H5Composites::CompositeDefinition::add(UnderlyingType_t&lt; U &gt; B::*ptr, const std::string &amp;name)'],['../classH5Composites_1_1CompositeDefinition.html#aea8036c8a803ad4e1c23daa02a127e36',1,'H5Composites::CompositeDefinition::add(U B::*ptr, const std::string &amp;name)']]],
-  ['arrdtype_1',['arrDType',['../classH5Composites_1_1DTypeIterator.html#a3ca9357648b36d2efc623e18d2e2279b',1,'H5Composites::DTypeIterator']]]
+  ['arrdtype_0',['arrDType',['../classH5Composites_1_1DTypeIterator.html#a3ca9357648b36d2efc623e18d2e2279b',1,'H5Composites::DTypeIterator']]],
+  ['as_1',['as',['../classH5Composites_1_1H5BufferConstView.html#af48920cfeafbde2c47ccdbccbb3faa77',1,'H5Composites::H5BufferConstView::as()'],['../classH5Composites_1_1H5BufferView.html#af69da6dadb91ef5f991b806b949db868',1,'H5Composites::H5BufferView::as()'],['../classH5Composites_1_1H5BufferView.html#af48920cfeafbde2c47ccdbccbb3faa77',1,'H5Composites::H5BufferView::as() const']]]
 ];

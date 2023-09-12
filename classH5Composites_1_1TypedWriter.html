@@ -91,20 +91,21 @@ Inheritance diagram for H5Composites::TypedWriter&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2d0fec99eeb3fdcaf431fb2a46544e46" id="r_a2d0fec99eeb3fdcaf431fb2a46544e46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1TypedWriter.html#a2d0fec99eeb3fdcaf431fb2a46544e46">TypedWriter</a> (H5::Group &amp;targetGroup, const std::string &amp;name, std::size_t <a class="el" href="classH5Composites_1_1Writer.html#ae465ae8c38213e4a6f032bbe0f83d20a">cacheSize</a>=2048, std::size_t chunkSize=-1)</td></tr>
-<tr class="memdesc:a2d0fec99eeb3fdcaf431fb2a46544e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classH5Composites_1_1Writer.html">Writer</a> object.  <br /></td></tr>
-<tr class="separator:a2d0fec99eeb3fdcaf431fb2a46544e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95d0a8bbd4c51353bf604d050939cf3b" id="r_a95d0a8bbd4c51353bf604d050939cf3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1TypedWriter.html#a95d0a8bbd4c51353bf604d050939cf3b">TypedWriter</a> (const H5::Group &amp;targetGroup, const std::string &amp;name, std::size_t <a class="el" href="classH5Composites_1_1Writer.html#ae465ae8c38213e4a6f032bbe0f83d20a">cacheSize</a>=2048, std::size_t chunkSize=-1)</td></tr>
+<tr class="memdesc:a95d0a8bbd4c51353bf604d050939cf3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classH5Composites_1_1Writer.html">Writer</a> object.  <br /></td></tr>
+<tr class="separator:a95d0a8bbd4c51353bf604d050939cf3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90f50706ec48fc62bb55ff52df11118" id="r_ae90f50706ec48fc62bb55ff52df11118"><td class="memItemLeft" align="right" valign="top"><a id="ae90f50706ec48fc62bb55ff52df11118" name="ae90f50706ec48fc62bb55ff52df11118"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const UnderlyingType_t&lt; T &gt; &amp;obj)</td></tr>
 <tr class="separator:ae90f50706ec48fc62bb55ff52df11118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a465a899782908e56972923881112e29f" id="r_a465a899782908e56972923881112e29f"><td class="memTemplParams" colspan="2"><a id="a465a899782908e56972923881112e29f" name="a465a899782908e56972923881112e29f"></a>
-template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a465a899782908e56972923881112e29f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (Iterator begin, Iterator end)</td></tr>
-<tr class="separator:a465a899782908e56972923881112e29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb1e89352375902bee7315740c4b983" id="r_abcb1e89352375902bee7315740c4b983"><td class="memTemplParams" colspan="2"><a id="abcb1e89352375902bee7315740c4b983" name="abcb1e89352375902bee7315740c4b983"></a>
+template&lt;std::input_iterator Iterator&gt; <br />
+requires (std::convertible_to&lt;std::iter_value_t&lt;Iterator&gt;, T&gt;)</td></tr>
+<tr class="memitem:abcb1e89352375902bee7315740c4b983"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (Iterator begin, Iterator end)</td></tr>
+<tr class="separator:abcb1e89352375902bee7315740c4b983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classH5Composites_1_1Writer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classH5Composites_1_1Writer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classH5Composites_1_1Writer.html">H5Composites::Writer</a></td></tr>
-<tr class="memitem:ade155dfcc6465fb91df11060aee80063 inherit pub_methods_classH5Composites_1_1Writer" id="r_ade155dfcc6465fb91df11060aee80063"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#ade155dfcc6465fb91df11060aee80063">Writer</a> (H5::Group &amp;targetGroup, const std::string &amp;name, const H5::DataType &amp;<a class="el" href="classH5Composites_1_1Writer.html#a16d9ded6793187a389c37424ab3b22ed">dtype</a>, std::size_t <a class="el" href="classH5Composites_1_1Writer.html#ae465ae8c38213e4a6f032bbe0f83d20a">cacheSize</a>=2048, std::size_t chunkSize=-1)</td></tr>
-<tr class="memdesc:ade155dfcc6465fb91df11060aee80063 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classH5Composites_1_1Writer.html">Writer</a> object.  <br /></td></tr>
-<tr class="separator:ade155dfcc6465fb91df11060aee80063 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2d16f77908d5ed7b8ebb0e7b42c1a27 inherit pub_methods_classH5Composites_1_1Writer" id="r_ad2d16f77908d5ed7b8ebb0e7b42c1a27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#ad2d16f77908d5ed7b8ebb0e7b42c1a27">Writer</a> (const H5::Group &amp;targetGroup, const std::string &amp;name, const H5::DataType &amp;<a class="el" href="classH5Composites_1_1Writer.html#a16d9ded6793187a389c37424ab3b22ed">dtype</a>, std::size_t <a class="el" href="classH5Composites_1_1Writer.html#ae465ae8c38213e4a6f032bbe0f83d20a">cacheSize</a>=2048, std::size_t chunkSize=-1)</td></tr>
+<tr class="memdesc:ad2d16f77908d5ed7b8ebb0e7b42c1a27 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classH5Composites_1_1Writer.html">Writer</a> object.  <br /></td></tr>
+<tr class="separator:ad2d16f77908d5ed7b8ebb0e7b42c1a27 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3068afc200eac66def34379fd940df3 inherit pub_methods_classH5Composites_1_1Writer" id="r_ad3068afc200eac66def34379fd940df3"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>Writer</b> (<a class="el" href="classH5Composites_1_1Writer.html">Writer</a> &amp;&amp;other)</td></tr>
 <tr class="memdesc:ad3068afc200eac66def34379fd940df3 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor. <br /></td></tr>
@@ -145,26 +146,30 @@ hsize_t&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b> () cons
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>nInBuffer</b> () const</td></tr>
 <tr class="memdesc:abdd631bba5a604e12476e452004d29bd inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of objects currently in the buffer. <br /></td></tr>
 <tr class="separator:abdd631bba5a604e12476e452004d29bd inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add849081eac38a08b77e25234dd81275 inherit pub_methods_classH5Composites_1_1Writer" id="r_add849081eac38a08b77e25234dd81275"><td class="memItemLeft" align="right" valign="top">
-const void *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> () const</td></tr>
-<tr class="memdesc:add849081eac38a08b77e25234dd81275 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">The buffer. <br /></td></tr>
-<tr class="separator:add849081eac38a08b77e25234dd81275 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d40cb59b9b3dd0039c02752d82328c7 inherit pub_methods_classH5Composites_1_1Writer" id="r_a8d40cb59b9b3dd0039c02752d82328c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#a8d40cb59b9b3dd0039c02752d82328c7">writeFromBuffer</a> (const H5::DataType &amp;<a class="el" href="classH5Composites_1_1Writer.html#a16d9ded6793187a389c37424ab3b22ed">dtype</a>, const void *<a class="el" href="classH5Composites_1_1Writer.html#add849081eac38a08b77e25234dd81275">buffer</a>)</td></tr>
-<tr class="memdesc:a8d40cb59b9b3dd0039c02752d82328c7 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object contained in a buffer.  <br /></td></tr>
-<tr class="separator:a8d40cb59b9b3dd0039c02752d82328c7 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad871af358d90d585c83f696b347dadc5 inherit pub_methods_classH5Composites_1_1Writer" id="r_ad871af358d90d585c83f696b347dadc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#ad871af358d90d585c83f696b347dadc5">writeFromBuffer</a> (const <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a> &amp;<a class="el" href="classH5Composites_1_1Writer.html#add849081eac38a08b77e25234dd81275">buffer</a>)</td></tr>
-<tr class="memdesc:ad871af358d90d585c83f696b347dadc5 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object contained in a buffer.  <br /></td></tr>
-<tr class="separator:ad871af358d90d585c83f696b347dadc5 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6f8a3172c1c8f8b6ed7dfe04a614a92 inherit pub_methods_classH5Composites_1_1Writer" id="r_ab6f8a3172c1c8f8b6ed7dfe04a614a92"><td class="memTemplParams" colspan="2">
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab6f8a3172c1c8f8b6ed7dfe04a614a92 inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const UnderlyingType_t&lt; T &gt; &amp;obj)</td></tr>
-<tr class="memdesc:ab6f8a3172c1c8f8b6ed7dfe04a614a92 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object to the buffer. <br /></td></tr>
-<tr class="separator:ab6f8a3172c1c8f8b6ed7dfe04a614a92 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb0cbacc318c84844e39a48bca9e8798 inherit pub_methods_classH5Composites_1_1Writer" id="r_adb0cbacc318c84844e39a48bca9e8798"><td class="memTemplParams" colspan="2">
-template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:adb0cbacc318c84844e39a48bca9e8798 inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (Iterator begin, Iterator end)</td></tr>
-<tr class="memdesc:adb0cbacc318c84844e39a48bca9e8798 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a range of objects to the buffer. <br /></td></tr>
-<tr class="separator:adb0cbacc318c84844e39a48bca9e8798 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd104674a6d3a41e1fefabbf9fcb1b2 inherit pub_methods_classH5Composites_1_1Writer" id="r_a3dd104674a6d3a41e1fefabbf9fcb1b2"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> () const</td></tr>
+<tr class="memdesc:a3dd104674a6d3a41e1fefabbf9fcb1b2 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">The buffer. <br /></td></tr>
+<tr class="separator:a3dd104674a6d3a41e1fefabbf9fcb1b2 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab26608e57d9cd5a07afa450839f56a9c inherit pub_methods_classH5Composites_1_1Writer" id="r_ab26608e57d9cd5a07afa450839f56a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#ab26608e57d9cd5a07afa450839f56a9c">writeFromBuffer</a> (const <a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a> &amp;<a class="el" href="classH5Composites_1_1Writer.html#a3dd104674a6d3a41e1fefabbf9fcb1b2">buffer</a>)</td></tr>
+<tr class="memdesc:ab26608e57d9cd5a07afa450839f56a9c inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object contained in a buffer.  <br /></td></tr>
+<tr class="separator:ab26608e57d9cd5a07afa450839f56a9c inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce41533c30ae8cfd17c9b3ad6aecf08 inherit pub_methods_classH5Composites_1_1Writer" id="r_a5ce41533c30ae8cfd17c9b3ad6aecf08"><td class="memTemplParams" colspan="2">
+template&lt;BufferWritable T&gt; <br />
+requires WrapperTrait&lt;T&gt;</td></tr>
+<tr class="memitem:a5ce41533c30ae8cfd17c9b3ad6aecf08 inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const UnderlyingType_t&lt; T &gt; &amp;obj)</td></tr>
+<tr class="memdesc:a5ce41533c30ae8cfd17c9b3ad6aecf08 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object to the buffer. <br /></td></tr>
+<tr class="separator:a5ce41533c30ae8cfd17c9b3ad6aecf08 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0043ba64a56cb68f958e2231037370c inherit pub_methods_classH5Composites_1_1Writer" id="r_ad0043ba64a56cb68f958e2231037370c"><td class="memTemplParams" colspan="2">
+template&lt;BufferWritable T&gt; <br />
+requires (!WrapperTrait&lt;T&gt;)</td></tr>
+<tr class="memitem:ad0043ba64a56cb68f958e2231037370c inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (const T &amp;obj)</td></tr>
+<tr class="memdesc:ad0043ba64a56cb68f958e2231037370c inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an object to the buffer. <br /></td></tr>
+<tr class="separator:ad0043ba64a56cb68f958e2231037370c inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5466eda19716b4deb92ee209ecf7afeb inherit pub_methods_classH5Composites_1_1Writer" id="r_a5466eda19716b4deb92ee209ecf7afeb"><td class="memTemplParams" colspan="2">
+template&lt;std::input_iterator Iterator, BufferWritable T = typename std::iter_value_t&lt;Iterator&gt;&gt; </td></tr>
+<tr class="memitem:a5466eda19716b4deb92ee209ecf7afeb inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>write</b> (Iterator begin, Iterator end)</td></tr>
+<tr class="memdesc:a5466eda19716b4deb92ee209ecf7afeb inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a range of objects to the buffer. <br /></td></tr>
+<tr class="separator:a5466eda19716b4deb92ee209ecf7afeb inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b2f3eee43f1300d458ac9655f3f8ba0 inherit pub_methods_classH5Composites_1_1Writer" id="r_a0b2f3eee43f1300d458ac9655f3f8ba0"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (const std::string &amp;index)</td></tr>
 <tr class="memdesc:a0b2f3eee43f1300d458ac9655f3f8ba0 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a single column to be the index. <br /></td></tr>
@@ -173,22 +178,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (const s
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIndex</b> (const std::vector&lt; std::string &gt; &amp;index)</td></tr>
 <tr class="memdesc:a4f32e9d805ea2cd4394a0782ce58ecea inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set multiple columns to be the index. <br /></td></tr>
 <tr class="separator:a4f32e9d805ea2cd4394a0782ce58ecea inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7266dd4d327273954de01af58c70d6b inherit pub_methods_classH5Composites_1_1Writer" id="r_ae7266dd4d327273954de01af58c70d6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#ae7266dd4d327273954de01af58c70d6b">setAttribute</a> (const std::string &amp;name, const <a class="el" href="classH5Composites_1_1H5Buffer.html">H5Buffer</a> &amp;value)</td></tr>
-<tr class="memdesc:ae7266dd4d327273954de01af58c70d6b inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an attribute on the dataset.  <br /></td></tr>
-<tr class="separator:ae7266dd4d327273954de01af58c70d6b inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d8274e2b94b47016abf5f5cd80a26f9 inherit pub_methods_classH5Composites_1_1Writer" id="r_a5d8274e2b94b47016abf5f5cd80a26f9"><td class="memTemplParams" colspan="2">
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5d8274e2b94b47016abf5f5cd80a26f9 inherit pub_methods_classH5Composites_1_1Writer"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setAttribute</b> (const std::string &amp;name, const T &amp;value)</td></tr>
-<tr class="separator:a5d8274e2b94b47016abf5f5cd80a26f9 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358041c88f6cf773f15c23a7a4890e61 inherit pub_methods_classH5Composites_1_1Writer" id="r_a358041c88f6cf773f15c23a7a4890e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classH5Composites_1_1Writer.html#a358041c88f6cf773f15c23a7a4890e61">setAttribute</a> (const std::string &amp;name, const <a class="el" href="classH5Composites_1_1H5BufferConstView.html">H5BufferConstView</a> &amp;value)</td></tr>
+<tr class="memdesc:a358041c88f6cf773f15c23a7a4890e61 inherit pub_methods_classH5Composites_1_1Writer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a named attribute on the output dataset.  <br /></td></tr>
+<tr class="separator:a358041c88f6cf773f15c23a7a4890e61 inherit pub_methods_classH5Composites_1_1Writer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2d0fec99eeb3fdcaf431fb2a46544e46" name="a2d0fec99eeb3fdcaf431fb2a46544e46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d0fec99eeb3fdcaf431fb2a46544e46">&#9670;&#160;</a></span>TypedWriter()</h2>
+<a id="a95d0a8bbd4c51353bf604d050939cf3b" name="a95d0a8bbd4c51353bf604d050939cf3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95d0a8bbd4c51353bf604d050939cf3b">&#9670;&#160;</a></span>TypedWriter()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;WithStaticH5DType T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -196,7 +197,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classH5Composites_1_1TypedWriter.html">H5Composites::TypedWriter</a>&lt; T &gt;::TypedWriter </td>
           <td>(</td>
-          <td class="paramtype">H5::Group &amp;&#160;</td>
+          <td class="paramtype">const H5::Group &amp;&#160;</td>
           <td class="paramname"><em>targetGroup</em>, </td>
         </tr>
         <tr>
@@ -244,7 +245,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/github/workspace/include/H5Composites/<a class="el" href="TypedWriter_8h_source.html">TypedWriter.h</a></li>
+<li>/github/workspace/include/H5Composites/<a class="el" href="TypedWriter_8hxx_source.html">TypedWriter.hxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

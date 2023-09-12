@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['setdefaultoutputlevel_0',['setDefaultOutputLevel',['../classAsyncQueue_1_1MessageManager.html#a2ac982daaf9bb28416186a9a0a781567',1,'AsyncQueue::MessageManager']]],
-  ['setmsg_1',['setMsg',['../classAsyncQueue_1_1ThreadManager.html#a1a559f86efabeb4e88568979fc1d0fa7',1,'AsyncQueue::ThreadManager']]],
-  ['setwriter_2',['setWriter',['../classAsyncQueue_1_1MessageManager.html#adcdbd5b0940e78e58cfcb25cfa3f7d4c',1,'AsyncQueue::MessageManager']]],
-  ['source_3',['source',['../structAsyncQueue_1_1Message.html#a45d8d92a65439e8b011d71a7b070fc94',1,'AsyncQueue::Message']]],
-  ['stream_5fmod_5ft_4',['stream_mod_t',['../classAsyncQueue_1_1MessageBuilder.html#acf6980685cdc5ac222bd2a230f8edfde',1,'AsyncQueue::MessageBuilder']]]
+  ['offset_0',['offset',['../classH5Composites_1_1Writer.html#aa5e91427303834111d1e32c44381340e',1,'H5Composites::Writer']]],
+  ['oneidentity_1',['OneIdentity',['../structH5Composites_1_1detail_1_1OneIdentity.html',1,'H5Composites::detail']]],
+  ['operator_20bool_2',['operator bool',['../classH5Composites_1_1H5Buffer.html#a427cf2a2d7aeae434428f196dde0c36d',1,'H5Composites::H5Buffer::operator bool()'],['../classH5Composites_1_1VLenDeleter.html#a92e520afebc8fcfa8b1f206d15f59ee4',1,'H5Composites::VLenDeleter::operator bool()']]],
+  ['operator_26_26_3',['operator&amp;&amp;',['../DTypeUtils_8h.html#ae5bf8a5ea8d762fec4eee89cea5b2a0c',1,'H5Composites']]],
+  ['operator_2a_4',['operator*',['../classH5Composites_1_1DTypeIterator.html#ae992492c7a855ce0184ee6061c5dbcae',1,'H5Composites::DTypeIterator']]],
+  ['operator_3d_5',['operator=',['../classH5Composites_1_1H5Buffer.html#af08e3fed232ee3e9e4921cb9fc83539d',1,'H5Composites::H5Buffer::operator=()'],['../classH5Composites_1_1SmartBuffer.html#a0d246f3b7176b1ab59d5e8571ad80080',1,'H5Composites::SmartBuffer::operator=(SmartBuffer &amp;&amp;other)'],['../classH5Composites_1_1SmartBuffer.html#a9670215b58f07c684ac446452d4a1cfa',1,'H5Composites::SmartBuffer::operator=(std::nullptr_t)'],['../classH5Composites_1_1VLenDeleter.html#abfe415c712a0a62f08a337a04244009e',1,'H5Composites::VLenDeleter::operator=()']]]
 ];

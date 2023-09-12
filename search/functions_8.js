@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['messagebuilder_0',['MessageBuilder',['../classAsyncQueue_1_1MessageBuilder.html#a30fddd62e960a42219a19286abf803c3',1,'AsyncQueue::MessageBuilder::MessageBuilder(MessageQueue &amp;queue)'],['../classAsyncQueue_1_1MessageBuilder.html#a2b72c22931236111918a8fb0ff858250',1,'AsyncQueue::MessageBuilder::MessageBuilder(MessageQueue &amp;queue, const std::string &amp;name, MessageLevel lvl)']]],
-  ['messageformatter_1',['MessageFormatter',['../classAsyncQueue_1_1MessageFormatter.html#aec667885c015dc9f32258e4ef51b70e3',1,'AsyncQueue::MessageFormatter::MessageFormatter()'],['../classAsyncQueue_1_1MessageFormatter.html#a6499680f2d9aa9246d0ce37c45a2fe27',1,'AsyncQueue::MessageFormatter::MessageFormatter(const std::vector&lt; Field &gt; &amp;fields, const std::string &amp;sep=&quot; &quot;)']]],
-  ['messagemanager_2',['MessageManager',['../classAsyncQueue_1_1MessageManager.html#a7f36ccd781741f363b9382df07ad410d',1,'AsyncQueue::MessageManager::MessageManager(MessageLevel outputLevel=MessageLevel::INFO)'],['../classAsyncQueue_1_1MessageManager.html#af0643b59aa162f4251dcc8fe5e77c249',1,'AsyncQueue::MessageManager::MessageManager(std::unique_ptr&lt; IMessageWriter &gt; writer, MessageLevel outputLevel=MessageLevel::INFO)']]],
-  ['messagesource_3',['MessageSource',['../classAsyncQueue_1_1MessageSource.html#a5ab3663274a353c7617a5c81e622977b',1,'AsyncQueue::MessageSource']]],
-  ['messagewriter_4',['MessageWriter',['../classAsyncQueue_1_1MessageWriter.html#a13daea07b292e2dd47f9cc52d84883c4',1,'AsyncQueue::MessageWriter::MessageWriter(std::ostream &amp;os, MessageLevel lvl=MessageLevel::VERBOSE)'],['../classAsyncQueue_1_1MessageWriter.html#a38aa68e806f8647af1745fb302cef891',1,'AsyncQueue::MessageWriter::MessageWriter(std::ostream &amp;os, formatter_t format, MessageLevel lvl=MessageLevel::VERBOSE)']]],
-  ['mutex_5',['mutex',['../classAsyncQueue_1_1AsyncQueue.html#a59b443c8fcf9e6a6f3d41c74c27e9e7f',1,'AsyncQueue::AsyncQueue']]]
+  ['instance_0',['instance',['../classH5Composites_1_1TypeRegister.html#aefa569007e52e50fc5d14873ac961a0a',1,'H5Composites::TypeRegister']]],
+  ['intdtype_1',['intDType',['../classH5Composites_1_1DTypeIterator.html#af3912211a778a4b1849a66d7cf870b75',1,'H5Composites::DTypeIterator']]],
+  ['isnativepredefineddtype_2',['isNativePredefinedDType',['../DTypeUtils_8h.html#a5b7acb7855cef42fab15f9f97c8475f8',1,'H5Composites']]],
+  ['isnumericdtype_3',['isNumericDType',['../DTypeUtils_8h.html#a63e00806125a711e02d9577cc963581b',1,'H5Composites']]],
+  ['isvalid_4',['isValid',['../classH5Composites_1_1DTypeConverter.html#ae3ea556da8c7160d806982d31c7d290f',1,'H5Composites::DTypeConverter']]]
 ];
